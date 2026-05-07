@@ -1,0 +1,434 @@
+/** Types for catalog template - content management */
+
+export interface CatalogData {
+  id: string;
+  meta: CatalogMeta;
+  hero: HeroData;
+  overview: OverviewData;
+  gallery: GalleryData;
+  finishes: FinishesData;
+  dimensions: DimensionsData;
+  materials: MaterialsData;
+  features: FeaturesData;
+  gettingStarted: GettingStartedData;
+  productCodes: ProductCodesData;
+  packshots?: PackshotsData;
+  sections?: SectionConfig[];
+}
+
+export type CatalogLayoutType = 'qx' | 'type2' | 'type3';
+
+export interface CatalogMeta {
+  title: string;
+  tagline?: string;
+  description: string;
+  brandName: string;
+  collectionName: string;
+  layoutType: CatalogLayoutType;
+  theme?: string;
+}
+
+export interface HeroSliderConfig {
+  /** Enable auto-advance to next slide */
+  autoAdvance?: boolean;
+  /** Interval in milliseconds between slides */
+  interval?: number;
+  /** Pause auto-advance when user hovers over slider */
+  pauseOnHover?: boolean;
+  /** Transition duration in milliseconds */
+  transitionMs?: number;
+  /** Show prev/next arrow buttons */
+  showArrows?: boolean;
+  /** Show dot indicators */
+  showDots?: boolean;
+  /** Initial slide index (0-based) */
+  initialSlide?: number;
+}
+
+export type HeroDescriptionPosition =
+  | 'bottom-center'
+  | 'bottom-left'
+  | 'bottom-right'
+  | 'top-center'
+  | 'top-left'
+  | 'top-right';
+
+export interface HeroDescriptionStyleConfig {
+  /** Turn slide descriptions on/off for this catalog */
+  enabled?: boolean;
+  /** Placement preset for the description label */
+  position?: HeroDescriptionPosition;
+  /** Distance from top or bottom edge (in px) */
+  offsetPx?: number;
+  /** Text color (CSS color value) */
+  textColor?: string;
+  /** Label background (CSS color value) */
+  backgroundColor?: string;
+  /** Backdrop blur (in px) */
+  backdropBlurPx?: number;
+  /** Horizontal padding (in px) */
+  paddingX?: number;
+  /** Vertical padding (in px) */
+  paddingY?: number;
+  /** Corner radius (in px) */
+  borderRadiusPx?: number;
+  /** Font size (in px) */
+  fontSizePx?: number;
+  /** Font weight */
+  fontWeight?: number;
+  /** Letter spacing in em units */
+  letterSpacingEm?: number;
+  /** Max width, e.g. 90vw or 520px */
+  maxWidth?: string;
+  /** Text alignment */
+  textAlign?: 'left' | 'center' | 'right';
+  /** Uppercase transform toggle */
+  uppercase?: boolean;
+}
+
+export interface HeroSlideContentOverrides {
+  /** Optional small label above the main hero title */
+  brandLabel?: string;
+  /** Optional main hero title override */
+  collectionName?: string;
+  /** Optional primary hero copy override */
+  tagline?: string;
+  /** Optional secondary hero copy override */
+  taglineLine2?: string;
+  /** Optional CTA label override */
+  ctaLabel?: string;
+}
+
+export type HeroAnchor =
+  | 'top-left'
+  | 'top-center'
+  | 'top-right'
+  | 'center-left'
+  | 'center'
+  | 'center-right'
+  | 'bottom-left'
+  | 'bottom-center'
+  | 'bottom-right';
+
+export type HeroCtaPosition = 'inline' | 'floating' | 'none';
+
+export interface HeroSlideContentLayout {
+  /** Where the text block anchors inside the viewport (9 combos: top-left … bottom-right) */
+  anchor?: HeroAnchor;
+  /** Text alignment within the block */
+  textAlign?: 'left' | 'center' | 'right';
+  /** Max width of text block (any CSS length, e.g. "32rem", "60vw", "1440px") */
+  maxWidth?: string;
+  /** Vertical padding (top + bottom). Overridden by paddingTop/paddingBottom if set. */
+  paddingY?: string;
+  /** Padding from top edge (overrides paddingY for top side) */
+  paddingTop?: string;
+  /** Padding from bottom edge (overrides paddingY for bottom side) */
+  paddingBottom?: string;
+  /** Horizontal nudge of the text block (transform translateX), e.g. "2rem" or "-1rem" */
+  offsetX?: string;
+  /** Vertical nudge of the text block (transform translateY), e.g. "-3rem" or "4rem" */
+  contentLift?: string;
+  /** CTA placement: inline (after tagline), floating (absolute), or none (hide CTA on this slide) */
+  ctaPosition?: HeroCtaPosition;
+  /** Floating CTA distance from viewport bottom (any CSS length) */
+  ctaFloatingBottom?: string;
+}
+
+/** Per-slide text style overrides applied to the hero copy block.
+ *  Exposed to CSS as custom properties on .hero-content-wrapper.hero-slide-N. */
+export interface HeroTextStyle {
+  /** Text color (any CSS color value) */
+  color?: string;
+  /** Font weight (100–900) */
+  fontWeight?: number;
+  /** Font size (any CSS length, e.g. "2.4rem", "clamp(1.6rem, 4vw, 3rem)") */
+  fontSize?: string;
+}
+
+/** Per-slide horizontal positioning override that applies only on mobile (<768px). */
+export interface HeroMobileContentLayout {
+  /** Text alignment within the hero copy block on mobile */
+  textAlign?: 'left' | 'center' | 'right';
+  /** Horizontal nudge of the text block on mobile (transform translateX), e.g. "2rem" or "-1rem" */
+  offsetX?: string;
+}
+
+export interface HeroSlide {
+  /** Resolved image URL */
+  src: string;
+  /** Accessible slide alt text */
+  alt: string;
+  /** Optional visible caption/description */
+  description?: string;
+  /** Optional per-slide override for the main hero copy */
+  heroContent?: HeroSlideContentOverrides;
+  /** Optional per-slide override for description placement and style */
+  descriptionStyle?: HeroDescriptionStyleConfig;
+  /** Optional per-slide layout/geometry override (desktop) */
+  contentLayout?: HeroSlideContentLayout;
+  /** Optional per-slide hero text style override (desktop). Falls back to global .hero-text rule. */
+  textStyle?: HeroTextStyle;
+  /** Optional per-slide hero text style override (mobile <768px). Falls back to textStyle, then global .hero-text rule. */
+  mobileTextStyle?: HeroTextStyle;
+  /** Optional per-slide horizontal positioning override (mobile <768px) */
+  mobileContentLayout?: HeroMobileContentLayout;
+  /** Optional per-slide horizontal shift of the hero image on mobile (<768px).
+   *  Positive value moves the image visually to the right (e.g. "100px", "-2rem").
+   *  Applied as offset on top of the per-catalog mobile object-position baseline. */
+  mobileImageOffsetX?: string;
+}
+
+export interface HeroSlideDefinition {
+  /** Relative path inside hero folder, e.g. hero_00.webp */
+  image: string;
+  /** Optional alt override for the slide */
+  alt?: string;
+  /** Optional visible caption/description for the slide */
+  description?: string;
+  /** Optional per-slide override for the main hero copy */
+  heroContent?: HeroSlideContentOverrides;
+  /** Optional per-slide override for description placement and style */
+  descriptionStyle?: HeroDescriptionStyleConfig;
+  /** Optional per-slide layout/geometry override (desktop) */
+  contentLayout?: HeroSlideContentLayout;
+  /** Optional per-slide hero text style override (desktop) */
+  textStyle?: HeroTextStyle;
+  /** Optional per-slide hero text style override (mobile <768px) */
+  mobileTextStyle?: HeroTextStyle;
+  /** Optional per-slide horizontal positioning override (mobile <768px) */
+  mobileContentLayout?: HeroMobileContentLayout;
+  /** Optional per-slide horizontal shift of the hero image on mobile (<768px).
+   *  Positive value moves the image visually to the right (e.g. "100px", "-2rem"). */
+  mobileImageOffsetX?: string;
+}
+
+export interface HeroSliderFile {
+  /** Slider settings stored in hero/slider.json */
+  settings?: HeroSliderConfig;
+  /** Description label style stored in hero/slider.json */
+  descriptionStyle?: HeroDescriptionStyleConfig;
+  /** Explicit list of slides for the hero carousel */
+  slides?: HeroSlideDefinition[];
+}
+
+export interface HeroData {
+  brandLabel: string;
+  collectionName: string;
+  tagline: string;
+  taglineLine2?: string;
+  ctaLabel: string;
+  heroImage: string;
+  heroImageAlt: string;
+  /** Explicit hero slides resolved from hero/slider.json */
+  heroSlides?: HeroSlide[];
+  /** Auto-discovered hero_NN.webp images for slider, with jpg/jpeg/png fallback */
+  heroImages?: string[];
+  /** Slider options loaded from hero/slider.json (or legacy hero content) */
+  slider?: HeroSliderConfig;
+  /** Description label style loaded from hero/slider.json */
+  descriptionStyle?: HeroDescriptionStyleConfig;
+}
+
+export interface OverviewData {
+  sectionLabel: string;
+  title: string;
+  titleLine2?: string;
+  paragraphs: string[];
+  packshotImage: string;
+  packshotImageAlt: string;
+  packshotCaption: string;
+}
+
+export interface GalleryImage {
+  src: string;
+  alt: string;
+  category: string;
+}
+
+export interface GalleryData {
+  sectionLabel: string;
+  title: string;
+  images: GalleryImage[];
+}
+
+export interface ColorOption {
+  name: string;
+  code: string;
+  ral?: string;
+}
+
+export interface SizeOption {
+  label: string;
+  desc: string;
+}
+
+export interface ComparisonRow {
+  feature: string;
+  basic: string;
+  premium: string;
+}
+
+export interface FinishesData {
+  sectionLabel: string;
+  title: string;
+  description?: string;
+  desktopColors: ColorOption[];
+  frameColors: ColorOption[];
+  sizes: SizeOption[];
+  previewImage: string;
+  comparisonTable: ComparisonRow[];
+  comparisonBasicLabel?: string;
+  comparisonPremiumLabel?: string;
+  configurator?: MaterialsConfiguratorData;
+}
+
+export interface SpecItem {
+  label: string;
+  value: string;
+}
+
+export interface DimensionsData {
+  sectionLabel: string;
+  title: string;
+  description?: string;
+  image?: string;
+  specs: SpecItem[];
+  certifications: string[];
+  dimensionDiagram?: {
+    width: string;
+    depth: string;
+    heightRange: string;
+  };
+}
+
+export interface MaterialItem {
+  name: string;
+  desc: string;
+  specs: string;
+}
+
+export interface ColorSwatch {
+  name: string;
+  hex: string;
+}
+
+export interface MaterialsConfiguratorOption {
+  id: string;
+  code: string;
+  label: string;
+  image: string;
+  thumbnail: string;
+}
+
+export interface MaterialsConfiguratorData {
+  frameOptions: MaterialsConfiguratorOption[];
+  desktopOptions: MaterialsConfiguratorOption[];
+}
+
+export interface MaterialsData {
+  sectionLabel: string;
+  title: string;
+  description?: string;
+  materials: MaterialItem[];
+  swatches: ColorSwatch[];
+  detailImage: string;
+  detailImageAlt: string;
+  detailImageCaption: string;
+  configurator?: MaterialsConfiguratorData;
+}
+
+export interface FeatureItem {
+  icon: string;
+  title: string;
+  desc: string;
+  video?: {
+    src: string;
+    poster?: string;
+  };
+}
+
+export interface FeaturesData {
+  sectionLabel: string;
+  title: string;
+  items: FeatureItem[];
+}
+
+export interface GettingStartedStep {
+  step: number;
+  title: string;
+  desc: string;
+  icon?: string;
+}
+
+export interface GettingStartedData {
+  sectionLabel: string;
+  title: string;
+  steps: GettingStartedStep[];
+  ctaLabels: {
+    quote: string;
+    pdf: string;
+    contact: string;
+  };
+  footerText: string;
+  versionInfo: string;
+}
+
+export type ProductCodeGroupCategory = 'single' | 'bench' | 'manager';
+
+export interface ProductCodeRow {
+  index: string;
+  indexR: string;
+  dimensions: string;
+}
+
+export interface ProductCodeGroup {
+  id: string;
+  category: ProductCodeGroupCategory;
+  title: string;
+  rows: ProductCodeRow[];
+}
+
+export interface ProductCodesData {
+  sectionLabel: string;
+  title: string;
+  description: string;
+  image?: string;
+  legend?: string;
+  groups: ProductCodeGroup[];
+}
+
+export interface SectionConfig {
+  id: string;
+  label: string;
+  enabled?: boolean;
+}
+
+export interface PackshotItem {
+  code: string;
+  name: string;
+  image?: string;
+  frameColorName?: string;
+  frameColorCode?: string;
+  frameColorHex?: string;
+  desktopColorName?: string;
+  desktopColorCode?: string;
+  desktopColorHex?: string;
+  colorName: string;
+  colorCode?: string;
+  colorHex?: string;
+}
+
+export interface PackshotGroup {
+  model: string;
+  label: string;
+  desc?: string;
+  items: PackshotItem[];
+}
+
+export interface PackshotsData {
+  sectionLabel: string;
+  title: string;
+  subtitle?: string;
+  groups: PackshotGroup[];
+}

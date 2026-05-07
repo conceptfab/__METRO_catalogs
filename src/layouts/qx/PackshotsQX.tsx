@@ -1,0 +1,326 @@
+'use client';
+
+import { useEffect, useId, useRef, useState } from 'react';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
+import { X, ChevronLeft, ChevronRight } from 'lucide-react';
+import type {
+  MaterialsConfiguratorData,
+  MaterialsConfiguratorOption,
+  PackshotsData,
+} from '@/types/catalog';
+import { SECTION_REVEAL_SLIDE, slowTransition } from '@/lib/motion';
+import { renderQxText } from '@/components/catalog/renderQxText';
+import { responsiveImg } from '@/lib/responsive-image';
+import { ColorChip } from '@/components/catalog/ColorChip';
+import { useFocusTrap } from '@/hooks/use-focus-trap';
+import { useIsMobile } from '@/hooks/use-mobile';
+
+interface PackshotsSectionProps {
+  data: PackshotsData;
+  materialsConfigurator?: MaterialsConfiguratorData;
+}
+
+const SAMPLE_PACKSHOT_SRC =
+  '/catalogs/QX/packshots/V51_W240_black__Shot_A_4K_R10.webp';
+
+const FRAME_COLOR_FROM_NAME: Record<string, string> = {
+  white: 'RAL9003',
+  black: 'RAL9005',
+  grey: 'RAL9006',
+  gray: 'RAL9006',
+};
+
+function parsePackshotImage(filename: string | undefined): {
+  topCode?: string;
+  frameCode?: string;
+} {
+  if (!filename) return {};
+  const base = filename.split('/').pop() ?? '';
+  const stem = base.replace(/\.[^.]+$/, '').split('__')[0];
+  const tokens = stem.split('_');
+  const topToken = tokens[1];
+  const frameToken = tokens[2]?.toLowerCase();
+  const topCode =
+    topToken && /^[UW]\d+$/i.test(topToken) ? topToken.toUpperCase() : undefined;
+  const frameCode = frameToken ? FRAME_COLOR_FROM_NAME[frameToken] : undefined;
+  return { topCode, frameCode };
+}
+
+const METRO_ID_PATTERN = /^metro[_ -]/i;
+
+function pickOption(
+  options: MaterialsConfiguratorOption[] | undefined,
+  code: string | undefined,
+): MaterialsConfiguratorOption | undefined {
+  if (!options || !code) return undefined;
+  const upper = code.toUpperCase();
+  const matches = options.filter(
+    (option) => option.code.toUpperCase() === upper,
+  );
+  if (matches.length === 0) return undefined;
+
+  const metroEntry = matches.find((option) => METRO_ID_PATTERN.test(option.id));
+  const swatchEntry = matches.find(
+    (option) => !METRO_ID_PATTERN.test(option.id),
+  );
+
+  if (metroEntry && swatchEntry) {
+    return {
+      ...metroEntry,
+      label: swatchEntry.label,
+      thumbnail: swatchEntry.image,
+    };
+  }
+  return swatchEntry ?? metroEntry ?? matches[0];
+}
+
+const PackshotsQX = ({
+  data,
+  materialsConfigurator,
+}: PackshotsSectionProps) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const reveal = SECTION_REVEAL_SLIDE;
+  const closeButtonRef = useRef<HTMLButtonElement | null>(null);
+  const dialogRef = useRef<HTMLDivElement | null>(null);
+  const counterId = useId();
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const isMobile = useIsMobile();
+  useFocusTrap(dialogRef, lightboxIndex !== null && !isMobile);
+
+  const packshotItems = data.groups.flatMap((group) =>
+    group.items.map((item) => ({
+      ...item,
+      groupLabel: group.label,
+      groupDescription: group.desc,
+      image: item.image ?? SAMPLE_PACKSHOT_SRC,
+    })),
+  );
+
+  const openLightbox = (index: number) => {
+    if (isMobile) return;
+    setLightboxIndex(index);
+  };
+  const closeLightbox = () => setLightboxIndex(null);
+
+  const navigate = (dir: number) => {
+    if (lightboxIndex === null) return;
+    setLightboxIndex(
+      (lightboxIndex + dir + packshotItems.length) % packshotItems.length,
+    );
+  };
+
+  useEffect(() => {
+    if (isMobile && lightboxIndex !== null) {
+      closeLightbox();
+      return;
+    }
+    if (lightboxIndex === null) return;
+
+    closeButtonRef.current?.focus();
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        closeLightbox();
+        return;
+      }
+      if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        navigate(-1);
+        return;
+      }
+      if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        navigate(1);
+      }
+    };
+
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isMobile, lightboxIndex]);
+
+  const activeItem =
+    lightboxIndex !== null ? packshotItems[lightboxIndex] : null;
+
+  return (
+    <section
+      id="packshots"
+      aria-labelledby="packshots-title"
+      className="bg-surface-elevated"
+    >
+      <div
+        className="relative mx-auto w-full max-w-[1440px] px-5 pt-6 pb-12 sm:px-8 sm:pt-8 lg:px-0 lg:pt-3 lg:pb-[120px]"
+        ref={ref}
+      >
+        <motion.div
+          initial={reveal.header.initial}
+          animate={isInView ? reveal.header.animate : {}}
+          transition={slowTransition({ duration: 0.6 })}
+          className="relative z-10 flex flex-col lg:max-w-[520px]"
+        >
+          <p className="section_ID font-display uppercase">
+            {renderQxText(data.sectionLabel)}
+          </p>
+          <h2
+            id="packshots-title"
+            className="section_Title mt-8 font-display font-normal lg:mt-7"
+          >
+            {renderQxText(data.title)}
+          </h2>
+          {data.subtitle && (
+            <p className="sec_main_text mt-6 max-w-[520px] font-body">
+              {renderQxText(data.subtitle)}
+            </p>
+          )}
+        </motion.div>
+
+        <div className="mt-12 -mx-5 grid grid-cols-1 gap-6 sm:mx-0 sm:grid-cols-2 lg:mt-[120px]">
+          {packshotItems.map((item, i) => {
+            const { topCode, frameCode } = parsePackshotImage(item.image);
+            const frameOption = pickOption(
+              materialsConfigurator?.frameOptions,
+              frameCode,
+            );
+            const desktopOption = pickOption(
+              materialsConfigurator?.desktopOptions,
+              topCode,
+            );
+            return (
+              <motion.article
+                key={`${item.code}-${item.image}`}
+                initial={reveal.content.initial}
+                animate={isInView ? reveal.content.animate : {}}
+                transition={slowTransition({
+                  duration: 0.5,
+                  delay: 0.2 + i * 0.1,
+                })}
+                className="min-w-0"
+              >
+                {isMobile ? (
+                  <div className="qx-packshot-mobile-frame">
+                    <img
+                      src={item.image}
+                      {...responsiveImg(item.image, 'packshot')}
+                      alt={item.name || `${item.code} packshot`}
+                      className="qx-packshot-mobile-image"
+                      loading="lazy"
+                    />
+                  </div>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => openLightbox(i)}
+                    className="group relative block w-full overflow-hidden"
+                    aria-label={`View ${item.name || item.code} packshot in fullscreen`}
+                  >
+                    <div className="qx-packshot-desktop-frame">
+                      <img
+                        src={item.image}
+                        {...responsiveImg(item.image, 'packshot')}
+                        alt={item.name || `${item.code} packshot`}
+                        className="qx-packshot-desktop-image"
+                        loading="lazy"
+                      />
+                    </div>
+                  </button>
+                )}
+                <div className="qx-packshot-meta">
+                  <span className="qx-packshot-code">{item.code}</span>
+                  {frameOption && (
+                    <span className="inline-flex items-center gap-1.5">
+                      <span className="font-display text-[10px] uppercase tracking-[0.12em] text-foreground/70">
+                        Frame
+                      </span>
+                      <ColorChip option={frameOption} role="frame" />
+                    </span>
+                  )}
+                  {desktopOption && (
+                    <span className="inline-flex items-center gap-1.5">
+                      <span className="font-display text-[10px] uppercase tracking-[0.12em] text-foreground/70">
+                        Top
+                      </span>
+                      <ColorChip option={desktopOption} role="top" />
+                    </span>
+                  )}
+                  {item.frameColorName && (
+                    <span>Frame {item.frameColorName}</span>
+                  )}
+                  {item.desktopColorName && (
+                    <span>Top {item.desktopColorName}</span>
+                  )}
+                </div>
+              </motion.article>
+            );
+          })}
+        </div>
+      </div>
+
+      <AnimatePresence>
+        {activeItem && lightboxIndex !== null && !isMobile && (
+          <motion.div
+            ref={dialogRef}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[60] bg-foreground/90 backdrop-blur-md flex items-center justify-center p-4"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby={counterId}
+            onClick={closeLightbox}
+          >
+            <button
+              ref={closeButtonRef}
+              onClick={closeLightbox}
+              className="absolute top-4 right-4 text-on-dark-muted hover:text-on-dark min-h-[44px] min-w-[44px] flex items-center justify-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-on-dark"
+              aria-label="Close lightbox"
+            >
+              <X size={28} />
+            </button>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                navigate(-1);
+              }}
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-on-dark-muted hover:text-on-dark min-h-[44px] min-w-[44px] flex items-center justify-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-on-dark"
+              aria-label="Previous packshot"
+            >
+              <ChevronLeft size={32} />
+            </button>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                navigate(1);
+              }}
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-on-dark-muted hover:text-on-dark min-h-[44px] min-w-[44px] flex items-center justify-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-on-dark"
+              aria-label="Next packshot"
+            >
+              <ChevronRight size={32} />
+            </button>
+            <motion.img
+              key={lightboxIndex}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              src={activeItem.image}
+              alt={activeItem.name || `${activeItem.code} packshot`}
+              className="max-w-full max-h-[85vh] object-contain rounded-lg"
+              onClick={(e) => e.stopPropagation()}
+            />
+            <p
+              id={counterId}
+              className="absolute bottom-6 text-on-dark-muted text-sm"
+              aria-live="polite"
+            >
+              {activeItem.code} — Packshot {lightboxIndex + 1} of{' '}
+              {packshotItems.length}: {activeItem.name || activeItem.code}
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </section>
+  );
+};
+
+export default PackshotsQX;

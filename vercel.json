@@ -1,0 +1,7 @@
+{
+  "git": {
+    "deploymentEnabled": {
+      "stage_2": true
+    }
+  }
+}
