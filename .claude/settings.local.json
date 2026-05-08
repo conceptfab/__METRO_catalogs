@@ -104,7 +104,8 @@
       "Bash(node -e \"JSON.parse\\(require\\('fs'\\).readFileSync\\('/Users/micz/__DEV__/__METRO_catalogs/package.json','utf8'\\)\\); console.log\\('valid JSON'\\)\")",
       "Bash(md5 -q /Users/micz/__DEV__/__METRO_catalogs/src/layouts/type2/CatalogPageType2.tsx /Users/micz/__DEV__/__METRO_catalogs/src/layouts/type3/CatalogPageType3.tsx)",
       "Bash(git -C /Users/micz/__DEV__/__METRO_catalogs check-ignore tsconfig.tsbuildinfo src/vite-env.d.ts src/app/layout.js)",
-      "Bash(git -C /Users/micz/__DEV__/__METRO_catalogs log --oneline -30)"
+      "Bash(git -C /Users/micz/__DEV__/__METRO_catalogs log --oneline -30)",
+      "Bash(git rm *)"
     ],
     "additionalDirectories": [
       "/tmp"

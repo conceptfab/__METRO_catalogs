@@ -35,5 +35,4 @@ tmp_manerba_home.html
 tmp_manerba_style.css
 tmp_manerba_styles.min.css
 tmp_manerba_styles.pretty.css
-.next-build
 .env*.local
