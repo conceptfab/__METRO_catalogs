@@ -60,6 +60,7 @@ const OverviewQX = ({ data }: OverviewSectionProps) => {
                 alt={data.packshotImageAlt}
                 className="absolute inset-0 h-full w-full object-cover object-center"
                 loading="lazy"
+                decoding="async"
               />
             </div>
             <figcaption className="sr-only">{renderQxText(data.packshotCaption)}</figcaption>

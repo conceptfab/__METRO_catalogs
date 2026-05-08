@@ -268,6 +268,7 @@ const FinishesQX = ({ data, configurator }: FinishesSectionProps) => {
                 draggable={false}
                 className="h-full w-full object-cover"
                 loading="lazy"
+                decoding="async"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}

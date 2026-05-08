@@ -206,6 +206,7 @@ const PackshotsQX = ({
                       alt={item.name || `${item.code} packshot`}
                       className="qx-packshot-mobile-image"
                       loading="lazy"
+                      decoding="async"
                     />
                   </div>
                 ) : (
@@ -222,6 +223,7 @@ const PackshotsQX = ({
                         alt={item.name || `${item.code} packshot`}
                         className="qx-packshot-desktop-image"
                         loading="lazy"
+                        decoding="async"
                       />
                     </div>
                   </button>

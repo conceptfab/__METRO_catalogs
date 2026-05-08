@@ -87,6 +87,7 @@ const GalleryQX = ({ data }: GallerySectionProps) => {
                 alt={mainImage.alt}
                 className="block h-full w-auto lg:w-full lg:object-cover lg:transition-transform lg:duration-700 lg:group-hover:scale-110"
                 loading="lazy"
+                decoding="async"
               />
             </motion.button>
 
@@ -109,6 +110,7 @@ const GalleryQX = ({ data }: GallerySectionProps) => {
                   alt={img.alt}
                   className="block h-full w-auto lg:w-full lg:object-cover lg:transition-transform lg:duration-700 lg:group-hover:scale-110"
                   loading="lazy"
+                  decoding="async"
                 />
               </motion.button>
             ))}
