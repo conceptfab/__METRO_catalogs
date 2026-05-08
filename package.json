@@ -7,6 +7,7 @@
     "dev": "next dev",
     "images": "node scripts/process-images.mjs",
     "images:force": "node scripts/process-images.mjs --force",
+    "deploy:prod": "vercel --prod",
     "dev:turbo": "next dev --turbopack",
     "prebuild": "npm run images",
     "build": "NEXT_LOCAL_ISOLATED_DIST=1 next build",
