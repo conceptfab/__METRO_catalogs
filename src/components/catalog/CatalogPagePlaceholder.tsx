@@ -8,7 +8,7 @@ interface Props {
   footerEntries?: CatalogFooterEntry[];
 }
 
-export default function CatalogPageType3({ catalog, globalConfig }: Props) {
+export default function CatalogPagePlaceholder({ catalog, globalConfig }: Props) {
   return (
     <main className="mx-auto flex min-h-screen max-w-[1440px] flex-col px-6 py-16 sm:px-8">
       <header className="mb-12">

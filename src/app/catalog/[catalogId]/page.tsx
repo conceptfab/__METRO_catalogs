@@ -8,16 +8,15 @@ import {
 } from '@/lib/catalog-loader';
 import type { CatalogLayoutType } from '@/types/catalog';
 import CatalogPageQX from '@/layouts/qx/CatalogPageQX';
-import CatalogPageType2 from '@/layouts/type2/CatalogPageType2';
-import CatalogPageType3 from '@/layouts/type3/CatalogPageType3';
+import CatalogPagePlaceholder from '@/components/catalog/CatalogPagePlaceholder';
 
 const layoutMap: Record<
   CatalogLayoutType,
-  typeof CatalogPageQX | typeof CatalogPageType2 | typeof CatalogPageType3
+  typeof CatalogPageQX | typeof CatalogPagePlaceholder
 > = {
   qx: CatalogPageQX,
-  type2: CatalogPageType2,
-  type3: CatalogPageType3,
+  type2: CatalogPagePlaceholder,
+  type3: CatalogPagePlaceholder,
 };
 
 export async function generateStaticParams() {
