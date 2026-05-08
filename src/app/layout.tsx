@@ -6,7 +6,7 @@ import { getSiteUrl } from '@/lib/site-url';
 
 const lato = Lato({
   subsets: ['latin'],
-  weight: ['100', '300', '400', '700', '900'],
+  weight: ['300', '400', '700', '900'],
   display: 'swap',
   variable: '--font-lato',
 });
