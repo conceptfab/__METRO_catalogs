@@ -6,6 +6,10 @@ import {
 
 const DEFAULT_DIST_DIR = '.next';
 const LOCAL_ISOLATED_PROD_DIST_DIR = '.next-build';
+const HOMEPAGE_AGENT_LINKS = [
+  '</.well-known/api-catalog>; rel="api-catalog"; type="application/linkset+json"; profile="https://www.rfc-editor.org/info/rfc9727"',
+  '</api/catalogs>; rel="service-desc"; type="application/json"',
+].join(', ');
 
 export default function nextConfig(phase: string): NextConfig {
   const isProdPhase =
@@ -23,5 +27,18 @@ export default function nextConfig(phase: string): NextConfig {
     distDir: useLocalIsolatedProdDist
       ? LOCAL_ISOLATED_PROD_DIST_DIR
       : DEFAULT_DIST_DIR,
+    async headers() {
+      return [
+        {
+          source: '/',
+          headers: [
+            {
+              key: 'Link',
+              value: HOMEPAGE_AGENT_LINKS,
+            },
+          ],
+        },
+      ];
+    },
   };
 }
