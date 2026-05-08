@@ -105,7 +105,17 @@
       "Bash(md5 -q /Users/micz/__DEV__/__METRO_catalogs/src/layouts/type2/CatalogPageType2.tsx /Users/micz/__DEV__/__METRO_catalogs/src/layouts/type3/CatalogPageType3.tsx)",
       "Bash(git -C /Users/micz/__DEV__/__METRO_catalogs check-ignore tsconfig.tsbuildinfo src/vite-env.d.ts src/app/layout.js)",
       "Bash(git -C /Users/micz/__DEV__/__METRO_catalogs log --oneline -30)",
-      "Bash(git rm *)"
+      "Bash(git rm *)",
+      "Bash(git -C /Users/micz/__DEV__/__METRO_catalogs add eslint.config.mjs)",
+      "Bash(git show *)",
+      "Bash(tee /tmp/metro-gallery-bases-pre-task7.txt)",
+      "Bash(node scripts/recompress-gallery-bases.mjs)",
+      "Bash(node scripts/process-images.mjs)",
+      "Bash(node -e \"JSON.parse\\(require\\('fs'\\).readFileSync\\('src/generated/responsive-image-manifest.json','utf8'\\)\\); console.log\\('valid'\\)\")",
+      "Bash(tee /tmp/metro-gallery-bases-post-task7.txt)",
+      "Bash(git -C /Users/micz/__DEV__/__METRO_catalogs status public/catalogs/ src/generated/)",
+      "Bash(git -C /Users/micz/__DEV__/__METRO_catalogs diff src/generated/)",
+      "Bash(git -C /Users/micz/__DEV__/__METRO_catalogs add src/middleware.ts src/middleware.test.ts)"
     ],
     "additionalDirectories": [
       "/tmp"
