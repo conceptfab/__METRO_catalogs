@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 const MARKDOWN_ROUTE = '/agent-markdown';
 const PUBLIC_FILE_PATTERN = /\.[a-z0-9]+$/i;
 
-function acceptsMarkdown(request: NextRequest): boolean {
+export function acceptsMarkdown(request: NextRequest): boolean {
   const accept = request.headers.get('accept');
   if (!accept) return false;
 
@@ -19,7 +19,7 @@ function acceptsMarkdown(request: NextRequest): boolean {
   });
 }
 
-function isHtmlRoute(pathname: string): boolean {
+export function isHtmlRoute(pathname: string): boolean {
   if (pathname === MARKDOWN_ROUTE || pathname.startsWith(`${MARKDOWN_ROUTE}/`))
     return false;
   if (pathname.startsWith('/_next/')) return false;
