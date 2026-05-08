@@ -115,42 +115,41 @@ const FeaturesQX = ({ data }: FeaturesSectionProps) => {
             role="tablist"
             aria-label="Functionality pillars"
           >
-            <ul className="flex flex-col gap-3">
+            <div className="flex flex-col gap-3">
               {items.map((item, index) => {
                 const Icon = getIcon(item.icon);
                 const isActive = index === activeIndex;
                 const panelId = `functionality-panel-${index}`;
                 const tabId = `functionality-tab-${index}`;
                 return (
-                  <li key={item.title}>
-                    <button
-                      type="button"
-                      id={tabId}
-                      role="tab"
-                      aria-selected={isActive}
-                      aria-controls={panelId}
-                      tabIndex={isActive ? 0 : -1}
-                      onClick={() => setActiveIndex(index)}
-                      className={`group flex w-full items-center gap-5 border px-5 py-4 text-left transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground ${
-                        isActive
-                          ? 'border-foreground bg-foreground text-background'
-                          : 'border-border bg-background text-foreground hover:border-foreground/40 hover:bg-foreground/5'
-                      }`}
-                    >
-                      <Icon
-                        size={32}
-                        strokeWidth={1.25}
-                        className="shrink-0"
-                        aria-hidden="true"
-                      />
-                      <span className="qx-item-title">
-                        {renderQxText(item.title)}
-                      </span>
-                    </button>
-                  </li>
+                  <button
+                    key={item.title}
+                    type="button"
+                    id={tabId}
+                    role="tab"
+                    aria-selected={isActive}
+                    aria-controls={panelId}
+                    tabIndex={isActive ? 0 : -1}
+                    onClick={() => setActiveIndex(index)}
+                    className={`group flex w-full items-center gap-5 border px-5 py-4 text-left transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground ${
+                      isActive
+                        ? 'border-foreground bg-foreground text-background'
+                        : 'border-border bg-background text-foreground hover:border-foreground/40 hover:bg-foreground/5'
+                    }`}
+                  >
+                    <Icon
+                      size={32}
+                      strokeWidth={1.25}
+                      className="shrink-0"
+                      aria-hidden="true"
+                    />
+                    <span className="qx-item-title">
+                      {renderQxText(item.title)}
+                    </span>
+                  </button>
                 );
               })}
-            </ul>
+            </div>
           </motion.div>
 
           <div
