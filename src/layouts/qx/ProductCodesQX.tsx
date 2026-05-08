@@ -6,13 +6,17 @@ import Image from 'next/image';
 import type { ProductCodeGroup, ProductCodesData } from '@/types/catalog';
 import { SECTION_REVEAL_SETTLE, slowTransition } from '@/lib/motion';
 import { renderQxText } from '@/components/catalog/renderQxText';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface ProductCodesSectionProps {
   data: ProductCodesData;
 }
 
-const ProductCodeTable = ({ group }: { group: ProductCodeGroup }) => (
-  <details className="codes-accordion grid w-full grid-rows-subgrid row-span-2 gap-y-1 lg:w-[343px]">
+const ProductCodeTable = ({ group, open }: { group: ProductCodeGroup; open: boolean }) => (
+  <details
+    open={open}
+    className="codes-accordion grid w-full grid-rows-subgrid row-span-2 gap-y-1 lg:w-[343px]"
+  >
     <summary>
       <h3 className="font-body text-[15px] font-medium leading-tight text-foreground/90 sm:text-[13px] sm:font-normal sm:text-foreground/65">
         {renderQxText(group.title)}
@@ -68,6 +72,8 @@ const ProductCodesQX = ({ data }: ProductCodesSectionProps) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
   const reveal = SECTION_REVEAL_SETTLE;
+  const isMobile = useIsMobile();
+  const desktopOpen = !isMobile;
   const singleDeskGroups = data.groups.filter(
     (group) => group.category === 'single',
   );
@@ -139,7 +145,7 @@ const ProductCodesQX = ({ data }: ProductCodesSectionProps) => {
               </h3>
               <div className="grid grid-cols-1 grid-rows-[auto_auto] gap-y-6 sm:grid-cols-2 sm:gap-x-10 lg:grid-cols-4 lg:gap-x-[calc((100%-1372px)/3)]">
                 {singleDeskGroups.map((group) => (
-                  <ProductCodeTable key={group.id} group={group} />
+                  <ProductCodeTable key={group.id} group={group} open={desktopOpen} />
                 ))}
               </div>
             </div>
@@ -152,7 +158,7 @@ const ProductCodesQX = ({ data }: ProductCodesSectionProps) => {
               </h3>
               <div className="grid grid-cols-1 grid-rows-[auto_auto] gap-y-6 sm:grid-cols-2 sm:gap-x-10 lg:grid-cols-4 lg:gap-x-[calc((100%-1372px)/3)]">
                 {benchGroups.map((group) => (
-                  <ProductCodeTable key={group.id} group={group} />
+                  <ProductCodeTable key={group.id} group={group} open={desktopOpen} />
                 ))}
               </div>
             </div>
@@ -167,7 +173,7 @@ const ProductCodesQX = ({ data }: ProductCodesSectionProps) => {
               )}
               <div className="grid grid-cols-1 grid-rows-[auto_auto] gap-y-6 sm:grid-cols-2 sm:gap-x-10 lg:grid-cols-4 lg:gap-x-[calc((100%-1372px)/3)]">
                 {managerGroups.map((group) => (
-                  <ProductCodeTable key={group.id} group={group} />
+                  <ProductCodeTable key={group.id} group={group} open={desktopOpen} />
                 ))}
                 {data.legend && (
                   <div className="flex items-end pb-1.5 lg:col-span-3 lg:pl-10">
