@@ -17,12 +17,10 @@
 
 import fs from 'fs/promises';
 import path from 'path';
-import { fileURLToPath } from 'url';
 import { SECTION_ASPECTS, SECTION_WIDTHS } from './lib/section-widths.mjs';
+import { pathsFromScript, loadSharp, isResponsiveVariant } from './lib/image-utils.mjs';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const ROOT = path.resolve(__dirname, '..');
-const PUBLIC = path.join(ROOT, 'public');
+const { ROOT, PUBLIC } = pathsFromScript(import.meta.url);
 const MANIFEST_OUTPUT = path.join(
   ROOT,
   'src',
@@ -37,22 +35,14 @@ const IMAGE_EXTENSIONS = new Set(['.webp']);
 // ---------------------------------------------------------------------------
 
 /** Check if sharp is available */
-let sharp;
-try {
-  sharp = (await import('sharp')).default;
-} catch {
-  console.error(
-    'Error: sharp is not installed. Run: npm install --save-dev sharp',
-  );
-  process.exit(1);
-}
+const sharp = await loadSharp();
 
 function isImageFile(fileName) {
   return IMAGE_EXTENSIONS.has(path.extname(fileName).toLowerCase());
 }
 
 function isGeneratedThumbnail(fileName) {
-  return /-\d+w\.\w+$/.test(fileName);
+  return isResponsiveVariant(fileName);
 }
 
 function thumbnailName(originalName, width) {

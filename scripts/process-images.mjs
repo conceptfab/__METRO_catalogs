@@ -22,10 +22,9 @@
 import { spawn } from 'child_process';
 import fs from 'fs/promises';
 import path from 'path';
-import { fileURLToPath } from 'url';
+import { pathsFromScript } from './lib/image-utils.mjs';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const ROOT = path.resolve(__dirname, '..');
+const { ROOT } = pathsFromScript(import.meta.url);
 const CATALOGS = path.join(ROOT, 'public', 'catalogs');
 const MANIFEST = path.join(ROOT, 'src', 'generated', 'responsive-image-manifest.json');
 
