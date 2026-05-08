@@ -21,12 +21,17 @@ export default function nextConfig(phase: string): NextConfig {
     process.env.NEXT_LOCAL_ISOLATED_DIST === '1';
 
   return {
-    // Vercel expects production artifacts in `.next`.
-    // Local isolated production output is opt-in:
-    // NEXT_LOCAL_ISOLATED_DIST=1 npm run build
     distDir: useLocalIsolatedProdDist
       ? LOCAL_ISOLATED_PROD_DIST_DIR
       : DEFAULT_DIST_DIR,
+    experimental: {
+      optimizePackageImports: ['lucide-react', 'framer-motion'],
+    },
+    compiler: {
+      removeConsole: isProdPhase
+        ? { exclude: ['error', 'warn'] }
+        : false,
+    },
     async headers() {
       return [
         {
