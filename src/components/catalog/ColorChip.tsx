@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import type { MaterialsConfiguratorOption } from '@/types/catalog';
+import { responsiveImg } from '@/lib/responsive-image';
 
 export type ChipRole = 'frame' | 'top';
 
@@ -59,6 +60,7 @@ export function ColorChip({ option, role }: ColorChipProps) {
       >
         <img
           src={option.thumbnail}
+          {...responsiveImg(option.thumbnail, 'materials-thumb', '24px')}
           alt=""
           aria-hidden="true"
           width={24}
@@ -74,6 +76,7 @@ export function ColorChip({ option, role }: ColorChipProps) {
           <span className="block w-[7.25rem] border border-foreground bg-background p-1 text-left shadow-token-lg">
             <img
               src={option.thumbnail}
+              {...responsiveImg(option.thumbnail, 'materials-thumb', '116px')}
               alt=""
               aria-hidden="true"
               className="block aspect-square w-full object-cover"
