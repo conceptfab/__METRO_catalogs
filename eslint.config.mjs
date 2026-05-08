@@ -14,6 +14,12 @@ const eslintConfig = [
     ignores: ['.next/**', '.next-build/**'],
   },
   ...compat.extends('next/core-web-vitals'),
+  {
+    files: ['src/**/*.{ts,tsx}'],
+    rules: {
+      'no-console': ['warn', { allow: ['warn', 'error'] }],
+    },
+  },
 ];
 
 export default eslintConfig;
