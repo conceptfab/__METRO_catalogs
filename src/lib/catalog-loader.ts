@@ -174,11 +174,11 @@ async function resolveImage(base: string, assetPath: string): Promise<string> {
   const normalizedAssetPath = normalizeRelativeAssetPath(assetPath);
   const candidates = buildImageCandidates(normalizedAssetPath);
 
-  for (const candidate of candidates) {
-    if (await fileExists(toPublicFilePath(base, candidate))) {
-      return resolveImageUrl(base, candidate);
-    }
-  }
+  const existsResults = await Promise.all(
+    candidates.map((candidate) => fileExists(toPublicFilePath(base, candidate))),
+  );
+  const firstHit = candidates[existsResults.indexOf(true)];
+  if (firstHit) return resolveImageUrl(base, firstHit);
 
   return resolveImageUrl(base, normalizedAssetPath);
 }
