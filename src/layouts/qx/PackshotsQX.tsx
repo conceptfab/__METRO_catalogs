@@ -315,7 +315,7 @@ const PackshotsQX = ({
               className="absolute bottom-6 text-on-dark-muted text-sm"
               aria-live="polite"
             >
-              {activeItem.code} — Packshot {lightboxIndex + 1} of{' '}
+              {activeItem.code}, Packshot {lightboxIndex + 1} of{' '}
               {packshotItems.length}: {activeItem.name || activeItem.code}
             </p>
           </m.div>
