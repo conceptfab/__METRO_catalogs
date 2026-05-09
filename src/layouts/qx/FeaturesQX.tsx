@@ -5,7 +5,7 @@ import { AnimatePresence, m, useInView, useReducedMotion } from 'framer-motion';
 import type { FeatureItem, FeaturesData } from '@/types/catalog';
 import { getIcon } from '@/lib/icon-map';
 import { SECTION_REVEAL_SLIDE, slowTransition } from '@/lib/motion';
-import { renderQxText } from '@/components/catalog/renderQxText';
+import { QxText } from '@/components/catalog/QxText';
 
 interface FeaturesSectionProps {
   data: FeaturesData;
@@ -88,13 +88,13 @@ const FeaturesQX = ({ data }: FeaturesSectionProps) => {
             transition={slowTransition({ duration: 0.6 })}
           >
             <p className="section_ID mb-12 font-display uppercase lg:mb-[120px]">
-              {renderQxText(data.sectionLabel)}
+              <QxText text={data.sectionLabel} />
             </p>
             <h2
               id="features-title"
               className="section_Title font-display font-normal"
             >
-              {renderQxText(data.title)}
+              <QxText text={data.title} />
             </h2>
           </m.div>
 
@@ -144,7 +144,7 @@ const FeaturesQX = ({ data }: FeaturesSectionProps) => {
                       aria-hidden="true"
                     />
                     <span className="qx-item-title">
-                      {renderQxText(item.title)}
+                      <QxText text={item.title} />
                     </span>
                   </button>
                 );
@@ -167,7 +167,7 @@ const FeaturesQX = ({ data }: FeaturesSectionProps) => {
                 transition={slowTransition({ duration: 0.35 })}
                 className="sec_main_text font-body"
               >
-                {active && renderQxText(active.desc)}
+                {active && <QxText text={active.desc} />}
               </m.p>
             </AnimatePresence>
           </div>

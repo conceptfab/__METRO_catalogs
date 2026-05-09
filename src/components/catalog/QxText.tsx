@@ -17,7 +17,11 @@ function renderLine(line: string, lineIndex: number): ReactNode[] {
   ]);
 }
 
-export function renderQxText(text: string): ReactNode {
+interface QxTextProps {
+  text: string;
+}
+
+export function QxText({ text }: QxTextProps): ReactNode {
   const lines = text.split(LINEBREAK_REGEX);
 
   return lines.flatMap((line, lineIndex) => {

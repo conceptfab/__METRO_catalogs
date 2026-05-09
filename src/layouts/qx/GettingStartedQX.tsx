@@ -4,7 +4,7 @@ import { useRef } from 'react';
 import { m, useInView } from 'framer-motion';
 import type { GettingStartedData } from '@/types/catalog';
 import { SECTION_REVEAL_LIFT, slowTransition } from '@/lib/motion';
-import { renderQxText } from '@/components/catalog/renderQxText';
+import { QxText } from '@/components/catalog/QxText';
 import { getIcon } from '@/lib/icon-map';
 
 interface GettingStartedSectionProps {
@@ -33,13 +33,13 @@ const GettingStartedQX = ({ data }: GettingStartedSectionProps) => {
           className="relative z-10 flex flex-col lg:max-w-[520px] lg:pt-3"
         >
           <p className="section_ID font-display uppercase">
-            {renderQxText(data.sectionLabel)}
+            <QxText text={data.sectionLabel} />
           </p>
           <h2
             id="getting-started-title"
             className="section_Title mt-8 font-display font-normal lg:mt-7"
           >
-            {renderQxText(data.title)}
+            <QxText text={data.title} />
           </h2>
         </m.div>
 
@@ -74,10 +74,10 @@ const GettingStartedQX = ({ data }: GettingStartedSectionProps) => {
                   )}
                 </div>
                 <h3 className="mt-3 qx-emphasis-title">
-                  {renderQxText(s.title)}
+                  <QxText text={s.title} />
                 </h3>
                 <p className="sec_main_text mt-1 max-w-[360px] font-body">
-                  {renderQxText(s.desc)}
+                  <QxText text={s.desc} />
                 </p>
               </m.article>
             );

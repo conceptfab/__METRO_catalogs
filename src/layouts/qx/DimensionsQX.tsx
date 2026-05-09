@@ -5,7 +5,7 @@ import { m, useInView } from 'framer-motion';
 import Image from 'next/image';
 import type { DimensionsData } from '@/types/catalog';
 import { SECTION_REVEAL_LIFT, slowTransition } from '@/lib/motion';
-import { renderQxText } from '@/components/catalog/renderQxText';
+import { QxText } from '@/components/catalog/QxText';
 
 interface DimensionsSectionProps {
   data: DimensionsData;
@@ -33,18 +33,18 @@ const DimensionsQX = ({ data }: DimensionsSectionProps) => {
           className="relative z-10 flex flex-col lg:pt-3"
         >
           <p className="section_ID font-display uppercase">
-            {renderQxText(data.sectionLabel)}
+            <QxText text={data.sectionLabel} />
           </p>
           <h2
             id="dimensions-title"
             className="section_Title mt-8 font-display font-normal lg:mt-7"
           >
-            {renderQxText(data.title)}
+            <QxText text={data.title} />
           </h2>
           {/* Description shown on desktop only — mobile gets it below the drawing */}
           {data.description && (
             <p className="sec_main_text mt-6 max-w-[633px] hidden sm:block">
-              {renderQxText(data.description)}
+              <QxText text={data.description} />
             </p>
           )}
         </m.div>
@@ -61,8 +61,8 @@ const DimensionsQX = ({ data }: DimensionsSectionProps) => {
             <dl className="sm:hidden mt-2 mb-6 grid grid-cols-2 gap-3 text-sm">
               {data.specs.slice(0, 3).map((s) => (
                 <div key={s.label}>
-                  <dt className="text-foreground/60">{renderQxText(s.label)}</dt>
-                  <dd className="font-display text-base font-bold">{renderQxText(s.value)}</dd>
+                  <dt className="text-foreground/60"><QxText text={s.label} /></dt>
+                  <dd className="font-display text-base font-bold"><QxText text={s.value} /></dd>
                 </div>
               ))}
             </dl>
@@ -80,7 +80,7 @@ const DimensionsQX = ({ data }: DimensionsSectionProps) => {
             {/* Description shown on mobile only — desktop gets it in the header block above */}
             {data.description && (
               <p className="sec_main_text mt-6 sm:hidden">
-                {renderQxText(data.description)}
+                <QxText text={data.description} />
               </p>
             )}
           </div>
@@ -96,10 +96,10 @@ const DimensionsQX = ({ data }: DimensionsSectionProps) => {
                   className="flex justify-between gap-4 border-b border-border/50 py-4"
                 >
                   <dt className="text-base text-muted-foreground">
-                    {renderQxText(s.label)}
+                    <QxText text={s.label} />
                   </dt>
                   <dd className="text-right text-base font-bold text-foreground">
-                    {renderQxText(s.value)}
+                    <QxText text={s.value} />
                   </dd>
                 </div>
               ))}

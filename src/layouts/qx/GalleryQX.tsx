@@ -4,7 +4,7 @@ import { useRef, useState } from 'react';
 import { m, useInView } from 'framer-motion';
 import type { GalleryData } from '@/types/catalog';
 import { SECTION_REVEAL_LIFT, slowTransition } from '@/lib/motion';
-import { renderQxText } from '@/components/catalog/renderQxText';
+import { QxText } from '@/components/catalog/QxText';
 import { responsiveImg } from '@/lib/responsive-image';
 import { Lightbox } from '@/components/catalog/Lightbox';
 
@@ -61,13 +61,13 @@ const GalleryQX = ({ data }: GallerySectionProps) => {
           className="relative z-10 flex flex-col lg:absolute lg:left-0 lg:top-3"
         >
           <p className="section_ID font-display uppercase">
-            {renderQxText(data.sectionLabel)}
+            <QxText text={data.sectionLabel} />
           </p>
           <h2
             id="gallery-title"
             className="section_Title mt-8 font-display font-normal lg:mt-7"
           >
-            {renderQxText(data.title)}
+            <QxText text={data.title} />
           </h2>
         </m.div>
 

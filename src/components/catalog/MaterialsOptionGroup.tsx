@@ -2,7 +2,7 @@
 
 import { useId } from 'react';
 import type { MaterialsConfiguratorOption } from '@/types/catalog';
-import { renderQxText } from '@/components/catalog/renderQxText';
+import { QxText } from '@/components/catalog/QxText';
 
 interface MaterialsOptionGroupProps {
   title: string;
@@ -37,7 +37,7 @@ export function MaterialsOptionGroup({
   return (
     <div>
       <h3 id={titleId} className={titleClassName}>
-        {renderQxText(title)}
+        <QxText text={title} />
       </h3>
 
       <div
@@ -67,9 +67,9 @@ export function MaterialsOptionGroup({
                 style={{ backgroundImage: `url("${option.thumbnail}")` }}
               />
               <p className="text-[11px] font-medium leading-tight text-foreground sm:text-xs">
-                <span className="block">{renderQxText(label.code)}</span>
+                <span className="block"><QxText text={label.code} /></span>
                 {label.name && (
-                  <span className="block">{renderQxText(label.name)}</span>
+                  <span className="block"><QxText text={label.name} /></span>
                 )}
               </p>
             </button>

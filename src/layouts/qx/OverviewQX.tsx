@@ -4,7 +4,7 @@ import { m, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import type { OverviewData } from '@/types/catalog';
 import { SECTION_REVEAL_SLIDE, slowTransition } from '@/lib/motion';
-import { renderQxText } from '@/components/catalog/renderQxText';
+import { QxText } from '@/components/catalog/QxText';
 import { responsiveImg } from '@/lib/responsive-image';
 import { SectionShell } from '@/components/catalog/SectionShell';
 import { SectionHeading } from '@/components/catalog/SectionHeading';
@@ -39,7 +39,7 @@ const OverviewQX = ({ data }: OverviewSectionProps) => {
           />
           <div className="sec_main_text mt-12 max-w-[520px] space-y-4 font-body lg:mt-[120px]">
             {data.paragraphs.map((p, i) => (
-              <p key={i}>{renderQxText(p)}</p>
+              <p key={i}><QxText text={p} /></p>
             ))}
           </div>
         </m.div>
@@ -63,7 +63,7 @@ const OverviewQX = ({ data }: OverviewSectionProps) => {
                 decoding="async"
               />
             </div>
-            <figcaption className="sr-only">{renderQxText(data.packshotCaption)}</figcaption>
+            <figcaption className="sr-only"><QxText text={data.packshotCaption} /></figcaption>
           </figure>
         </m.div>
       </div>

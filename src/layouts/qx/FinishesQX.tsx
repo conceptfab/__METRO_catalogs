@@ -8,7 +8,7 @@ import type {
   FinishesData,
 } from '@/types/catalog';
 import { SECTION_REVEAL_SETTLE, slowTransition } from '@/lib/motion';
-import { renderQxText } from '@/components/catalog/renderQxText';
+import { QxText } from '@/components/catalog/QxText';
 import { responsiveImg } from '@/lib/responsive-image';
 import { MaterialsOptionGroup } from '@/components/catalog/MaterialsOptionGroup';
 import { useFocusTrap } from '@/hooks/use-focus-trap';
@@ -141,19 +141,19 @@ const FinishesQX = ({ data, configurator }: FinishesSectionProps) => {
           className="relative z-10 flex flex-col lg:pt-3"
         >
           <p className="section_ID font-display uppercase">
-            {renderQxText(data.sectionLabel)}
+            <QxText text={data.sectionLabel} />
           </p>
           <h2
             id="finishes-title"
             className="section_Title mt-8 font-display font-normal lg:mt-7"
           >
-            {renderQxText(data.title)}
+            <QxText text={data.title} />
           </h2>
           {data.description && (
             <p className="sec_main_text mt-6 max-w-[633px]">
               {descriptionLines.map((line, index) => (
                 <span key={`${index}-${line}`}>
-                  {renderQxText(line)}
+                  <QxText text={line} />
                   {index < descriptionLines.length - 1 ? <br /> : null}
                 </span>
               ))}
@@ -171,7 +171,7 @@ const FinishesQX = ({ data, configurator }: FinishesSectionProps) => {
             <>
               <div>
                 <h3 className="mb-3 qx-emphasis-title">
-                  {renderQxText('Desktop Finish')}
+                  <QxText text="Desktop Finish" />
                 </h3>
                 <div className="space-y-4">
                   <MaterialsOptionGroup

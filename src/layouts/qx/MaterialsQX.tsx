@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { AnimatePresence, m, useInView } from 'framer-motion';
 import type { MaterialsConfiguratorOption, MaterialsData } from '@/types/catalog';
 import { SECTION_REVEAL_SETTLE, slowTransition } from '@/lib/motion';
-import { renderQxText } from '@/components/catalog/renderQxText';
+import { QxText } from '@/components/catalog/QxText';
 import { responsiveImg } from '@/lib/responsive-image';
 import { MaterialsOptionGroup } from '@/components/catalog/MaterialsOptionGroup';
 
@@ -162,17 +162,17 @@ const MaterialsQX = ({ data }: MaterialsSectionProps) => {
           className="relative z-10 flex flex-col lg:pt-3"
         >
           <p className="section_ID font-display uppercase">
-            {renderQxText(data.sectionLabel)}
+            <QxText text={data.sectionLabel} />
           </p>
           <h2
             id="materials-title"
             className="section_Title mt-8 font-display font-normal lg:mt-7"
           >
-            {renderQxText(data.title)}
+            <QxText text={data.title} />
           </h2>
           {data.description && (
             <p className="sec_main_text mt-6 max-w-[633px]">
-              {renderQxText(data.description)}
+              <QxText text={data.description} />
             </p>
           )}
         </m.div>
@@ -188,7 +188,7 @@ const MaterialsQX = ({ data }: MaterialsSectionProps) => {
               {hasGroupedDesktop ? (
                 <div>
                   <h3 className="mb-3 qx-emphasis-title">
-                    {renderQxText('Desktop Finish')}
+                    <QxText text="Desktop Finish" />
                   </h3>
                   <div className="space-y-4">
                     {desktopPriceGroup1.length > 0 && (
@@ -245,7 +245,7 @@ const MaterialsQX = ({ data }: MaterialsSectionProps) => {
                     aria-label={`${swatch.name} colour swatch`}
                   />
                   <p className="mt-2 text-xs text-muted-foreground">
-                    {renderQxText(swatch.name)}
+                    <QxText text={swatch.name} />
                   </p>
                 </div>
               ))}

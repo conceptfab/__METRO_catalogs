@@ -9,7 +9,7 @@ import type {
   PackshotsData,
 } from '@/types/catalog';
 import { SECTION_REVEAL_SLIDE, slowTransition } from '@/lib/motion';
-import { renderQxText } from '@/components/catalog/renderQxText';
+import { QxText } from '@/components/catalog/QxText';
 import { responsiveImg } from '@/lib/responsive-image';
 import { ColorChip } from '@/components/catalog/ColorChip';
 import { useFocusTrap } from '@/hooks/use-focus-trap';
@@ -161,17 +161,17 @@ const PackshotsQX = ({
           className="relative z-10 flex flex-col lg:max-w-[520px]"
         >
           <p className="section_ID font-display uppercase">
-            {renderQxText(data.sectionLabel)}
+            <QxText text={data.sectionLabel} />
           </p>
           <h2
             id="packshots-title"
             className="section_Title mt-8 font-display font-normal lg:mt-7"
           >
-            {renderQxText(data.title)}
+            <QxText text={data.title} />
           </h2>
           {data.subtitle && (
             <p className="sec_main_text mt-6 max-w-[520px] font-body">
-              {renderQxText(data.subtitle)}
+              <QxText text={data.subtitle} />
             </p>
           )}
         </m.div>

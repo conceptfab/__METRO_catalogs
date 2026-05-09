@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { ColorChip } from '@/components/catalog/ColorChip';
 import { SectionShell } from '@/components/catalog/SectionShell';
 import { SectionHeading } from '@/components/catalog/SectionHeading';
-import { renderQxText } from '@/components/catalog/renderQxText';
+import { QxText } from '@/components/catalog/QxText';
 import { colorTokens } from '@/lib/design-tokens';
 
 export const metadata: Metadata = {
@@ -106,7 +106,7 @@ const TYPOGRAPHY_SAMPLES = [
     source: 'globals.css · .catalog-qx0 .section_Title',
     render: (
       <h3 className="section_Title font-display font-normal">
-        {renderQxText('Sekcja /n QX')}
+        <QxText text="Sekcja /n QX" />
       </h3>
     ),
   },
@@ -148,7 +148,7 @@ const TYPOGRAPHY_SAMPLES = [
     source: 'globals.css',
     render: (
       <p className="hero-text">
-        {renderQxText('QX Modular desk system')}
+        <QxText text="QX Modular desk system" />
       </p>
     ),
   },
@@ -225,7 +225,7 @@ const SHARED_COMPONENTS = [
     name: 'SectionHeading',
     source: 'src/components/catalog/SectionHeading.tsx',
     description:
-      'Para .section_ID (label) + .section_Title (heading) z opcjonalnym titleLine2. Używa renderQxText.',
+      'Para .section_ID (label) + .section_Title (heading) z opcjonalnym titleLine2. Używa QxText.',
   },
   {
     name: 'MaterialsOptionGroup',
@@ -246,8 +246,8 @@ const SHARED_COMPONENTS = [
       'MotionConfig wrapper z globalną skalą czasu ×2 (catalog-motion-slow). Honoruje prefers-reduced-motion.',
   },
   {
-    name: 'renderQxText',
-    source: 'src/components/catalog/renderQxText.tsx',
+    name: 'QxText',
+    source: 'src/components/catalog/QxText.tsx',
     description:
       'Tokenizer tekstu: \\bQX\\b → <span class="qx-word">, /n + \\n → <br />. Używany przez wszystkie sekcje QX.',
   },
@@ -560,7 +560,7 @@ export default function DesignSystemPage() {
             id="ds-hero-title"
             className="section_Title mt-8 max-w-[20ch] font-display font-normal"
           >
-            {renderQxText('METRO Catalogs')}
+            <QxText text="METRO Catalogs" />
           </h1>
           <p className="sec_main_text mt-10 max-w-[60ch]">
             Co realnie działa w katalogach <span className="qx-word">QX</span> i{' '}
@@ -1057,7 +1057,7 @@ export default function DesignSystemPage() {
                 <div className="absolute inset-0 bg-hero-overlay/40" />
                 <div className="absolute inset-0 flex items-end p-8">
                   <p className="hero-text">
-                    {renderQxText('QX Modular desk system /n engineered for the modern workspace.')}
+                    <QxText text="QX Modular desk system /n engineered for the modern workspace." />
                   </p>
                 </div>
               </div>

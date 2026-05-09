@@ -5,7 +5,7 @@ import { m, useInView } from 'framer-motion';
 import Image from 'next/image';
 import type { ProductCodeGroup, ProductCodesData } from '@/types/catalog';
 import { SECTION_REVEAL_SETTLE, slowTransition } from '@/lib/motion';
-import { renderQxText } from '@/components/catalog/renderQxText';
+import { QxText } from '@/components/catalog/QxText';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 interface ProductCodesSectionProps {
@@ -19,7 +19,7 @@ const ProductCodeTable = ({ group, open }: { group: ProductCodeGroup; open: bool
   >
     <summary>
       <h3 className="font-body text-[15px] font-medium leading-tight text-foreground/90 sm:text-[13px] sm:font-normal sm:text-foreground/65">
-        {renderQxText(group.title)}
+        <QxText text={group.title} />
       </h3>
     </summary>
     <div className="codes-accordion__content">
@@ -100,16 +100,16 @@ const ProductCodesQX = ({ data }: ProductCodesSectionProps) => {
             className="relative z-10 flex flex-col lg:col-span-6 lg:pt-3"
           >
             <p className="section_ID font-display uppercase">
-              {renderQxText(data.sectionLabel)}
+              <QxText text={data.sectionLabel} />
             </p>
             <h2
               id="codes-title"
               className="section_Title mt-8 font-display font-normal lg:mt-7"
             >
-              {renderQxText(data.title)}
+              <QxText text={data.title} />
             </h2>
             <p className="sec_main_text mt-6 max-w-[633px]">
-              {renderQxText(data.description)}
+              <QxText text={data.description} />
             </p>
           </m.div>
 
@@ -178,7 +178,7 @@ const ProductCodesQX = ({ data }: ProductCodesSectionProps) => {
                 {data.legend && (
                   <div className="flex items-end pb-1.5 lg:col-span-3 lg:pl-10">
                     <p className="font-body text-[13px] leading-tight text-foreground/65">
-                      {renderQxText(data.legend)}
+                      <QxText text={data.legend} />
                     </p>
                   </div>
                 )}

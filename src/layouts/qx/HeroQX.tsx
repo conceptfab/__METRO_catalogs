@@ -12,7 +12,7 @@ import type {
   HeroSlideContentLayout,
 } from '@/types/catalog';
 import { scaleMotionValue, slowTransition } from '@/lib/motion';
-import { renderQxText } from '@/components/catalog/renderQxText';
+import { QxText } from '@/components/catalog/QxText';
 import { responsiveImg } from '@/lib/responsive-image';
 
 interface HeroQXProps {
@@ -425,21 +425,21 @@ const HeroQX = ({ data }: HeroQXProps) => {
           {currentHeroContent.collectionName?.trim() && (
             <span className="block">
               <span className="hero-line">
-                {renderQxText(currentHeroContent.collectionName)}
+                <QxText text={currentHeroContent.collectionName} />
               </span>
             </span>
           )}
           {currentHeroContent.tagline?.trim() && (
             <span className="block">
               <span className="hero-line">
-                {renderQxText(currentHeroContent.tagline)}
+                <QxText text={currentHeroContent.tagline} />
               </span>
             </span>
           )}
           {currentHeroContent.taglineLine2?.trim() && (
             <span className="block">
               <span className="hero-line">
-                {renderQxText(currentHeroContent.taglineLine2)}
+                <QxText text={currentHeroContent.taglineLine2} />
               </span>
             </span>
           )}

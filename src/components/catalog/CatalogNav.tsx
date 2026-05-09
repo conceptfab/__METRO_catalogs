@@ -5,7 +5,7 @@ import { Menu, X } from 'lucide-react';
 import { m, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import type { SectionConfig } from '@/types/catalog';
-import { renderQxText } from './renderQxText';
+import { QxText } from './QxText';
 
 const DEFAULT_SECTIONS: SectionConfig[] = [
   { id: 'cover', label: 'Cover' },
@@ -235,7 +235,7 @@ const CatalogNav = ({
                             isSectionHighlighted(section.id) ? 'location' : undefined
                           }
                         >
-                          {renderQxText(section.label)}
+                          <QxText text={section.label} />
                         </button>
                       </li>
                     ))}
@@ -279,7 +279,7 @@ const CatalogNav = ({
                         isSectionHighlighted(section.id) ? 'location' : undefined
                       }
                     >
-                      {renderQxText(section.label)}
+                      <QxText text={section.label} />
                     </button>
                   </li>
                 ))}
@@ -328,7 +328,7 @@ const CatalogNav = ({
                         isSectionHighlighted(section.id) ? 'location' : undefined
                       }
                     >
-                      {renderQxText(section.label)}
+                      <QxText text={section.label} />
                     </button>
                   </li>
                 ))}
@@ -369,7 +369,7 @@ const CatalogNav = ({
                       isSectionHighlighted(section.id) ? 'location' : undefined
                     }
                   >
-                    {renderQxText(section.label)}
+                    <QxText text={section.label} />
                   </button>
                 </li>
               ))}
