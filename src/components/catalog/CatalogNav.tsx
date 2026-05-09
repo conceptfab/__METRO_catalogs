@@ -28,6 +28,58 @@ interface CatalogNavProps {
   logoOnly?: boolean;
 }
 
+interface BrandControlProps {
+  brandLabel: string;
+  brandLogoSrc?: string;
+  backToCatalogListHref?: string;
+  className: string;
+  logoClassName: string;
+  onBrandClick: () => void;
+}
+
+function BrandControl({
+  brandLabel,
+  brandLogoSrc,
+  backToCatalogListHref,
+  className,
+  logoClassName,
+  onBrandClick,
+}: BrandControlProps) {
+  const brand = brandLogoSrc ? (
+    <Image
+      src={brandLogoSrc}
+      alt={`${brandLabel} logo`}
+      width={160}
+      height={48}
+      className={logoClassName}
+    />
+  ) : (
+    brandLabel
+  );
+
+  if (backToCatalogListHref) {
+    return (
+      <a
+        href={backToCatalogListHref}
+        className={className}
+        aria-label="Back to catalog list"
+      >
+        {brand}
+      </a>
+    );
+  }
+
+  return (
+    <button
+      onClick={onBrandClick}
+      className={className}
+      aria-label={`${brandLabel} - back to top`}
+    >
+      {brand}
+    </button>
+  );
+}
+
 const CatalogNav = ({
   sections = DEFAULT_SECTIONS,
   brandLabel = 'METRO',
@@ -157,43 +209,6 @@ const CatalogNav = ({
     scrollAnimationRef.current = window.requestAnimationFrame(animateScroll);
   };
 
-  const renderBrand = (logoClassName: string) => {
-    if (!brandLogoSrc) return brandLabel;
-    return (
-      <Image
-        src={brandLogoSrc}
-        alt={`${brandLabel} logo`}
-        width={160}
-        height={48}
-        className={logoClassName}
-      />
-    );
-  };
-
-  const renderBrandControl = (className: string, logoClassName: string) => {
-    if (backToCatalogListHref) {
-      return (
-        <a
-          href={backToCatalogListHref}
-          className={className}
-          aria-label="Back to catalog list"
-        >
-          {renderBrand(logoClassName)}
-        </a>
-      );
-    }
-
-    return (
-      <button
-        onClick={() => scrollTo('cover')}
-        className={className}
-        aria-label={`${brandLabel} - back to top`}
-      >
-        {renderBrand(logoClassName)}
-      </button>
-    );
-  };
-
   if (variant === 'qx0') {
     return (
       <>
@@ -212,10 +227,14 @@ const CatalogNav = ({
                 navExpanded ? 'lg:h-[166px]' : 'lg:h-14'
               }`}
             >
-              {renderBrandControl(
-                'inline-flex items-center min-h-[44px] min-w-[44px] font-display text-xl font-black tracking-tighter text-slate-900 !rounded-none',
-                'h-[22px] w-auto object-contain !rounded-none lg:h-7',
-              )}
+              <BrandControl
+                brandLabel={brandLabel}
+                brandLogoSrc={brandLogoSrc}
+                backToCatalogListHref={backToCatalogListHref}
+                className="inline-flex items-center min-h-[44px] min-w-[44px] font-display text-xl font-black tracking-tighter text-slate-900 !rounded-none"
+                logoClassName="h-[22px] w-auto object-contain !rounded-none lg:h-7"
+                onBrandClick={() => scrollTo('cover')}
+              />
 
               {!logoOnly && (
                 <div className="ml-auto hidden h-full w-full max-w-[1150px] lg:block">
@@ -308,10 +327,14 @@ const CatalogNav = ({
               navExpanded ? 'lg:h-[166px]' : 'lg:h-14'
             }`}
           >
-            {renderBrandControl(
-              'font-display text-xl font-black tracking-tighter text-slate-900',
-              'h-7 w-auto object-contain',
-            )}
+            <BrandControl
+              brandLabel={brandLabel}
+              brandLogoSrc={brandLogoSrc}
+              backToCatalogListHref={backToCatalogListHref}
+              className="font-display text-xl font-black tracking-tighter text-slate-900"
+              logoClassName="h-7 w-auto object-contain"
+              onBrandClick={() => scrollTo('cover')}
+            />
 
             <div className="ml-auto hidden w-full max-w-[1150px] lg:block">
               <ul className="flex items-center" role="list">
