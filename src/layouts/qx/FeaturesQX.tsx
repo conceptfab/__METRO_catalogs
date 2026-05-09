@@ -11,6 +11,37 @@ interface FeaturesSectionProps {
   data: FeaturesData;
 }
 
+interface FeatureVideoProps {
+  videoRef: RefObject<HTMLVideoElement | null>;
+  active: FeatureItem | undefined;
+  activeIndex: number;
+}
+
+function FeatureVideo({ videoRef, active, activeIndex }: FeatureVideoProps) {
+  return (
+    <div className="relative aspect-square w-full overflow-hidden bg-background">
+      {active?.video ? (
+        <>
+          <video
+            ref={videoRef}
+            key={`${activeIndex}-${active.video.src}`}
+            src={active.video.src}
+            poster={active.video.poster}
+            className="absolute inset-0 h-full w-full object-cover"
+            muted
+            playsInline
+            preload="metadata"
+            aria-hidden="true"
+          />
+          <span className="sr-only">
+            {`Visual demonstration of ${active.title}: ${active.desc}`}
+          </span>
+        </>
+      ) : null}
+    </div>
+  );
+}
+
 const FeaturesQX = ({ data }: FeaturesSectionProps) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
@@ -48,29 +79,6 @@ const FeaturesQX = ({ data }: FeaturesSectionProps) => {
     };
   }, [activeIndex, prefersReducedMotion]);
 
-  const renderFeatureVideo = (ref: RefObject<HTMLVideoElement | null>) => (
-    <div className="relative aspect-square w-full overflow-hidden bg-background">
-      {active?.video ? (
-        <>
-          <video
-            ref={ref}
-            key={`${activeIndex}-${active.video.src}`}
-            src={active.video.src}
-            poster={active.video.poster}
-            className="absolute inset-0 h-full w-full object-cover"
-            muted
-            playsInline
-            preload="metadata"
-            aria-hidden="true"
-          />
-          <span className="sr-only">
-            {`Visual demonstration of ${active.title}: ${active.desc}`}
-          </span>
-        </>
-      ) : null}
-    </div>
-  );
-
   return (
     <section
       id="features"
@@ -104,7 +112,7 @@ const FeaturesQX = ({ data }: FeaturesSectionProps) => {
             transition={slowTransition({ duration: 0.5, delay: 0.15 })}
             className="mt-8 lg:hidden"
           >
-            {renderFeatureVideo(mobileVideoRef)}
+            <FeatureVideo videoRef={mobileVideoRef} active={active} activeIndex={activeIndex} />
           </m.div>
 
           <m.div
@@ -174,7 +182,7 @@ const FeaturesQX = ({ data }: FeaturesSectionProps) => {
         </div>
 
         <div className="hidden lg:absolute lg:inset-y-0 lg:left-1/2 lg:right-0 lg:flex lg:items-center lg:justify-center">
-          {renderFeatureVideo(desktopVideoRef)}
+          <FeatureVideo videoRef={desktopVideoRef} active={active} activeIndex={activeIndex} />
         </div>
       </div>
     </section>
