@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getCatalogList, getGlobalConfig } from '@/lib/catalog-loader';
 import CatalogNav from '@/components/catalog/CatalogNav';
@@ -6,6 +7,20 @@ import { responsiveImg } from '@/lib/responsive-image';
 
 const QX_HERO_IMAGE = '/catalogs/QX/hero/02_26_Metro_QX_HERO_1_R3-clean_noise_thumb.webp';
 const QS_HERO_IMAGE = '/catalogs/QS/hero/04_26_Metro_QS_SOLO_B2_hero_noise.webp';
+
+export const metadata: Metadata = {
+  title: 'METRO – Catalogs',
+  description:
+    'Browse METRO office furniture catalogs: QX and QS desk systems, conference tables, and reception desks.',
+  alternates: { canonical: '/' },
+  openGraph: {
+    title: 'METRO – Catalogs',
+    description:
+      'Browse METRO office furniture catalogs: QX and QS desk systems, conference tables, and reception desks.',
+    url: '/',
+    type: 'website',
+  },
+};
 
 export default async function HomePage() {
   const [catalogs, globalConfig] = await Promise.all([
