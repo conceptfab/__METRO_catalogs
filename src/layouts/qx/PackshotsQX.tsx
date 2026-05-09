@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useId, useRef, useState } from 'react';
-import { motion, useInView, AnimatePresence } from 'framer-motion';
+import { m, useInView, AnimatePresence } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import type {
   MaterialsConfiguratorData,
@@ -154,7 +154,7 @@ const PackshotsQX = ({
         className="relative mx-auto w-full max-w-[1440px] px-5 pt-6 pb-12 sm:px-8 sm:pt-8 lg:px-0 lg:pt-3 lg:pb-[120px]"
         ref={ref}
       >
-        <motion.div
+        <m.div
           initial={reveal.header.initial}
           animate={isInView ? reveal.header.animate : {}}
           transition={slowTransition({ duration: 0.6 })}
@@ -174,7 +174,7 @@ const PackshotsQX = ({
               {renderQxText(data.subtitle)}
             </p>
           )}
-        </motion.div>
+        </m.div>
 
         <div className="mt-12 -mx-5 grid grid-cols-1 gap-6 sm:mx-0 sm:grid-cols-2 lg:mt-[120px]">
           {packshotItems.map((item, i) => {
@@ -188,7 +188,7 @@ const PackshotsQX = ({
               topCode,
             );
             return (
-              <motion.article
+              <m.article
                 key={`${item.code}-${item.image}`}
                 initial={reveal.content.initial}
                 animate={isInView ? reveal.content.animate : {}}
@@ -253,7 +253,7 @@ const PackshotsQX = ({
                     <span>Top {item.desktopColorName}</span>
                   )}
                 </div>
-              </motion.article>
+              </m.article>
             );
           })}
         </div>
@@ -261,7 +261,7 @@ const PackshotsQX = ({
 
       <AnimatePresence>
         {activeItem && lightboxIndex !== null && !isMobile && (
-          <motion.div
+          <m.div
             ref={dialogRef}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -300,7 +300,7 @@ const PackshotsQX = ({
             >
               <ChevronRight size={32} />
             </button>
-            <motion.img
+            <m.img
               key={lightboxIndex}
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -318,7 +318,7 @@ const PackshotsQX = ({
               {activeItem.code} — Packshot {lightboxIndex + 1} of{' '}
               {packshotItems.length}: {activeItem.name || activeItem.code}
             </p>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </section>

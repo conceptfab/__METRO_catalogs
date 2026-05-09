@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { m, useInView } from 'framer-motion';
 import Image from 'next/image';
 import type { ProductCodeGroup, ProductCodesData } from '@/types/catalog';
 import { SECTION_REVEAL_SETTLE, slowTransition } from '@/lib/motion';
@@ -93,7 +93,7 @@ const ProductCodesQX = ({ data }: ProductCodesSectionProps) => {
         ref={ref}
       >
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12">
-          <motion.div
+          <m.div
             initial={reveal.header.initial}
             animate={isInView ? reveal.header.animate : {}}
             transition={slowTransition({ duration: 0.6 })}
@@ -111,11 +111,11 @@ const ProductCodesQX = ({ data }: ProductCodesSectionProps) => {
             <p className="sec_main_text mt-6 max-w-[633px]">
               {renderQxText(data.description)}
             </p>
-          </motion.div>
+          </m.div>
 
           {data.image && (
             <div className="hidden items-start justify-end lg:col-span-6 lg:col-start-7 lg:flex lg:-mt-10 lg:translate-y-16">
-              <motion.div
+              <m.div
                 initial={reveal.content.initial}
                 animate={isInView ? reveal.content.animate : {}}
                 transition={slowTransition({ duration: 0.6, delay: 0.2 })}
@@ -127,12 +127,12 @@ const ProductCodesQX = ({ data }: ProductCodesSectionProps) => {
                   height={842}
                   className="h-auto w-full max-w-[240px]"
                 />
-              </motion.div>
+              </m.div>
             </div>
           )}
         </div>
 
-        <motion.div
+        <m.div
           initial={reveal.content.initial}
           animate={isInView ? reveal.content.animate : {}}
           transition={slowTransition({ duration: 0.6, delay: 0.35 })}
@@ -185,7 +185,7 @@ const ProductCodesQX = ({ data }: ProductCodesSectionProps) => {
               </div>
             </div>
           )}
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

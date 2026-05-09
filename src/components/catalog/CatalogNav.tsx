@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Menu, X } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import type { SectionConfig } from '@/types/catalog';
 import { renderQxText } from './renderQxText';
@@ -259,7 +259,7 @@ const CatalogNav = ({
 
         <AnimatePresence>
           {!logoOnly && isOpen && (
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
@@ -284,7 +284,7 @@ const CatalogNav = ({
                   </li>
                 ))}
               </ul>
-            </motion.div>
+            </m.div>
           )}
         </AnimatePresence>
       </>
@@ -349,7 +349,7 @@ const CatalogNav = ({
 
       <AnimatePresence>
         {isOpen && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
@@ -374,7 +374,7 @@ const CatalogNav = ({
                 </li>
               ))}
             </ul>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </>

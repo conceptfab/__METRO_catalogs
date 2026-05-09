@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { AnimatePresence, motion, useInView } from 'framer-motion';
+import { AnimatePresence, m, useInView } from 'framer-motion';
 import type {
   MaterialsConfiguratorData,
   MaterialsConfiguratorOption,
@@ -134,7 +134,7 @@ const FinishesQX = ({ data, configurator }: FinishesSectionProps) => {
         className="relative mx-auto w-full max-w-[1440px] px-5 pt-6 pb-12 sm:px-8 sm:pt-8 lg:min-h-[960px] lg:px-0 lg:py-0"
         ref={ref}
       >
-        <motion.div
+        <m.div
           initial={reveal.header.initial}
           animate={isInView ? reveal.header.animate : {}}
           transition={slowTransition({ duration: 0.6 })}
@@ -159,9 +159,9 @@ const FinishesQX = ({ data, configurator }: FinishesSectionProps) => {
               ))}
             </p>
           )}
-        </motion.div>
+        </m.div>
 
-        <motion.div
+        <m.div
           initial={reveal.content.initial}
           animate={isInView ? reveal.content.animate : {}}
           transition={slowTransition({ duration: 0.6, delay: 0.2 })}
@@ -239,9 +239,9 @@ const FinishesQX = ({ data, configurator }: FinishesSectionProps) => {
               </div>
             </>
           )}
-        </motion.div>
+        </m.div>
 
-        <motion.div
+        <m.div
           initial={reveal.content.initial}
           animate={isInView ? reveal.content.animate : {}}
           transition={slowTransition({ duration: 0.3, delay: 0.35 })}
@@ -260,7 +260,7 @@ const FinishesQX = ({ data, configurator }: FinishesSectionProps) => {
               <ZoomIn size={18} strokeWidth={1.5} />
             </span>
             <AnimatePresence mode="wait" initial={false}>
-              <motion.img
+              <m.img
                 key={previewImage}
                 src={previewImage}
                 {...responsiveImg(previewImage, 'materials-full')}
@@ -279,11 +279,11 @@ const FinishesQX = ({ data, configurator }: FinishesSectionProps) => {
               />
             </AnimatePresence>
           </button>
-        </motion.div>
+        </m.div>
 
         <AnimatePresence>
           {isPreviewOpen && (
-            <motion.div
+            <m.div
               ref={previewDialogRef}
               className="fixed inset-0 z-50 flex items-center justify-center bg-black/55 p-5"
               role="dialog"
@@ -294,7 +294,7 @@ const FinishesQX = ({ data, configurator }: FinishesSectionProps) => {
               exit={{ opacity: 0 }}
               onClick={() => setIsPreviewOpen(false)}
             >
-              <motion.div
+              <m.div
                 className="relative aspect-square w-[min(88vw,88vh)] bg-surface-elevated"
                 initial={{ opacity: 0, scale: 0.96 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -320,8 +320,8 @@ const FinishesQX = ({ data, configurator }: FinishesSectionProps) => {
                   alt={previewAlt}
                   className="h-full w-full object-cover"
                 />
-              </motion.div>
-            </motion.div>
+              </m.div>
+            </m.div>
           )}
         </AnimatePresence>
       </div>

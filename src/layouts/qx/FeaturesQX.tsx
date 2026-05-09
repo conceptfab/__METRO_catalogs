@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState, type RefObject } from 'react';
-import { AnimatePresence, motion, useInView, useReducedMotion } from 'framer-motion';
+import { AnimatePresence, m, useInView, useReducedMotion } from 'framer-motion';
 import type { FeatureItem, FeaturesData } from '@/types/catalog';
 import { getIcon } from '@/lib/icon-map';
 import { SECTION_REVEAL_SLIDE, slowTransition } from '@/lib/motion';
@@ -82,7 +82,7 @@ const FeaturesQX = ({ data }: FeaturesSectionProps) => {
         ref={ref}
       >
         <div className="relative z-10 flex flex-col lg:col-span-6 lg:max-w-[520px] lg:pt-3">
-          <motion.div
+          <m.div
             initial={reveal.header.initial}
             animate={isInView ? reveal.header.animate : {}}
             transition={slowTransition({ duration: 0.6 })}
@@ -96,18 +96,18 @@ const FeaturesQX = ({ data }: FeaturesSectionProps) => {
             >
               {renderQxText(data.title)}
             </h2>
-          </motion.div>
+          </m.div>
 
-          <motion.div
+          <m.div
             initial={reveal.content.initial}
             animate={isInView ? reveal.content.animate : {}}
             transition={slowTransition({ duration: 0.5, delay: 0.15 })}
             className="mt-8 lg:hidden"
           >
             {renderFeatureVideo(mobileVideoRef)}
-          </motion.div>
+          </m.div>
 
-          <motion.div
+          <m.div
             initial={reveal.content.initial}
             animate={isInView ? reveal.content.animate : {}}
             transition={slowTransition({ duration: 0.5, delay: 0.2 })}
@@ -150,7 +150,7 @@ const FeaturesQX = ({ data }: FeaturesSectionProps) => {
                 );
               })}
             </div>
-          </motion.div>
+          </m.div>
 
           <div
             className="mt-8 max-w-[520px] lg:mt-10"
@@ -159,7 +159,7 @@ const FeaturesQX = ({ data }: FeaturesSectionProps) => {
             aria-labelledby={`functionality-tab-${activeIndex}`}
           >
             <AnimatePresence mode="wait">
-              <motion.p
+              <m.p
                 key={activeIndex}
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -168,7 +168,7 @@ const FeaturesQX = ({ data }: FeaturesSectionProps) => {
                 className="sec_main_text font-body"
               >
                 {active && renderQxText(active.desc)}
-              </motion.p>
+              </m.p>
             </AnimatePresence>
           </div>
         </div>

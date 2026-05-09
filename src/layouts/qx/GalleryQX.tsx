@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useState } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { m, useInView } from 'framer-motion';
 import type { GalleryData } from '@/types/catalog';
 import { SECTION_REVEAL_LIFT, slowTransition } from '@/lib/motion';
 import { renderQxText } from '@/components/catalog/renderQxText';
@@ -54,7 +54,7 @@ const GalleryQX = ({ data }: GallerySectionProps) => {
         className="relative mx-auto w-full max-w-[1440px] px-5 pt-6 pb-12 sm:px-8 sm:pt-8 lg:h-[960px] lg:px-0 lg:py-0"
         ref={ref}
       >
-        <motion.div
+        <m.div
           initial={reveal.header.initial}
           animate={isInView ? reveal.header.animate : {}}
           transition={slowTransition({ duration: 0.6 })}
@@ -69,11 +69,11 @@ const GalleryQX = ({ data }: GallerySectionProps) => {
           >
             {renderQxText(data.title)}
           </h2>
-        </motion.div>
+        </m.div>
 
         {mainImage && (
           <div className="-mx-5 mt-8 flex snap-x snap-mandatory items-center gap-3 overflow-x-auto px-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:mx-0 lg:mt-0 lg:block lg:gap-0 lg:overflow-visible lg:px-0">
-            <motion.button
+            <m.button
               initial={reveal.content.initial}
               animate={isInView ? reveal.content.animate : {}}
               transition={slowTransition({ duration: 0.3 })}
@@ -89,10 +89,10 @@ const GalleryQX = ({ data }: GallerySectionProps) => {
                 loading="lazy"
                 decoding="async"
               />
-            </motion.button>
+            </m.button>
 
             {thumbnailImages.map((img, i) => (
-              <motion.button
+              <m.button
                 key={img.src}
                 initial={reveal.content.initial}
                 animate={isInView ? reveal.content.animate : {}}
@@ -112,7 +112,7 @@ const GalleryQX = ({ data }: GallerySectionProps) => {
                   loading="lazy"
                   decoding="async"
                 />
-              </motion.button>
+              </m.button>
             ))}
           </div>
         )}

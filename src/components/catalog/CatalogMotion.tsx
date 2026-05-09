@@ -1,7 +1,7 @@
 'use client';
 
 import type { ReactNode } from 'react';
-import { MotionConfig } from 'framer-motion';
+import { LazyMotion, MotionConfig, domAnimation } from 'framer-motion';
 import { slowTransition } from '@/lib/motion';
 
 interface CatalogMotionProps {
@@ -9,9 +9,11 @@ interface CatalogMotionProps {
 }
 
 const CatalogMotion = ({ children }: CatalogMotionProps) => (
-  <MotionConfig transition={slowTransition({ duration: 0.3 })}>
-    {children}
-  </MotionConfig>
+  <LazyMotion features={domAnimation} strict>
+    <MotionConfig transition={slowTransition({ duration: 0.3 })}>
+      {children}
+    </MotionConfig>
+  </LazyMotion>
 );
 
 export default CatalogMotion;

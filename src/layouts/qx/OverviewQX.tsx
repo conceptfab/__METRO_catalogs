@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useInView } from 'framer-motion';
+import { m, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import type { OverviewData } from '@/types/catalog';
 import { SECTION_REVEAL_SLIDE, slowTransition } from '@/lib/motion';
@@ -25,7 +25,7 @@ const OverviewQX = ({ data }: OverviewSectionProps) => {
       innerClassName="relative mx-auto grid w-full max-w-[1440px] grid-cols-1 gap-10 px-5 pt-6 pb-12 sm:px-8 sm:pt-8 lg:min-h-[960px] lg:grid-cols-12 lg:gap-0 lg:px-0 lg:py-0"
     >
       <div className="relative z-10 flex flex-col lg:col-span-6 lg:max-w-[540px] lg:pt-3" ref={ref}>
-        <motion.div
+        <m.div
           initial={reveal.header.initial}
           animate={isInView ? reveal.header.animate : {}}
           transition={slowTransition({ duration: 0.6 })}
@@ -42,11 +42,11 @@ const OverviewQX = ({ data }: OverviewSectionProps) => {
               <p key={i}>{renderQxText(p)}</p>
             ))}
           </div>
-        </motion.div>
+        </m.div>
       </div>
 
       <div className="aspect-[3/4] w-full lg:absolute lg:inset-y-0 lg:left-1/2 lg:right-0 lg:aspect-auto lg:w-auto">
-        <motion.div
+        <m.div
           initial={reveal.content.initial}
           animate={isInView ? reveal.content.animate : {}}
           transition={slowTransition({ duration: 0.6, delay: 0.2 })}
@@ -65,7 +65,7 @@ const OverviewQX = ({ data }: OverviewSectionProps) => {
             </div>
             <figcaption className="sr-only">{renderQxText(data.packshotCaption)}</figcaption>
           </figure>
-        </motion.div>
+        </m.div>
       </div>
     </SectionShell>
   );

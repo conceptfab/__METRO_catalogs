@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { m, useInView } from 'framer-motion';
 import Image from 'next/image';
 import type { DimensionsData } from '@/types/catalog';
 import { SECTION_REVEAL_LIFT, slowTransition } from '@/lib/motion';
@@ -26,7 +26,7 @@ const DimensionsQX = ({ data }: DimensionsSectionProps) => {
         className="relative mx-auto w-full max-w-[1440px] px-5 pt-6 pb-12 sm:px-8 sm:pt-8 lg:min-h-[960px] lg:px-0 lg:py-0"
         ref={ref}
       >
-        <motion.div
+        <m.div
           initial={reveal.header.initial}
           animate={isInView ? reveal.header.animate : {}}
           transition={slowTransition({ duration: 0.6 })}
@@ -47,9 +47,9 @@ const DimensionsQX = ({ data }: DimensionsSectionProps) => {
               {renderQxText(data.description)}
             </p>
           )}
-        </motion.div>
+        </m.div>
 
-        <motion.div
+        <m.div
           initial={reveal.content.initial}
           animate={isInView ? reveal.content.animate : {}}
           transition={slowTransition({ duration: 0.6, delay: 0.2 })}
@@ -105,7 +105,7 @@ const DimensionsQX = ({ data }: DimensionsSectionProps) => {
               ))}
             </dl>
           </div>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

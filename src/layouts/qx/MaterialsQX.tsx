@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { AnimatePresence, motion, useInView } from 'framer-motion';
+import { AnimatePresence, m, useInView } from 'framer-motion';
 import type { MaterialsConfiguratorOption, MaterialsData } from '@/types/catalog';
 import { SECTION_REVEAL_SETTLE, slowTransition } from '@/lib/motion';
 import { renderQxText } from '@/components/catalog/renderQxText';
@@ -155,7 +155,7 @@ const MaterialsQX = ({ data }: MaterialsSectionProps) => {
         className="relative mx-auto w-full max-w-[1440px] px-5 pt-6 pb-12 sm:px-8 sm:pt-8 lg:min-h-[960px] lg:px-0 lg:py-0"
         ref={ref}
       >
-        <motion.div
+        <m.div
           initial={reveal.header.initial}
           animate={isInView ? reveal.header.animate : {}}
           transition={slowTransition({ duration: 0.6 })}
@@ -175,9 +175,9 @@ const MaterialsQX = ({ data }: MaterialsSectionProps) => {
               {renderQxText(data.description)}
             </p>
           )}
-        </motion.div>
+        </m.div>
 
-        <motion.div
+        <m.div
           initial={reveal.content.initial}
           animate={isInView ? reveal.content.animate : {}}
           transition={slowTransition({ duration: 0.6, delay: 0.2 })}
@@ -251,9 +251,9 @@ const MaterialsQX = ({ data }: MaterialsSectionProps) => {
               ))}
             </div>
           )}
-        </motion.div>
+        </m.div>
 
-        <motion.div
+        <m.div
           initial={reveal.content.initial}
           animate={isInView ? reveal.content.animate : {}}
           transition={slowTransition({ duration: 0.3, delay: 0.35 })}
@@ -266,7 +266,7 @@ const MaterialsQX = ({ data }: MaterialsSectionProps) => {
               aria-label={configuratorAlt}
             >
               <AnimatePresence mode="wait" initial={false}>
-                <motion.img
+                <m.img
                   key={`frame-${selectedFrame.image}`}
                   src={selectedFrame.image}
                   {...responsiveImg(selectedFrame.image, 'materials-full')}
@@ -285,7 +285,7 @@ const MaterialsQX = ({ data }: MaterialsSectionProps) => {
               </AnimatePresence>
 
               <AnimatePresence mode="wait" initial={false}>
-                <motion.img
+                <m.img
                   key={`desktop-${selectedDesktop.image}`}
                   src={selectedDesktop.image}
                   {...responsiveImg(selectedDesktop.image, 'materials-full')}
@@ -315,7 +315,7 @@ const MaterialsQX = ({ data }: MaterialsSectionProps) => {
               />
             </figure>
           )}
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

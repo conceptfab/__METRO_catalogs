@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useId, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useFocusTrap } from '@/hooks/use-focus-trap';
 import { responsiveImg } from '@/lib/responsive-image';
@@ -54,7 +54,7 @@ export function Lightbox({ images, index, onClose, onNavigate }: LightboxProps) 
   return (
     <AnimatePresence>
       {isOpen && (
-        <motion.div
+        <m.div
           ref={dialogRef}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -96,7 +96,7 @@ export function Lightbox({ images, index, onClose, onNavigate }: LightboxProps) 
           >
             <ChevronRight size={32} />
           </button>
-          <motion.img
+          <m.img
             key={index}
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -115,7 +115,7 @@ export function Lightbox({ images, index, onClose, onNavigate }: LightboxProps) 
           >
             Image {index! + 1} of {images.length}: {images[index!].alt}
           </p>
-        </motion.div>
+        </m.div>
       )}
     </AnimatePresence>
   );

@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { m, useInView } from 'framer-motion';
 import type { GettingStartedData } from '@/types/catalog';
 import { SECTION_REVEAL_LIFT, slowTransition } from '@/lib/motion';
 import { renderQxText } from '@/components/catalog/renderQxText';
@@ -26,7 +26,7 @@ const GettingStartedQX = ({ data }: GettingStartedSectionProps) => {
         className="relative mx-auto w-full max-w-[1440px] px-5 pt-6 pb-12 sm:px-8 sm:pt-8 lg:px-0 lg:py-0"
         ref={ref}
       >
-        <motion.div
+        <m.div
           initial={reveal.header.initial}
           animate={isInView ? reveal.header.animate : {}}
           transition={slowTransition({ duration: 0.6 })}
@@ -41,13 +41,13 @@ const GettingStartedQX = ({ data }: GettingStartedSectionProps) => {
           >
             {renderQxText(data.title)}
           </h2>
-        </motion.div>
+        </m.div>
 
         <div className="mt-10 grid grid-cols-1 gap-y-10 sm:grid-cols-2 sm:gap-x-10 lg:grid-cols-3 lg:gap-x-[calc((100%-1029px)/2)]">
           {data.steps.map((s, i) => {
             const Icon = s.icon ? getIcon(s.icon) : null;
             return (
-              <motion.article
+              <m.article
                 key={s.step}
                 initial={reveal.content.initial}
                 animate={isInView ? reveal.content.animate : {}}
@@ -79,7 +79,7 @@ const GettingStartedQX = ({ data }: GettingStartedSectionProps) => {
                 <p className="sec_main_text mt-1 max-w-[360px] font-body">
                   {renderQxText(s.desc)}
                 </p>
-              </motion.article>
+              </m.article>
             );
           })}
         </div>

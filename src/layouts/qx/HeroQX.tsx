@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback, type CSSProperties } from 'react';
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { AnimatePresence, m, useReducedMotion } from 'framer-motion';
 import { ArrowDown, ChevronLeft, ChevronRight } from 'lucide-react';
 import type {
   HeroAnchor,
@@ -296,7 +296,7 @@ const HeroQX = ({ data }: HeroQXProps) => {
         aria-roledescription={hasSlider ? 'Image carousel' : undefined}
       >
         <AnimatePresence mode="sync" initial={false}>
-          <motion.img
+          <m.img
             key={`${currentSlide.src}-${currentIndex}`}
             src={currentSlide.src}
             {...responsiveImg(currentSlide.src, 'hero')}
@@ -331,7 +331,7 @@ const HeroQX = ({ data }: HeroQXProps) => {
           </span>
           {slider.showArrows && (
             <>
-              <motion.button
+              <m.button
                 type="button"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -341,8 +341,8 @@ const HeroQX = ({ data }: HeroQXProps) => {
                 aria-label="Previous slide"
               >
                 <ChevronLeft size={64} strokeWidth={1.2} />
-              </motion.button>
-              <motion.button
+              </m.button>
+              <m.button
                 type="button"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -352,11 +352,11 @@ const HeroQX = ({ data }: HeroQXProps) => {
                 aria-label="Next slide"
               >
                 <ChevronRight size={64} strokeWidth={1.2} />
-              </motion.button>
+              </m.button>
             </>
           )}
           {slider.showDots && (
-            <motion.div
+            <m.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={slowTransition({ duration: 0.3, delay: 1.2 })}
@@ -383,13 +383,13 @@ const HeroQX = ({ data }: HeroQXProps) => {
                   />
                 </button>
               ))}
-            </motion.div>
+            </m.div>
           )}
         </>
       )}
 
       {showSlideDescription && (
-        <motion.p
+        <m.p
           key={`slide-description-${currentIndex}`}
           initial={{ opacity: 0, y: 6 }}
           animate={{ opacity: 1, y: 0 }}
@@ -397,7 +397,7 @@ const HeroQX = ({ data }: HeroQXProps) => {
           style={descriptionInlineStyle}
         >
           {currentSlide.description}
-        </motion.p>
+        </m.p>
       )}
 
       <div
@@ -409,7 +409,7 @@ const HeroQX = ({ data }: HeroQXProps) => {
         className={`hero-content-wrapper hero-slide-${currentIndex} relative z-10 mx-auto flex min-h-screen w-full max-w-[1440px] flex-col px-6 sm:px-8 lg:px-0 ${wrapperFlexClasses}`}
         style={wrapperStyle}
       >
-        <motion.div
+        <m.div
           key={`hero-block-${currentIndex}`}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -443,10 +443,10 @@ const HeroQX = ({ data }: HeroQXProps) => {
               </span>
             </span>
           )}
-        </motion.div>
+        </m.div>
 
         {layout.ctaPosition === 'inline' && (
-          <motion.div
+          <m.div
             key={`hero-cta-${currentIndex}`}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -454,12 +454,12 @@ const HeroQX = ({ data }: HeroQXProps) => {
             className="mt-8"
           >
             {ctaButton()}
-          </motion.div>
+          </m.div>
         )}
       </div>
 
       {layout.ctaPosition === 'floating' && (
-        <motion.div
+        <m.div
           key={`hero-floating-cta-${currentIndex}`}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -468,7 +468,7 @@ const HeroQX = ({ data }: HeroQXProps) => {
           style={{ bottom: layout.ctaFloatingBottom }}
         >
           {ctaButton()}
-        </motion.div>
+        </m.div>
       )}
 
     </section>
