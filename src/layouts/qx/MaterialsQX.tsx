@@ -58,9 +58,10 @@ function orderOptions(
   options: MaterialsConfiguratorOption[],
   orderedCodes: string[],
 ) {
-  return orderedCodes
-    .map((code) => pickConfiguratorOption(options, code))
-    .filter((option): option is MaterialsConfiguratorOption => Boolean(option));
+  return orderedCodes.flatMap((code) => {
+    const option = pickConfiguratorOption(options, code);
+    return option ? [option] : [];
+  });
 }
 
 const MaterialsQX = ({ data }: MaterialsSectionProps) => {

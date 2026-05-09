@@ -130,9 +130,9 @@ function resolveImageUrl(base: string, assetPath: string): string {
 }
 
 function toPublicFilePath(...segments: string[]): string {
-  const normalizedSegments = segments
-    .flatMap((segment) => trimSlashes(segment).split('/'))
-    .filter(Boolean);
+  const normalizedSegments = segments.flatMap((segment) =>
+    trimSlashes(segment).split('/').filter(Boolean),
+  );
 
   return path.join(PUBLIC_DIR, ...normalizedSegments);
 }

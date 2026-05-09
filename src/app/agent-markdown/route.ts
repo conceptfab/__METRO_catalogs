@@ -22,10 +22,12 @@ function compact(value: string | undefined): string {
 }
 
 function frontmatter(fields: Record<string, string | undefined>): string {
-  const lines = Object.entries(fields)
-    .map(([key, value]) => [key, compact(value)] as const)
-    .filter(([, value]) => value.length > 0)
-    .map(([key, value]) => `${key}: ${JSON.stringify(value)}`);
+  const lines = Object.entries(fields).flatMap(([key, value]) => {
+    const compactValue = compact(value);
+    return compactValue.length > 0
+      ? [`${key}: ${JSON.stringify(compactValue)}`]
+      : [];
+  });
 
   return lines.length > 0 ? `---\n${lines.join('\n')}\n---\n\n` : '';
 }

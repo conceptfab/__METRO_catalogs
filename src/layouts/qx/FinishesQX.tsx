@@ -29,9 +29,10 @@ function orderOptions(
   orderedCodes: string[],
 ) {
   const optionsByCode = new Map(options.map((option) => [option.code, option]));
-  return orderedCodes
-    .map((code) => optionsByCode.get(code))
-    .filter((option): option is MaterialsConfiguratorOption => Boolean(option));
+  return orderedCodes.flatMap((code) => {
+    const option = optionsByCode.get(code);
+    return option ? [option] : [];
+  });
 }
 
 const FinishesQX = ({ data, configurator }: FinishesSectionProps) => {
