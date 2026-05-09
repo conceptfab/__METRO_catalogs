@@ -110,14 +110,14 @@ function BrandControl({
   );
 }
 
-const CatalogNav = ({
+function useCatalogNavController({
   sections = DEFAULT_SECTIONS,
   brandLabel = 'METRO',
   brandLogoSrc,
   backToCatalogListHref,
   variant = 'default',
   logoOnly = false,
-}: CatalogNavProps) => {
+}: CatalogNavProps) {
   const [{ activeSection, scrolled }, dispatchNavState] = useReducer(
     catalogNavReducer,
     { activeSection: 'cover', scrolled: false },
@@ -126,8 +126,6 @@ const CatalogNav = ({
   const scrollAnimationRef = useRef<number | null>(null);
   const scrollingToSectionRef = useRef<string | null>(null);
   const navExpanded = !scrolled;
-  const isSectionHighlighted = (sectionId: string) =>
-    sectionId !== 'cover' && activeSection === sectionId;
 
   const visibleSections = useMemo(
     () => sections.filter((section) => section.enabled !== false),
@@ -244,6 +242,39 @@ const CatalogNav = ({
 
     scrollAnimationRef.current = window.requestAnimationFrame(animateScroll);
   };
+
+  return {
+    activeSection,
+    backToCatalogListHref,
+    brandLabel,
+    brandLogoSrc,
+    isOpen,
+    logoOnly,
+    navExpanded,
+    scrolled,
+    scrollTo,
+    setIsOpen,
+    variant,
+    visibleSections,
+  };
+}
+
+function renderCatalogNav({
+  activeSection,
+  backToCatalogListHref,
+  brandLabel,
+  brandLogoSrc,
+  isOpen,
+  logoOnly,
+  navExpanded,
+  scrolled,
+  scrollTo,
+  setIsOpen,
+  variant,
+  visibleSections,
+}: ReturnType<typeof useCatalogNavController>) {
+  const isSectionHighlighted = (sectionId: string) =>
+    sectionId !== 'cover' && activeSection === sectionId;
 
   if (variant === 'qx0') {
     return (
@@ -436,6 +467,9 @@ const CatalogNav = ({
       </AnimatePresence>
     </>
   );
-};
+}
+
+const CatalogNav = (props: CatalogNavProps) =>
+  renderCatalogNav(useCatalogNavController(props));
 
 export default CatalogNav;

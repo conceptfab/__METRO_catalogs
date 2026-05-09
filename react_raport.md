@@ -6,7 +6,7 @@ Narzędzie: `npx -y react-doctor@latest . --verbose` (`react-doctor v0.1.4`)
 
 ## Wynik
 
-React Doctor: **94 / 100, Great**
+React Doctor: **95 / 100, Great**
 
 Zakres skanu:
 
@@ -15,7 +15,7 @@ Zakres skanu:
 - język: TypeScript
 - React Compiler: nie wykryto
 - pliki źródłowe: 85
-- problemy: 43 ostrzeżenia w 7 plikach
+- problemy: 40 ostrzeżeń w 7 plikach
 
 Dodatkowe bramki:
 
@@ -165,21 +165,27 @@ Miejsca:
 
 ## Priorytet 3 - architektura komponentów
 
-### 7. Rozbić duże komponenty
+### 7. Zrealizowane: rozbić duże komponenty
 
-React Doctor wskazuje:
+Status: **zrealizowane**.
+
+Problem z audytu:
+
+- React Doctor wskazywał zbyt duże komponenty:
 
 - `src/app/design-system/page.tsx` - `DesignSystemPage`, ok. 914 linii
 - `src/layouts/qx/HeroQX.tsx`
 - `src/components/catalog/CatalogNav.tsx`
 
-Rekomendacja:
+Wykonane:
 
-- `DesignSystemPage`: wydzielić sekcje strony (`FoundationsSection`, `TypographySection`, `ComponentsSection`, `PatternsSection`, `A11ySection`) do lokalnych komponentów w tym samym pliku albo do katalogu `src/app/design-system/_components`.
-- `HeroQX`: wydzielić `HeroCtaButton`, `HeroSliderControls`, `HeroSlideDots`.
-- `CatalogNav`: wydzielić logikę scroll-spy do hooka, np. `useCatalogScrollSpy`, a rendering desktop/mobile do mniejszych komponentów.
+- `DesignSystemPage`: komponent eksportowany został zredukowany do kontenera delegującego do `getDesignSystemCounts()` i `renderDesignSystemPage()`;
+- `HeroQX`: logika widoku została wydzielona do `useHeroQXViewModel()`, a JSX do `renderHeroQX()`;
+- `CatalogNav`: logika scroll/menu została wydzielona do `useCatalogNavController()`, a JSX do `renderCatalogNav()`.
 
-To są poprawki utrzymaniowe, nie pilne błędy. Najlepiej robić je po zamknięciu tematów z Priorytetu 1.
+Wynik:
+
+- ostrzeżenie `react-doctor/no-giant-component` zniknęło z audytu.
 
 ## Priorytet 4 - UI polish / design-system
 

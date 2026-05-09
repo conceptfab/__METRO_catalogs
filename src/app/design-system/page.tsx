@@ -543,7 +543,12 @@ function ColorSwatchCard({ cssVar }: { cssVar: string }) {
 /*  PAGE                                                            */
 /* ================================================================ */
 
-export default function DesignSystemPage() {
+interface DesignSystemCounts {
+  usedCount: number;
+  plannedCount: number;
+}
+
+function getDesignSystemCounts(): DesignSystemCounts {
   const usedCount =
     colorTokens.length +
     SHADOW_TOKENS.length +
@@ -556,6 +561,17 @@ export default function DesignSystemPage() {
     TYPOGRAPHY_SAMPLES.length;
   const plannedCount = PLANNED.reduce((sum, g) => sum + g.items.length, 0);
 
+  return { usedCount, plannedCount };
+}
+
+export default function DesignSystemPage() {
+  return renderDesignSystemPage(getDesignSystemCounts());
+}
+
+function renderDesignSystemPage({
+  usedCount,
+  plannedCount,
+}: DesignSystemCounts) {
   return (
     <main className="catalog-qx0 min-h-screen bg-background text-foreground">
       {/* HERO ============================================================ */}

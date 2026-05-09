@@ -94,7 +94,7 @@ function descriptionPositionClasses(position: HeroDescriptionPosition): string {
   }
 }
 
-const HeroQX = ({ data }: HeroQXProps) => {
+function useHeroQXViewModel(data: HeroData) {
   const slider = { ...DEFAULT_SLIDER, ...data.slider };
   const fallbackSlides: HeroSlide[] = (data.heroImages ?? []).map(
     (src, index, all) => ({
@@ -290,6 +290,52 @@ const HeroQX = ({ data }: HeroQXProps) => {
     </button>
   );
 
+  return {
+    ctaButton,
+    currentHeroContent,
+    currentIndex,
+    currentSlide,
+    descriptionInlineStyle,
+    descriptionPosClass,
+    displaySlides,
+    goNext,
+    goPrev,
+    goTo,
+    hasSlider,
+    heroCtaTransition,
+    innerStyle,
+    isHoveredRef,
+    layout,
+    showSlideDescription,
+    slideTransition,
+    slider,
+    wrapperFlexClasses,
+    wrapperStyle,
+  };
+}
+
+function renderHeroQX({
+  ctaButton,
+  currentHeroContent,
+  currentIndex,
+  currentSlide,
+  descriptionInlineStyle,
+  descriptionPosClass,
+  displaySlides,
+  goNext,
+  goPrev,
+  goTo,
+  hasSlider,
+  heroCtaTransition,
+  innerStyle,
+  isHoveredRef,
+  layout,
+  showSlideDescription,
+  slideTransition,
+  slider,
+  wrapperFlexClasses,
+  wrapperStyle,
+}: ReturnType<typeof useHeroQXViewModel>) {
   return (
     <section
       id="cover"
@@ -485,6 +531,8 @@ const HeroQX = ({ data }: HeroQXProps) => {
 
     </section>
   );
-};
+}
+
+const HeroQX = ({ data }: HeroQXProps) => renderHeroQX(useHeroQXViewModel(data));
 
 export default HeroQX;
