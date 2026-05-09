@@ -215,7 +215,7 @@ const FinishesQX = ({ data, configurator }: FinishesSectionProps) => {
                   {data.desktopColors.map((c) => (
                     <div
                       key={c.name}
-                      className="h-12 w-12 rounded-full border border-border"
+                      className="size-12 rounded-full border border-border"
                       style={{ backgroundColor: c.code }}
                       title={c.name}
                     />
@@ -230,7 +230,7 @@ const FinishesQX = ({ data, configurator }: FinishesSectionProps) => {
                   {data.frameColors.map((c) => (
                     <div
                       key={c.name}
-                      className="h-12 w-12 rounded-full border border-border"
+                      className="size-12 rounded-full border border-border"
                       style={{ backgroundColor: c.code }}
                       title={c.name}
                     />
@@ -255,7 +255,7 @@ const FinishesQX = ({ data, configurator }: FinishesSectionProps) => {
           >
             <span
               aria-hidden="true"
-              className="absolute right-3 top-3 z-10 flex h-10 w-10 items-center justify-center bg-surface-elevated/90 opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100"
+              className="absolute right-3 top-3 z-10 flex size-10 items-center justify-center bg-surface-elevated/90 opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100"
             >
               <ZoomIn size={18} strokeWidth={1.5} />
             </span>
@@ -307,7 +307,7 @@ const FinishesQX = ({ data, configurator }: FinishesSectionProps) => {
                 </h2>
                 <button
                   type="button"
-                  className="absolute right-3 top-3 z-10 flex h-9 w-9 items-center justify-center bg-surface-elevated text-2xl leading-none text-foreground shadow-sm transition-colors hover:bg-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
+                  className="absolute right-3 top-3 z-10 flex size-9 items-center justify-center bg-surface-elevated text-2xl leading-none text-foreground shadow-sm transition-colors hover:bg-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
                   onClick={() => setIsPreviewOpen(false)}
                   aria-label="Close preview"
                 >

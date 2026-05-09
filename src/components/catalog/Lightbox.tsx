@@ -71,7 +71,7 @@ export function Lightbox({ images, index, onClose, onNavigate }: LightboxProps) 
               event.stopPropagation();
               onClose();
             }}
-            className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center text-white/80 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            className="absolute right-4 top-4 flex size-11 items-center justify-center text-white/80 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             aria-label="Close lightbox"
           >
             <X size={28} />
@@ -81,7 +81,7 @@ export function Lightbox({ images, index, onClose, onNavigate }: LightboxProps) 
               event.stopPropagation();
               onNavigate(-1);
             }}
-            className="absolute left-4 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center text-white/80 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            className="absolute left-4 top-1/2 flex size-11 -translate-y-1/2 items-center justify-center text-white/80 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             aria-label="Previous image"
           >
             <ChevronLeft size={32} />
@@ -91,7 +91,7 @@ export function Lightbox({ images, index, onClose, onNavigate }: LightboxProps) 
               event.stopPropagation();
               onNavigate(1);
             }}
-            className="absolute right-4 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center text-white/80 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            className="absolute right-4 top-1/2 flex size-11 -translate-y-1/2 items-center justify-center text-white/80 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             aria-label="Next image"
           >
             <ChevronRight size={32} />

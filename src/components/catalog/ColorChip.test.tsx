@@ -16,8 +16,7 @@ describe('ColorChip', () => {
   it('renders a button with min 44x44 touch target', () => {
     const { getByRole } = render(<ColorChip option={opt} role="frame" />);
     const button = getByRole('button');
-    expect(button.className).toMatch(/h-11/);
-    expect(button.className).toMatch(/w-11/);
+    expect(button.className).toMatch(/size-11/);
   });
 
   it('escape hides the tooltip after focus opens it', () => {

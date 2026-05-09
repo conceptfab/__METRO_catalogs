@@ -449,7 +449,7 @@ function SurfaceTag({ token, position = 'top-left' }: { token: string; position?
     <span
       className={`pointer-events-none absolute top-2 ${pos} z-10 inline-flex items-center gap-1.5 border border-foreground/15 bg-card/90 px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider text-muted-foreground backdrop-blur-sm`}
     >
-      <span className="h-2 w-2 border border-foreground/30" style={{ background: `var(${token})` }} />
+      <span className="size-2 border border-foreground/30" style={{ background: `var(${token})` }} />
       bg · {token}
     </span>
   );
@@ -459,14 +459,14 @@ function StatusTag({ kind }: { kind: 'used' | 'planned' }) {
   if (kind === 'used') {
     return (
       <span className="inline-flex items-center gap-1.5 border border-success/30 bg-success/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest text-success">
-        <span className="h-1.5 w-1.5 rounded-full bg-success" />
+        <span className="size-1.5 rounded-full bg-success" />
         zaimplementowane
       </span>
     );
   }
   return (
     <span className="inline-flex items-center gap-1.5 border border-foreground/15 bg-foreground/5 px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
-      <span className="h-1.5 w-1.5 rounded-full bg-muted-foreground" />
+      <span className="size-1.5 rounded-full bg-muted-foreground" />
       planowane
     </span>
   );
@@ -1402,7 +1402,7 @@ export default function DesignSystemPage() {
                       key={item}
                       className="flex items-start gap-3 border-b border-background/10 pb-2 text-[13px] leading-relaxed text-background/85"
                     >
-                      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-background/30" />
+                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-background/30" />
                       <span>{item}</span>
                     </li>
                   ))}

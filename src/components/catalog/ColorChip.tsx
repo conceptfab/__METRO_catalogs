@@ -56,7 +56,7 @@ export function ColorChip({ option, role }: ColorChipProps) {
         onMouseLeave={() => setOpen(false)}
         onFocus={() => setOpen(true)}
         onBlur={() => setOpen(false)}
-        className="flex h-11 w-11 items-center justify-center cursor-help focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
+        className="flex size-11 items-center justify-center cursor-help focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
       >
         <img
           src={option.thumbnail}
@@ -65,7 +65,7 @@ export function ColorChip({ option, role }: ColorChipProps) {
           aria-hidden="true"
           width={24}
           height={24}
-          className="block h-6 w-6 border border-foreground/60 object-cover"
+          className="block size-6 border border-foreground/60 object-cover"
         />
       </button>
       {open && (
