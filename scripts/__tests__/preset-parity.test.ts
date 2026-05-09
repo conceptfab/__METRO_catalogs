@@ -20,10 +20,14 @@ function extractPresetWidths(): Record<string, number[]> {
   const entryRe = /'?([\w-]+)'?\s*:\s*\[([\d,\s]+)\]/g;
   let match: RegExpExecArray | null;
   while ((match = entryRe.exec(body)) !== null) {
-    out[match[1]] = match[2]
-      .split(',')
-      .map((v) => parseInt(v.trim(), 10))
-      .filter((n) => Number.isFinite(n));
+    const widths: number[] = [];
+    for (const value of match[2].split(',')) {
+      const width = parseInt(value.trim(), 10);
+      if (Number.isFinite(width)) {
+        widths.push(width);
+      }
+    }
+    out[match[1]] = widths;
   }
   return out;
 }

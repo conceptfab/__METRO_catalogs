@@ -6,7 +6,7 @@ Narzędzie: `npx -y react-doctor@latest . --verbose` (`react-doctor v0.1.4`)
 
 ## Wynik
 
-React Doctor: **93 / 100, Great**
+React Doctor: **94 / 100, Great**
 
 Zakres skanu:
 
@@ -15,7 +15,7 @@ Zakres skanu:
 - język: TypeScript
 - React Compiler: nie wykryto
 - pliki źródłowe: 85
-- problemy: 46 ostrzeżeń w 9 plikach
+- problemy: 43 ostrzeżenia w 7 plikach
 
 Dodatkowe bramki:
 
@@ -117,33 +117,51 @@ Miejsca:
 - `src/layouts/qx/ProductCodesQX.tsx:60`
 - `src/components/catalog/QxText.tsx:13`
 
-### 5. Przyspieszyć test `overview-min-size`
+### 5. Zrealizowane: przyspieszyć test `overview-min-size`
 
 Plik: `scripts/__tests__/overview-min-size.test.ts`
 
-Problem:
+Status: **zrealizowane**.
+
+Problem z audytu:
 
 - `sharp(path).metadata()` jest wykonywane sekwencyjnie w pętli `for...of`.
 
-Rekomendacja:
+Wykonane:
 
-- zebrać promisy i użyć `Promise.all`, ponieważ odczyty metadanych są niezależne.
+- odczyty metadanych obrazów są uruchamiane równolegle przez `Promise.all`;
+- lista zbyt małych obrazów jest wyliczana z gotowych wyników;
+- test pozostaje `it.skip`, zgodnie z istniejącym komentarzem o znanym problemie assetów.
+
+Wynik:
+
+- ostrzeżenie `react-doctor/async-await-in-loop` zniknęło z audytu.
 
 Miejsce:
 
 - `scripts/__tests__/overview-min-size.test.ts:36`
 
-### 6. Uprościć `map().filter()` w testach i design-systemie
+### 6. Zrealizowane: uprościć `map().filter()` w testach i design-systemie
+
+Status: **zrealizowane**.
+
+Problem z audytu:
+
+- React Doctor wskazywał dwa miejsca, gdzie łańcuch `.map().filter()` / `.filter().map()` iterował po tej samej tablicy dwa razy.
+
+Wykonane:
+
+- `scripts/__tests__/preset-parity.test.ts`: parsowanie szerokości używa jednej pętli `for...of`;
+- `src/app/design-system/page.tsx`: filtrowana lista komponentów współdzielonych została wyniesiona do stałej `SUPPORTING_SHARED_COMPONENTS`, a JSX wykonuje już tylko `.map()`.
+
+Wynik:
+
+- ostrzeżenie `react-doctor/js-combine-iterations` zniknęło z audytu.
 
 Miejsca:
 
 - `scripts/__tests__/preset-parity.test.ts:23`
 - `src/app/design-system/page.tsx:778`
-
-Rekomendacja:
-
-- w teście można użyć jednego `reduce` albo pętli `for...of` do parsowania szerokości;
-- w design-systemie wynik filtrowania `SHARED_COMPONENTS` można zapisać jako stałą poza JSX, np. `VISIBLE_SHARED_COMPONENTS`, żeby uniknąć pracy w renderze i poprawić czytelność.
 
 ## Priorytet 3 - architektura komponentów
 

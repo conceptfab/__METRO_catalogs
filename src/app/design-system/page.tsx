@@ -254,6 +254,15 @@ const SHARED_COMPONENTS = [
   },
 ];
 
+const FEATURED_SHARED_COMPONENTS = new Set([
+  'ColorChip',
+  'SectionShell',
+  'SectionHeading',
+]);
+const SUPPORTING_SHARED_COMPONENTS = SHARED_COMPONENTS.filter(
+  (component) => !FEATURED_SHARED_COMPONENTS.has(component.name),
+);
+
 const QX_LAYOUTS = [
   { name: 'HeroQX', file: 'src/layouts/qx/HeroQX.tsx', desc: 'Pełnoekranowy slider z auto-advance i klawiaturą; mobile hero używa sizes 200vh pod object-cover. Per-slide overrides: textStyle, mobileTextStyle, mobileContentLayout, mobileImageOffsetX (CSS custom props).' },
   { name: 'OverviewQX', file: 'src/layouts/qx/OverviewQX.tsx', desc: 'Dwukolumnowy: tekst + packshot. Reveal SLIDE.' },
@@ -775,9 +784,7 @@ export default function DesignSystemPage() {
 
           {/* All other shared components grid */}
           <div className="mt-16 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {SHARED_COMPONENTS.filter(
-              (c) => !['ColorChip', 'SectionShell', 'SectionHeading'].includes(c.name),
-            ).map((c) => (
+            {SUPPORTING_SHARED_COMPONENTS.map((c) => (
               <div key={c.name} className="border border-foreground/10 bg-card p-5">
                 <StatusTag kind="used" />
                 <p className="mt-3 font-display text-base font-bold">{c.name}</p>

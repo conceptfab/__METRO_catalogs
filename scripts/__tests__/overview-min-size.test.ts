@@ -31,14 +31,12 @@ describe('overview/ source images', () => {
     const images = await getImagesInOverview();
     expect(images.length, 'no overview images found').toBeGreaterThan(0);
 
-    const tooSmall: { path: string; width: number }[] = [];
-    for (const path of images) {
+    const imageSizes = await Promise.all(images.map(async (path) => {
       const meta = await sharp(path).metadata();
-      const width = meta.width ?? 0;
-      if (width < MIN_OVERVIEW_WIDTH) {
-        tooSmall.push({ path, width });
-      }
-    }
+      return { path, width: meta.width ?? 0 };
+    }));
+
+    const tooSmall = imageSizes.filter(({ width }) => width < MIN_OVERVIEW_WIDTH);
 
     if (tooSmall.length > 0) {
       const summary = tooSmall
