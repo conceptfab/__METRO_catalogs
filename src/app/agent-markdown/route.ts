@@ -127,8 +127,10 @@ function renderCatalogMarkdown(catalog: CatalogData): string {
     .map((group) => {
       const items = group.items
         .slice(0, 4)
-        .map((item) => item.name || item.code)
-        .filter(Boolean)
+        .flatMap((item) => {
+          const label = item.name || item.code;
+          return label ? [label] : [];
+        })
         .join(', ');
       return `- ${group.label}${items ? `: ${items}` : ''}`;
     })
