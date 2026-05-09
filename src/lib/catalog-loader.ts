@@ -532,9 +532,6 @@ export async function loadCatalog(
     return null;
   }
 
-  const sections =
-    config.sections ?? SECTION_ORDER.map((id) => ({ id, label: id }));
-
   const [
     hero,
     heroSliderFile,
@@ -574,6 +571,9 @@ export async function loadCatalog(
   ) {
     return null;
   }
+
+  const sections =
+    config.sections ?? SECTION_ORDER.map((id) => ({ id, label: id }));
 
   parseHeroContent(hero);
   if (packshots) parsePackshotsContent(packshots);
