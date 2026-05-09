@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import { ColorChip } from '@/components/catalog/ColorChip';
 import { SectionShell } from '@/components/catalog/SectionShell';
@@ -814,12 +815,13 @@ export default function DesignSystemPage() {
             <div className="relative mt-8 bg-surface-elevated px-5 py-12 sm:px-8 lg:px-12">
               <SurfaceTag token="--surface-elevated" />
               <article className="mx-auto max-w-[640px]">
-                <div className="block w-full overflow-hidden">
-                  <img
+                <div className="relative block aspect-[4000/3176] w-full overflow-hidden">
+                  <Image
                     src={PACKSHOT_DEMO.image}
                     alt={PACKSHOT_DEMO.alt}
-                    className="block h-auto w-full"
-                    loading="lazy"
+                    fill
+                    sizes="(min-width: 1024px) 640px, 100vw"
+                    className="object-contain"
                   />
                 </div>
                 <div className="qx-packshot-meta">
@@ -1049,10 +1051,12 @@ export default function DesignSystemPage() {
             <p className="qx-emphasis-title">Hero · ekspozycja produktu</p>
             <div className="mt-6 grid grid-cols-1 gap-3 lg:grid-cols-2">
               <div className="relative aspect-[16/9] overflow-hidden bg-foreground/90">
-                <img
+                <Image
                   src="/catalogs/QX/hero/02_26_Metro_QX_HERO_1_R3-clean_noise_thumb.webp"
                   alt="Hero — biuro otwarte z biurkami QX"
-                  className="absolute inset-0 h-full w-full object-cover"
+                  fill
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  className="object-cover"
                 />
                 <div className="absolute inset-0 bg-hero-overlay/40" />
                 <div className="absolute inset-0 flex items-end p-8">
@@ -1062,10 +1066,12 @@ export default function DesignSystemPage() {
                 </div>
               </div>
               <div className="relative aspect-[16/9] overflow-hidden">
-                <img
+                <Image
                   src="/catalogs/QX/gallery/02_26_Metro_QX_HOME0000.webp"
                   alt="Gallery — przykład kompozycji domowej"
-                  className="absolute inset-0 h-full w-full object-cover"
+                  fill
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  className="object-cover"
                 />
               </div>
             </div>

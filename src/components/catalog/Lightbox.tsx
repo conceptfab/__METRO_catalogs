@@ -6,7 +6,7 @@ import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useFocusTrap } from '@/hooks/use-focus-trap';
 import { responsiveImg } from '@/lib/responsive-image';
 
-export interface LightboxImage {
+interface LightboxImage {
   src: string;
   alt: string;
 }

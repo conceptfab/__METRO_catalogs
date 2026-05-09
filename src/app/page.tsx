@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import { getCatalogList, getGlobalConfig } from '@/lib/catalog-loader';
 import CatalogNav from '@/components/catalog/CatalogNav';
 import CatalogMotion from '@/components/catalog/CatalogMotion';
-import { responsiveImg } from '@/lib/responsive-image';
 
 const QX_HERO_IMAGE = '/catalogs/QX/hero/02_26_Metro_QX_HERO_1_R3-clean_noise_thumb.webp';
 const QS_HERO_IMAGE = '/catalogs/QS/hero/04_26_Metro_QS_SOLO_B2_hero_noise.webp';
@@ -30,8 +30,6 @@ export default async function HomePage() {
 
   const qxCatalog = catalogs.find((c) => c.id === 'QX');
   const qsCatalog = catalogs.find((c) => c.id === 'QS');
-  const qxHeroSrcSet = responsiveImg(QX_HERO_IMAGE, 'hero');
-  const qsHeroSrcSet = responsiveImg(QS_HERO_IMAGE, 'hero');
 
   return (
     <div className="catalog-qx0 catalog-motion-slow">
@@ -61,11 +59,13 @@ export default async function HomePage() {
                     className="group relative block h-full w-full overflow-hidden bg-background outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-foreground"
                     aria-label={`Open ${qxCatalog.meta.title} catalog`}
                   >
-                    <img
+                    <Image
                       src={QX_HERO_IMAGE}
                       alt=""
-                      {...qxHeroSrcSet}
-                      className="home-tile-pan absolute inset-0 h-full w-full scale-[1.4] object-cover transition-transform duration-700 group-hover:scale-[1.45]"
+                      fill
+                      priority
+                      sizes="(min-width: 1024px) 20vw, (min-width: 640px) 33vw, 50vw"
+                      className="home-tile-pan scale-[1.4] object-cover transition-transform duration-700 group-hover:scale-[1.45]"
                     />
                     <div className="absolute inset-0 bg-foreground/0 transition-colors duration-300 group-hover:bg-foreground/55" />
                     <span className="pointer-events-none absolute inset-0 flex items-center justify-center font-display text-[88px] font-black tracking-tighter text-background opacity-0 transition-opacity duration-300 group-hover:opacity-100">
@@ -83,11 +83,13 @@ export default async function HomePage() {
                     className="group relative block h-full w-full overflow-hidden bg-background outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-foreground"
                     aria-label={`Open ${qsCatalog.meta.title} catalog`}
                   >
-                    <img
+                    <Image
                       src={QS_HERO_IMAGE}
                       alt=""
-                      {...qsHeroSrcSet}
-                      className="home-tile-pan-reverse absolute inset-0 h-full w-full scale-[1.4] object-cover transition-transform duration-700 group-hover:scale-[1.45]"
+                      fill
+                      priority
+                      sizes="(min-width: 1024px) 20vw, (min-width: 640px) 33vw, 50vw"
+                      className="home-tile-pan-reverse scale-[1.4] object-cover transition-transform duration-700 group-hover:scale-[1.45]"
                     />
                     <div className="absolute inset-0 bg-foreground/0 transition-colors duration-300 group-hover:bg-foreground/55" />
                     <span className="pointer-events-none absolute inset-0 flex items-center justify-center font-display text-[88px] font-black tracking-tighter text-background opacity-0 transition-opacity duration-300 group-hover:opacity-100">

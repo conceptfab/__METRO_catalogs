@@ -1,11 +1,11 @@
 'use client';
 
 import { m, useInView } from 'framer-motion';
+import Image from 'next/image';
 import { useRef } from 'react';
 import type { OverviewData } from '@/types/catalog';
 import { SECTION_REVEAL_SLIDE, slowTransition } from '@/lib/motion';
 import { QxText } from '@/components/catalog/QxText';
-import { responsiveImg } from '@/lib/responsive-image';
 import { SectionShell } from '@/components/catalog/SectionShell';
 import { SectionHeading } from '@/components/catalog/SectionHeading';
 
@@ -54,13 +54,12 @@ const OverviewQX = ({ data }: OverviewSectionProps) => {
         >
           <figure className="h-full w-full overflow-hidden bg-transparent">
             <div className="relative h-full w-full overflow-hidden">
-              <img
+              <Image
                 src={data.packshotImage}
-                {...responsiveImg(data.packshotImage, 'overview')}
                 alt={data.packshotImageAlt}
-                className="absolute inset-0 h-full w-full object-cover object-center"
-                loading="lazy"
-                decoding="async"
+                fill
+                sizes="(min-width: 1440px) 720px, (min-width: 1024px) 50vw, 100vw"
+                className="object-cover object-center"
               />
             </div>
             <figcaption className="sr-only"><QxText text={data.packshotCaption} /></figcaption>

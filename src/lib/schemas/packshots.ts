@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const packshotItemSchema = z.object({
+const packshotItemSchema = z.object({
   code: z.string(),
   name: z.string().default(''),
   image: z.string(),
@@ -12,21 +12,21 @@ export const packshotItemSchema = z.object({
   colorCode: z.string().default(''),
 });
 
-export const packshotGroupSchema = z.object({
+const packshotGroupSchema = z.object({
   model: z.string(),
   label: z.string().default(''),
   desc: z.string().default(''),
   items: z.array(packshotItemSchema),
 });
 
-export const packshotsContentSchema = z.object({
+const packshotsContentSchema = z.object({
   sectionLabel: z.string().default(''),
   title: z.string().default(''),
   subtitle: z.string().default(''),
   groups: z.array(packshotGroupSchema),
 });
 
-export type PackshotsContent = z.infer<typeof packshotsContentSchema>;
+type PackshotsContent = z.infer<typeof packshotsContentSchema>;
 
 export function parsePackshotsContent(input: unknown): PackshotsContent {
   return packshotsContentSchema.parse(input);

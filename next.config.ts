@@ -27,6 +27,10 @@ export default function nextConfig(phase: string): NextConfig {
     experimental: {
       optimizePackageImports: ['lucide-react', 'framer-motion'],
     },
+    images: {
+      loader: 'custom',
+      loaderFile: './src/lib/image-loader.ts',
+    },
     compiler: {
       removeConsole: isProdPhase
         ? { exclude: ['error', 'warn'] }

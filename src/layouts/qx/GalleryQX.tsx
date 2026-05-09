@@ -2,10 +2,10 @@
 
 import { useRef, useState } from 'react';
 import { m, useInView } from 'framer-motion';
+import Image from 'next/image';
 import type { GalleryData } from '@/types/catalog';
 import { SECTION_REVEAL_LIFT, slowTransition } from '@/lib/motion';
 import { QxText } from '@/components/catalog/QxText';
-import { responsiveImg } from '@/lib/responsive-image';
 import { Lightbox } from '@/components/catalog/Lightbox';
 
 interface GallerySectionProps {
@@ -81,13 +81,13 @@ const GalleryQX = ({ data }: GallerySectionProps) => {
               className="group relative h-[55vh] max-h-[460px] shrink-0 snap-start overflow-hidden lg:absolute lg:left-0 lg:top-[163px] lg:h-[797px] lg:max-h-none lg:w-[1169px]"
               aria-label={`View ${mainImage.category} image in fullscreen`}
             >
-              <img
+              <Image
                 src={mainImage.src}
-                {...responsiveImg(mainImage.src, 'gallery')}
                 alt={mainImage.alt}
+                width={1169}
+                height={797}
+                sizes="(min-width: 1440px) 1081px, (min-width: 1024px) 75vw, 200vw"
                 className="block h-full w-auto lg:w-full lg:object-cover lg:transition-transform lg:duration-700 lg:group-hover:scale-110"
-                loading="lazy"
-                decoding="async"
               />
             </m.button>
 
@@ -104,13 +104,13 @@ const GalleryQX = ({ data }: GallerySectionProps) => {
                 className={`group relative h-[55vh] max-h-[460px] shrink-0 snap-start overflow-hidden lg:absolute lg:right-0 lg:h-[255px] lg:max-h-none lg:w-[255px] ${thumbnailPositionClasses[i]}`}
                 aria-label={`View ${img.category} image in fullscreen`}
               >
-                <img
+                <Image
                   src={img.src}
-                  {...responsiveImg(img.src, 'gallery-thumb')}
                   alt={img.alt}
+                  width={255}
+                  height={255}
+                  sizes="(min-width: 1440px) 255px, (min-width: 1024px) 18vw, 200vw"
                   className="block h-full w-auto lg:w-full lg:object-cover lg:transition-transform lg:duration-700 lg:group-hover:scale-110"
-                  loading="lazy"
-                  decoding="async"
                 />
               </m.button>
             ))}

@@ -1,10 +1,10 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import type { MaterialsConfiguratorOption } from '@/types/catalog';
-import { responsiveImg } from '@/lib/responsive-image';
 
-export type ChipRole = 'frame' | 'top';
+type ChipRole = 'frame' | 'top';
 
 const CHIP_ROLE_LABEL: Record<ChipRole, string> = {
   frame: 'Frame',
@@ -58,13 +58,13 @@ export function ColorChip({ option, role }: ColorChipProps) {
         onBlur={() => setOpen(false)}
         className="flex size-11 items-center justify-center cursor-help focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
       >
-        <img
+        <Image
           src={option.thumbnail}
-          {...responsiveImg(option.thumbnail, 'materials-thumb', '24px')}
           alt=""
           aria-hidden="true"
           width={24}
           height={24}
+          sizes="24px"
           className="block size-6 border border-foreground/60 object-cover"
         />
       </button>
@@ -74,11 +74,13 @@ export function ColorChip({ option, role }: ColorChipProps) {
           className="pointer-events-none absolute bottom-[calc(100%+8px)] left-1/2 z-tooltip -translate-x-1/2"
         >
           <span className="block w-[7.25rem] border border-foreground bg-background p-1 text-left shadow-token-lg">
-            <img
+            <Image
               src={option.thumbnail}
-              {...responsiveImg(option.thumbnail, 'materials-thumb', '116px')}
               alt=""
               aria-hidden="true"
+              width={116}
+              height={116}
+              sizes="116px"
               className="block aspect-square w-full object-cover"
             />
             <span className="mt-2 block px-1 pb-1 text-[11px] font-medium leading-tight text-foreground sm:text-xs">

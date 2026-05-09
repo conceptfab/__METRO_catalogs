@@ -18,7 +18,7 @@ export interface CatalogData {
 
 export type CatalogLayoutType = 'qx' | 'type2' | 'type3';
 
-export interface CatalogMeta {
+interface CatalogMeta {
   title: string;
   tagline?: string;
   description: string;
@@ -28,7 +28,7 @@ export interface CatalogMeta {
   theme?: string;
 }
 
-export interface HeroSliderConfig {
+interface HeroSliderConfig {
   /** Enable auto-advance to next slide */
   autoAdvance?: boolean;
   /** Interval in milliseconds between slides */
@@ -86,7 +86,7 @@ export interface HeroDescriptionStyleConfig {
   uppercase?: boolean;
 }
 
-export interface HeroSlideContentOverrides {
+interface HeroSlideContentOverrides {
   /** Optional small label above the main hero title */
   brandLabel?: string;
   /** Optional main hero title override */
@@ -110,7 +110,7 @@ export type HeroAnchor =
   | 'bottom-center'
   | 'bottom-right';
 
-export type HeroCtaPosition = 'inline' | 'floating' | 'none';
+type HeroCtaPosition = 'inline' | 'floating' | 'none';
 
 export interface HeroSlideContentLayout {
   /** Where the text block anchors inside the viewport (9 combos: top-left … bottom-right) */
@@ -137,7 +137,7 @@ export interface HeroSlideContentLayout {
 
 /** Per-slide text style overrides applied to the hero copy block.
  *  Exposed to CSS as custom properties on .hero-content-wrapper.hero-slide-N. */
-export interface HeroTextStyle {
+interface HeroTextStyle {
   /** Text color (any CSS color value) */
   color?: string;
   /** Font weight (100–900) */
@@ -147,7 +147,7 @@ export interface HeroTextStyle {
 }
 
 /** Per-slide horizontal positioning override that applies only on mobile (<768px). */
-export interface HeroMobileContentLayout {
+interface HeroMobileContentLayout {
   /** Text alignment within the hero copy block on mobile */
   textAlign?: 'left' | 'center' | 'right';
   /** Horizontal nudge of the text block on mobile (transform translateX), e.g. "2rem" or "-1rem" */
@@ -179,7 +179,7 @@ export interface HeroSlide {
   mobileImageOffsetX?: string;
 }
 
-export interface HeroSlideDefinition {
+interface HeroSlideDefinition {
   /** Relative path inside hero folder, e.g. hero_00.webp */
   image: string;
   /** Optional alt override for the slide */
@@ -240,7 +240,7 @@ export interface OverviewData {
   packshotCaption: string;
 }
 
-export interface GalleryImage {
+interface GalleryImage {
   src: string;
   alt: string;
   category: string;
@@ -252,18 +252,18 @@ export interface GalleryData {
   images: GalleryImage[];
 }
 
-export interface ColorOption {
+interface ColorOption {
   name: string;
   code: string;
   ral?: string;
 }
 
-export interface SizeOption {
+interface SizeOption {
   label: string;
   desc: string;
 }
 
-export interface ComparisonRow {
+interface ComparisonRow {
   feature: string;
   basic: string;
   premium: string;
@@ -283,7 +283,7 @@ export interface FinishesData {
   configurator?: MaterialsConfiguratorData;
 }
 
-export interface SpecItem {
+interface SpecItem {
   label: string;
   value: string;
 }
@@ -302,13 +302,13 @@ export interface DimensionsData {
   };
 }
 
-export interface MaterialItem {
+interface MaterialItem {
   name: string;
   desc: string;
   specs: string;
 }
 
-export interface ColorSwatch {
+interface ColorSwatch {
   name: string;
   hex: string;
 }
@@ -354,7 +354,7 @@ export interface FeaturesData {
   items: FeatureItem[];
 }
 
-export interface GettingStartedStep {
+interface GettingStartedStep {
   step: number;
   title: string;
   desc: string;
@@ -374,9 +374,9 @@ export interface GettingStartedData {
   versionInfo: string;
 }
 
-export type ProductCodeGroupCategory = 'single' | 'bench' | 'manager';
+type ProductCodeGroupCategory = 'single' | 'bench' | 'manager';
 
-export interface ProductCodeRow {
+interface ProductCodeRow {
   index: string;
   indexR: string;
   dimensions: string;
@@ -404,7 +404,7 @@ export interface SectionConfig {
   enabled?: boolean;
 }
 
-export interface PackshotItem {
+interface PackshotItem {
   code: string;
   name: string;
   image?: string;
@@ -419,7 +419,7 @@ export interface PackshotItem {
   colorHex?: string;
 }
 
-export interface PackshotGroup {
+interface PackshotGroup {
   model: string;
   label: string;
   desc?: string;

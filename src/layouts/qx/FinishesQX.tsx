@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { AnimatePresence, m, useInView } from 'framer-motion';
+import Image from 'next/image';
 import type {
   MaterialsConfiguratorData,
   MaterialsConfiguratorOption,
@@ -315,11 +316,12 @@ const FinishesQX = ({ data, configurator }: FinishesSectionProps) => {
                   ×
                 </button>
 
-                <img
+                <Image
                   src={previewImage}
-                  {...responsiveImg(previewImage, 'materials-full')}
                   alt={previewAlt}
-                  className="h-full w-full object-cover"
+                  fill
+                  sizes="(min-width: 1024px) 88vh, 88vw"
+                  className="object-cover"
                 />
               </m.div>
             </m.div>

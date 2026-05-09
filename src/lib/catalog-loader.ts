@@ -17,7 +17,8 @@ import type {
 } from '@/types/catalog';
 import fs from 'fs/promises';
 import path from 'path';
-import { parseHeroContent, parsePackshotsContent } from './schemas';
+import { parseHeroContent } from './schemas/hero';
+import { parsePackshotsContent } from './schemas/packshots';
 
 type DiscoveredMaterialsOption = {
   code: string;

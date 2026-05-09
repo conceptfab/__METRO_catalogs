@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { AnimatePresence, m, useInView } from 'framer-motion';
+import Image from 'next/image';
 import type { MaterialsConfiguratorOption, MaterialsData } from '@/types/catalog';
 import { SECTION_REVEAL_SETTLE, slowTransition } from '@/lib/motion';
 import { QxText } from '@/components/catalog/QxText';
@@ -306,13 +307,12 @@ const MaterialsQX = ({ data }: MaterialsSectionProps) => {
             </figure>
           ) : (
             <figure className="group relative h-full w-full overflow-hidden">
-              <img
+              <Image
                 src={data.detailImage}
-                {...responsiveImg(data.detailImage, 'materials-full')}
                 alt={data.detailImageAlt}
-                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                loading="lazy"
-                decoding="async"
+                fill
+                sizes="(min-width: 1440px) 687px, (min-width: 1024px) 50vw, 100vw"
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
             </figure>
           )}

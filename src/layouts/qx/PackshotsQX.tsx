@@ -2,6 +2,7 @@
 
 import { useEffect, useId, useRef, useState } from 'react';
 import { m, useInView, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import type {
   MaterialsConfiguratorData,
@@ -10,7 +11,6 @@ import type {
 } from '@/types/catalog';
 import { SECTION_REVEAL_SLIDE, slowTransition } from '@/lib/motion';
 import { QxText } from '@/components/catalog/QxText';
-import { responsiveImg } from '@/lib/responsive-image';
 import { ColorChip } from '@/components/catalog/ColorChip';
 import { useFocusTrap } from '@/hooks/use-focus-trap';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -200,13 +200,12 @@ const PackshotsQX = ({
               >
                 {isMobile ? (
                   <div className="qx-packshot-mobile-frame">
-                    <img
+                    <Image
                       src={item.image}
-                      {...responsiveImg(item.image, 'packshot')}
                       alt={item.name || `${item.code} packshot`}
+                      fill
+                      sizes="(min-width: 1440px) 710px, (min-width: 640px) 46vw, 100vw"
                       className="qx-packshot-mobile-image"
-                      loading="lazy"
-                      decoding="async"
                     />
                   </div>
                 ) : (
@@ -217,13 +216,12 @@ const PackshotsQX = ({
                     aria-label={`View ${item.name || item.code} packshot in fullscreen`}
                   >
                     <div className="qx-packshot-desktop-frame">
-                      <img
+                      <Image
                         src={item.image}
-                        {...responsiveImg(item.image, 'packshot')}
                         alt={item.name || `${item.code} packshot`}
+                        fill
+                        sizes="(min-width: 1440px) 710px, (min-width: 640px) 46vw, 100vw"
                         className="qx-packshot-desktop-image"
-                        loading="lazy"
-                        decoding="async"
                       />
                     </div>
                   </button>

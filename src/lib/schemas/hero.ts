@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const heroContentSchema = z.object({
+const heroContentSchema = z.object({
   brandLabel: z.string().default(''),
   collectionName: z.string().default(''),
   tagline: z.string().default(''),
@@ -10,7 +10,7 @@ export const heroContentSchema = z.object({
   heroImageAlt: z.string().optional(),
 });
 
-export type HeroContent = z.infer<typeof heroContentSchema>;
+type HeroContent = z.infer<typeof heroContentSchema>;
 
 export function parseHeroContent(input: unknown): HeroContent {
   return heroContentSchema.parse(input);

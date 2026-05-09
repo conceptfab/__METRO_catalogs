@@ -1,77 +1,78 @@
 <claude-mem-context>
 # Memory Context
 
-# [__METRO_catalogs] recent context, 2026-05-08 10:51pm GMT+2
+# [__METRO_catalogs] recent context, 2026-05-09 11:08am GMT+2
 
 Legend: 🎯session 🔴bugfix 🟣feature 🔄refactor ✅change 🔵discovery ⚖️decision 🚨security_alert 🔐security_note
 Format: ID TIME TYPE TITLE
 Fetch details: get_observations([IDs]) | Search: mem-search skill
 
-Stats: 50 obs (17,683t read) | 280,094t work | 94% savings
+Stats: 50 obs (16,893t read) | 450,000t work | 96% savings
 
 ### May 8, 2026
-S1348 User asked whether image optimization and thumbnail generation will happen automatically, since they plan to frequently add and change graphics — context: reviewing plan_implementacji.md for METRO Catalogs project (May 8 at 6:00 PM)
-S1349 User asked whether image optimization and thumbnail generation will be automatic on Vercel (deploy pipeline), since they plan to frequently add and change graphics (May 8 at 6:12 PM)
-S1350 User asked about automatic image optimization on Vercel — session evolved into actually updating package.json to add recompress:gallery to prebuild for hands-off automation (May 8 at 6:13 PM)
-S1351 User asked about automatic image optimization — session evolved into updating package.json prebuild pipeline and clarifying cross-platform tooling preferences (May 8 at 6:17 PM)
-S1352 User asked about automatic image optimization — session delivered a complete image pipeline overhaul with a new orchestrator script and verified it working (May 8 at 6:18 PM)
-S1353 User asked whether image optimization/thumbnails are automatic — session completed a full image pipeline overhaul with new orchestrator, verified working, and finalized package.json scripts (May 8 at 6:23 PM)
-S1354 User asked how to run the image pipeline — answered with the single command and force variant (May 8 at 6:24 PM)
-S1355 Recovery from session data loss + npm install failure — restore image pipeline (process-images.mjs + package.json + node_modules) (May 8 at 6:24 PM)
-S1357 Tasks 1–3 complete on stage_2: gallery recompression, thumbnail cleanup, shadcn/ui pruning — design-system page accidentally deleted and user scripts accidentally reverted, then both fixed (May 8 at 6:29 PM)
-2503 10:38p 🔵 Comprehensive Dead Code Audit Completed by Subagent
-2504 " 🔵 Middleware Implements Content-Negotiated Markdown Serving for AI Agents
-2507 10:39p 🔵 Comprehensive Optimization Audit Completed — 14 Findings Across All Code Areas
-2508 " 🔵 Pre-Existing 1310-Line Implementation Plan Found in plan_implementacji.md
-2506 " 🔵 TIOCSTI definitively blocked on macOS for both O_WRONLY and O_RDWR tty access
-2509 " 🔵 Dead shadcn/ui Components Already Removed — Only 2 of Expected 43 Remain
-2510 " 🔵 TooltipProvider Wraps Entire App But No Tooltip Components Are Actually Used
-2511 " 🔵 Catalog Page is a Clean Async Server Component with Parallel Data Loading
-2512 " ✅ Pi-hole config script copied to macOS clipboard via pbcopy for manual paste
-2513 " 🔵 SSH to Pi-hole succeeded interactively — user micz authenticated with password, Pi is Debian bookworm aarch64
-2531 10:40p 🔵 Dead UI Component Chain: tooltip → utils → cn()
-2532 " 🔵 Dual Font Token System Aliases to Single Font (Lato)
-2533 " 🔵 __METRO_catalogs Project: Agent/Machine-Readable API Infrastructure
-2514 " 🔵 Third SSH session to Pi appeared on ttys011 — also Codex-spawned; Claude Code process has no controlling tty
-2515 " 🟣 AppleScript automation used to paste Pi-hole script into Codex app and press Enter
-2516 10:41p 🔵 osascript keystroke injection blocked — Accessibility permission not granted (error 1002)
-2517 10:42p 🟣 osascript keystroke injection succeeded — Pi-hole script pasted and executed in Codex SSH window
-2518 " 🔵 osascript paste delivered wrong clipboard content — "micz@pi:~$" pasted instead of Pi-hole script
-2519 " 🔵 Clipboard race condition persists — second pbcopy+osascript attempt again pasted wrong content
-2520 " 🔵 Codex app has single window named "Codex" — paste target confirmed
-2521 " 🔵 Codex window geometry mapped; cliclick not available for mouse automation
-2522 10:43p ✅ Clipboard race fix attempted: printf+pbcopy separated from osascript; mouse click at (420, 1240) before paste
-2523 " 🔵 osascript with mouse click at coordinates hung indefinitely — killed after 15s with pkill
-2524 " ✅ Clipboard verified correct ("echo CODEX_FOCUS_TEST") then paste sent as separate osascript call
-2525 " 🔵 Click at (420, 1240) hits Codex "Ustawienia" settings button — wrong target for terminal paste
-2526 10:44p 🔵 Screen coordinate (900, 300) hits Claude Code Electron window, not Codex — windows overlap
-2527 " 🔵 Full screen coordinate map: Claude Code Electron dominates center; Codex terminal not reachable by coordinate click
-2528 10:45p ✅ Pivoted to Antigravity (VS Code) integrated terminal — used View→Terminal menu to focus then paste
-2529 " 🔵 lsof confirms: Codex owns both ttys009 and ttys011 — app terminal snapshot is from ttys011 (Codex SSH session)
-2530 10:46p 🔵 Codex confirmed frontmost app; window object not text-coercible — Cmd+V pastes to wrong Codex panel
-2534 " 🔵 Codex accessibility tree is opaque — one nested unnamed group, terminal panel not addressable via AppleScript
-2536 " ✅ Code Audit Report Written to raport.md
-2535 " 🔵 AppleScript "my" function calls broken in Polish-locale macOS; Codex window intermittently loses index 1 accessibility
-2537 10:47p 🔵 "first window" works for Codex but "window 1" index fails inside recursive handlers — AppleScript indexing quirk
-2538 " 🔵 Codex window count dropped to 0 — window no longer accessible via System Events
-2539 " 🔵 Coordinate scan at x=300 hangs osascript repeatedly; Pi-hole config confirmed still unmodified
-2540 10:48p ✅ Pi-hole script re-copied to clipboard and Cmd+V+Return sent to Codex — another delivery attempt
-2541 " 🔵 PackshotsQX Inline Lightbox z-index Bug: z-[60] Below z-modal=80
-2542 " ✅ raport.md Refined: Sprint C/D Split, New Sections 4.6 and 4.7 Added
-2543 " 🔵 Combined pbcopy+osascript paste still delivers wrong clipboard content — same "micz@pi:~$" error in terminal
-2544 10:49p 🔵 click at {330, 1180} hangs osascript — bottom-left Codex area consistently blocks System Events clicks
-2545 " 🔵 macOS Keychain has no saved password for 192.168.1.2 — sshpass automation not possible without password retrieval
-S1358 Code review audit of METRO Catalogs project (branch stage_2) — identify dead code, optimization opportunities, and write findings to raport.md (May 8 at 10:49 PM)
-2546 " 🔵 No SSH keypair and no Keychain password for Pi-hole — SSH key setup is the only remaining automated access path
-2547 " 🔵 Codex has a focused text field accessible via AXFocusedUIElement — direct keyboard input target identified
-2548 10:50p 🔵 Codex menu bar revealed: View→"Toggle Terminal" available; AXFocusedUIElement is stable text field
-2549 " 🟣 BREAKTHROUGH: "echo CODEX_FOCUS_OK" reached Pi-hole SSH terminal via View→Toggle Terminal + Cmd+V
-2550 " 🔵 After Toggle Terminal, AXFocusedUIElement shifts to "text area" — confirmed SSH terminal input is now focused
-2551 " 🔵 Swift with CoreGraphics available — CGEvent keyboard injection possible as fallback
-2552 10:51p 🔵 Swift CGEvent click at (330, 1180) focuses "group" not terminal; bare Cmd+V without Toggle Terminal misses SSH panel
-2553 " ✅ Ctrl+C sent to Codex SSH terminal to clear stuck "echo CODEX_FOCUS_OK" state
+S1362 Code review of working codebase (stage_2 branch) — check for improvements, dead code, optimizations — write conclusions in raport.md (May 8 at 11:17 PM)
+S1363 Code review of stage_2 branch — check improvements, dead code, optimizations — write conclusions in raport.md; extended with detailed ColorChip performance analysis (May 8 at 11:49 PM)
+S1364 Code review: find improvements, dead code, optimizations — write conclusions in raport.md (Polish: "kod działa prawidłowo, sprawdź co można poprawić, martwy kod, optymalizacje") (May 8 at 11:57 PM)
+S1365 react-doctor audit of metro-catalogs project with results saved to react_raport.md (May 8 at 11:57 PM)
+### May 9, 2026
+S1366 Execute React audit fixes from react_raport.md — planning phase with scope clarification before implementation (May 9 at 10:18 AM)
+S1367 Execute high-priority React audit fixes from react_raport.md on __METRO_catalogs project (branch stage_2) (May 9 at 10:19 AM)
+2651 10:22a ✅ catalogs API memoization committed — commit 78ef8a4
+2652 10:23a 🔵 src/app/page.tsx has no page-level metadata export — nextjs-missing-metadata audit finding
+2653 " 🔵 layout.tsx already has full metadata — page.tsx fix needs page-specific override only
+2654 " 🟣 Page-level metadata added to src/app/page.tsx — nextjs-missing-metadata audit fixed
+2655 " 🟣 Home page metadata committed — commit abf7ce3 on stage_2
+2656 10:24a 🔵 Production build succeeds — bundle sizes and remaining img warnings confirmed
+2657 " 🟣 React audit session complete — 3 commits on stage_2, all tests green
+S1368 react-doctor audit after recent fixes — score comparison and remaining issues analysis (May 9 at 10:24 AM)
+2658 10:25a 🔵 metro-catalogs stage_2 branch recent commit history
+2659 " 🔵 react-doctor audit: metro-catalogs scores 81/100 with 199 issues across 32 files
+S1369 react-doctor audit of __METRO_catalogs project — create remediation plan and save to react_raport.md / plan_poprawek.md (May 9 at 10:26 AM)
+2660 10:26a 🔵 CatalogNav.tsx inline render function patterns identified for refactor
+2661 10:27a 🔵 renderQxText is a ReactNode utility function, not a component — root cause of no-render-in-render violations
+2662 " 🔵 Inline render arrow functions confined to CatalogNav.tsx and FeaturesQX.tsx; all other violations are renderQxText() call sites
+2663 " 🔵 FeaturesQX renderFeatureVideo is a ref-dependent inline render function; catalog components have test coverage via Vitest
+2664 10:28a 🔵 loadCatalogMeta is exported but only used internally in catalog-loader.ts — safe to unexport
+2665 " 🔵 renderQxText used in 15 source files — broad impact for QxText component conversion
+2666 10:32a ✅ react-doctor audit plan created: plan_poprawek.md (stage_2)
+S1370 Execute plan_poprawek.md — a multi-task cleanup and quality improvement plan for the metro-catalogs Next.js project on the stage_2 branch (May 9 at 10:33 AM)
+2667 10:38a 🔵 METRO Catalogs project on stage_2 branch with recent perf optimizations
+2668 " 🟣 QxText component test suite created
+2669 " 🔵 TDD red phase confirmed: QxText component does not yet exist
+2670 10:39a 🟣 QxText React component created as typed wrapper around renderQxText logic
+2671 " 🔵 renderQxText used in 14 files across catalog and QX layouts — full migration scope identified
+2672 " 🔄 SectionHeading.tsx migrated from renderQxText import to QxText component
+2673 " 🔄 SectionHeading and MaterialsOptionGroup fully migrated from renderQxText to QxText component
+2674 10:40a 🔄 CatalogNav.tsx fully migrated to QxText component across all 4 nav contexts
+2675 " 🔄 DimensionsQX.tsx fully migrated to QxText component
+2676 " 🔄 FeaturesQX.tsx fully migrated; HeroQX.tsx read for migration with 3 call sites identified
+2677 " 🔄 HeroQX.tsx fully migrated; OverviewQX.tsx read with 2 call sites identified
+2678 " 🔄 OverviewQX and GalleryQX fully migrated to QxText component
+2679 10:44a 🔄 FeaturesQX: Extracted FeatureVideo render function into standalone component
+2680 10:45a 🔄 FeaturesQX FeatureVideo extraction committed to stage_2 branch
+2681 " 🔄 ColorChip: Tailwind h-11 w-11 consolidated to size-11 shorthand
+2682 " 🔄 Tailwind size-* shorthand applied across ColorChip, Lightbox, and FinishesQX
+2683 " 🔄 Tailwind size-* shorthand cleanup extended to FinishesQX zoom icon and design-system page indicators
+2684 11:00a 🔵 Knip audit revealed 40+ unused exports, types, and devDependencies
+2685 " 🔵 Knip false positives identified for several "unused" exports
+2686 11:01a 🔵 schemas/index.ts barrel file is entirely unused — no imports reference it
+2687 " 🔵 loadCatalogMeta is a lightweight catalog list-view loader with no external consumers
+2688 11:02a 🔄 loadCatalogMeta de-exported — made internal helper to getCatalogList
+2689 " 🔵 agent-skills.ts internal exports are building blocks for public route functions
+2690 " 🔄 Removed unnecessary export keywords from ColorChip, motion, and agent-skills modules
+2691 " 🔄 sha256Digest also de-exported from agent-skills.ts — fully private module
+2692 " ✅ TypeCheck, tests, and build all pass after knip de-export cleanup
+2693 " ✅ Committed knip de-export cleanup to stage_2 branch
+2694 " 🔴 a11y-helpers test fixed to use createElement for intentional missing-alt test case
+2695 11:03a ✅ Committed a11y-helpers test fix to stage_2 branch
+2696 " ✅ react-doctor score is 89/100 after stage_2 cleanup work
+2697 11:04a ✅ stage_2 branch: 16 commits completing plan_poprawek.md cleanup tasks
+2698 11:05a 🔵 react-doctor audit of metro-catalogs: score 89/100, 97 issues across 21 files
+S1371 react-doctor code audit of metro-catalogs project (May 9 at 11:06 AM)
+2699 11:06a 🔵 Knip dead-code investigation: CatalogMeta used internally but not imported externally; schema exports genuinely unused
+2700 11:08a 🔵 Knip JSON reveals 19 unused types in catalog.ts and most flagged img tags are framer-motion m.img (not migratable)
 
-Access 280k tokens of past work via get_observations([IDs]) or mem-search skill.
+Access 450k tokens of past work via get_observations([IDs]) or mem-search skill.
 </claude-mem-context>
 
 ## Design System — obowiązkowe
