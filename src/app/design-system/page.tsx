@@ -239,7 +239,7 @@ const SHARED_COMPONENTS = [
     name: 'CatalogNav',
     source: 'src/components/catalog/CatalogNav.tsx',
     description:
-      'Nav katalogu: desktop z linkami sekcji + mobile burger menu. Smooth scroll, aria-current, RAF scroll spy.',
+      'Nav katalogu: desktop z linkami sekcji + mobile burger menu. Smooth scroll, aria-current, RAF scroll spy. Brand label używa text-foreground.',
   },
   {
     name: 'CatalogMotion',
@@ -265,7 +265,7 @@ const SUPPORTING_SHARED_COMPONENTS = SHARED_COMPONENTS.filter(
 );
 
 const QX_LAYOUTS = [
-  { name: 'HeroQX', file: 'src/layouts/qx/HeroQX.tsx', desc: 'Pełnoekranowy slider z auto-advance i klawiaturą; mobile hero używa sizes 200vh pod object-cover. Per-slide overrides: textStyle, mobileTextStyle, mobileContentLayout, mobileImageOffsetX (CSS custom props).' },
+  { name: 'HeroQX', file: 'src/layouts/qx/HeroQX.tsx', desc: 'Pełnoekranowy slider z auto-advance i klawiaturą; mobile hero używa sizes 200vh pod object-cover. CTA arrow ma subtelny hover translate zamiast ciągłego bounce. Per-slide overrides: textStyle, mobileTextStyle, mobileContentLayout, mobileImageOffsetX (CSS custom props).' },
   { name: 'OverviewQX', file: 'src/layouts/qx/OverviewQX.tsx', desc: 'Dwukolumnowy: tekst + packshot. Reveal SLIDE.' },
   { name: 'GalleryQX', file: 'src/layouts/qx/GalleryQX.tsx', desc: 'Desktop: siatka 4 obrazów + Lightbox. Mobile: horizontal scroll-snap carousel z naturalnym aspect-ratio (bez kropowania). Reveal LIFT.' },
   { name: 'FeaturesQX', file: 'src/layouts/qx/FeaturesQX.tsx', desc: 'Zakładki z ikonami Lucide + autoplay video; mobile pokazuje animację nad tabami. Reveal SLIDE.' },
@@ -274,7 +274,7 @@ const QX_LAYOUTS = [
   { name: 'MaterialsQX', file: 'src/layouts/qx/MaterialsQX.tsx', desc: 'Biblioteka swatchy desktop+mobile. Reveal SETTLE.' },
   { name: 'FinishesQX', file: 'src/layouts/qx/FinishesQX.tsx', desc: 'Konfigurator + preview toggle. Reveal SETTLE.' },
   { name: 'DimensionsQX', file: 'src/layouts/qx/DimensionsQX.tsx', desc: 'Diagram + tabela specyfikacji. Reveal LIFT.' },
-  { name: 'ProductCodesQX', file: 'src/layouts/qx/ProductCodesQX.tsx', desc: '3 tabele kodów (single/bench/manager) z subgrid. Reveal SETTLE.' },
+  { name: 'ProductCodesQX', file: 'src/layouts/qx/ProductCodesQX.tsx', desc: '3 tabele kodów (single/bench/manager) z subgrid. Nagłówki grup używają font-semibold. Reveal SETTLE.' },
   { name: 'CatalogPageQX', file: 'src/layouts/qx/CatalogPageQX.tsx', desc: 'Orchestrator: 11 sekcji w kolejności + theme scope.' },
 ];
 

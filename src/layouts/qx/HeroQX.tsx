@@ -283,10 +283,14 @@ function useHeroQXViewModel(data: HeroData) {
           .getElementById('overview')
           ?.scrollIntoView({ behavior: 'smooth' })
       }
-      className={`inline-flex min-h-[44px] items-center gap-3 rounded-full bg-primary px-8 py-4 font-display text-sm font-bold uppercase tracking-widest text-primary-foreground transition-colors hover:bg-primary/90 ${extraClassName ?? ''}`}
+      className={`group inline-flex min-h-[44px] items-center gap-3 rounded-full bg-primary px-8 py-4 font-display text-sm font-bold uppercase tracking-widest text-primary-foreground transition-colors hover:bg-primary/90 ${extraClassName ?? ''}`}
     >
       <span>{currentHeroContent.ctaLabel}</span>
-      <ArrowDown size={18} strokeWidth={1.2} className="animate-bounce" />
+      <ArrowDown
+        size={18}
+        strokeWidth={1.2}
+        className="transition-transform duration-300 group-hover:translate-y-0.5"
+      />
     </button>
   );
 

@@ -451,6 +451,20 @@ interface CatalogConfig {
   sections: CatalogData['sections'];
 }
 
+interface CatalogContentFiles {
+  hero: HeroData;
+  heroSliderFile: HeroSliderFile | null;
+  overview: OverviewData;
+  gallery: RawGalleryData;
+  finishes: FinishesData;
+  dimensions: DimensionsData;
+  materials: MaterialsData;
+  features: FeaturesData;
+  gettingStarted: GettingStartedData;
+  productCodes: ProductCodesData;
+  packshots: RawPackshotsData | null;
+}
+
 /** Lightweight loader for list view */
 async function loadCatalogMeta(
   catalogId: string,
@@ -518,21 +532,9 @@ export async function getCatalogFooterEntries(): Promise<CatalogFooterEntry[]> {
 
 const VALID_LAYOUT_TYPES = new Set(['qx', 'type2', 'type3']);
 
-export async function loadCatalog(
-  catalogId: string,
-): Promise<CatalogData | null> {
-  const base = catalogBase(catalogId);
-
-  const config = await readPublicJson<CatalogConfig>(`${base}/config.json`);
-  if (!config) return null;
-
-  if (!config.meta?.layoutType || !VALID_LAYOUT_TYPES.has(config.meta.layoutType)) {
-    console.warn(
-      `[catalog-loader] ${catalogId}: missing or invalid meta.layoutType (got ${JSON.stringify(config.meta?.layoutType)}). Expected one of: qx, type2, type3.`,
-    );
-    return null;
-  }
-
+async function readCatalogContent(
+  base: string,
+): Promise<CatalogContentFiles | null> {
   const [
     hero,
     heroSliderFile,
@@ -559,22 +561,65 @@ export async function loadCatalog(
     readPublicJson<RawPackshotsData>(`${base}/packshots/content.json`),
   ]);
 
-  if (
-    !hero ||
-    !overview ||
-    !gallery ||
-    !finishes ||
-    !dimensions ||
-    !materials ||
-    !features ||
-    !gettingStarted ||
-    !productCodes
-  ) {
+  return hero &&
+    overview &&
+    gallery &&
+    finishes &&
+    dimensions &&
+    materials &&
+    features &&
+    gettingStarted &&
+    productCodes
+    ? {
+        hero,
+        heroSliderFile,
+        overview,
+        gallery,
+        finishes,
+        dimensions,
+        materials,
+        features,
+        gettingStarted,
+        productCodes,
+        packshots,
+      }
+    : null;
+}
+
+export async function loadCatalog(
+  catalogId: string,
+): Promise<CatalogData | null> {
+  const base = catalogBase(catalogId);
+
+  const config = await readPublicJson<CatalogConfig>(`${base}/config.json`);
+  if (!config) return null;
+
+  if (!config.meta?.layoutType || !VALID_LAYOUT_TYPES.has(config.meta.layoutType)) {
+    console.warn(
+      `[catalog-loader] ${catalogId}: missing or invalid meta.layoutType (got ${JSON.stringify(config.meta?.layoutType)}). Expected one of: qx, type2, type3.`,
+    );
     return null;
   }
 
   const sections =
     config.sections ?? SECTION_ORDER.map((id) => ({ id, label: id }));
+
+  const content = await readCatalogContent(base);
+  if (!content) return null;
+
+  const {
+    hero,
+    heroSliderFile,
+    overview,
+    gallery,
+    finishes,
+    dimensions,
+    materials,
+    features,
+    gettingStarted,
+    productCodes,
+    packshots,
+  } = content;
 
   parseHeroContent(hero);
   if (packshots) parsePackshotsContent(packshots);

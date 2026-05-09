@@ -297,7 +297,7 @@ function renderCatalogNav({
                 brandLabel={brandLabel}
                 brandLogoSrc={brandLogoSrc}
                 backToCatalogListHref={backToCatalogListHref}
-                className="inline-flex items-center min-h-[44px] min-w-[44px] font-display text-xl font-black tracking-tighter text-slate-900 !rounded-none"
+                className="inline-flex items-center min-h-[44px] min-w-[44px] font-display text-xl font-black tracking-tighter text-foreground !rounded-none"
                 logoClassName="h-[22px] w-auto object-contain !rounded-none lg:h-7"
                 onBrandClick={() => scrollTo('cover')}
               />
@@ -396,7 +396,7 @@ function renderCatalogNav({
               brandLabel={brandLabel}
               brandLogoSrc={brandLogoSrc}
               backToCatalogListHref={backToCatalogListHref}
-              className="font-display text-xl font-black tracking-tighter text-slate-900"
+              className="font-display text-xl font-black tracking-tighter text-foreground"
               logoClassName="h-7 w-auto object-contain"
               onBrandClick={() => scrollTo('cover')}
             />

@@ -1,12 +1,12 @@
 # React raport
 
-Data audytu: 2026-05-09 13:47 CEST  
+Data audytu: 2026-05-09 14:20 CEST  
 Branch: `stage_2`  
 Narzędzie: `npx -y react-doctor@latest . --verbose` (`react-doctor v0.1.4`)
 
 ## Wynik
 
-React Doctor: **96 / 100, Great**
+React Doctor: **99 / 100, Great**
 
 Zakres skanu:
 
@@ -15,12 +15,17 @@ Zakres skanu:
 - język: TypeScript
 - React Compiler: nie wykryto
 - pliki źródłowe: 85
-- problemy: 9 ostrzeżeń w 6 plikach
+- problemy: 1 ostrzeżenie w 1 pliku
 
 Dodatkowe bramki:
 
 - `npm run typecheck` - OK
-- `npm run lint` - OK z 1 ostrzeżeniem: `postcss.config.js:1` (`import/no-anonymous-default-export`)
+- `npm run lint` - OK
+- `npx vitest run src/components/catalog/CatalogNav.test.tsx src/layouts/qx/CatalogPageQX.test.tsx` - OK
+
+Pozostałe ostrzeżenie:
+
+- `src/lib/image-loader.ts` - świadome false positive, ponieważ plik jest używany przez `next.config.ts` jako `images.loaderFile`.
 
 ## Priorytet 1 - poprawki techniczne
 
@@ -233,55 +238,74 @@ Miejsce:
 
 - `src/app/design-system/page.tsx`
 
-### 10. Zmienić `font-bold` na mniej ciężki wariant w nagłówkach
+### 10. Zrealizowane: zmienić `font-bold` na mniej ciężki wariant w nagłówkach
 
-Miejsca:
+Status: **zrealizowane**.
 
-- `src/app/not-found.tsx:7`
-- `src/layouts/qx/ProductCodesQX.tsx:143`
-- `src/layouts/qx/ProductCodesQX.tsx:156`
-- `src/layouts/qx/ProductCodesQX.tsx:170`
+Problem z audytu:
 
-Rekomendacja:
+- część nagłówków używała `font-bold`, mimo że wizualnie wystarczał lżejszy wariant.
 
-- dla nagłówków użyć `font-semibold` albo istniejącej klasy tokenowej (`qx-emphasis-title`, jeśli pasuje semantycznie i wizualnie);
-- w `ProductCodesQX` sprawdzić spójność z dokumentacją tabel kodów w `/design-system`.
+Wykonane:
 
-### 11. Zastąpić `text-slate-900` tokenem projektu
+- `src/app/not-found.tsx`: nagłówek 404 używa `font-semibold`;
+- `src/layouts/qx/ProductCodesQX.tsx`: nagłówki grup `Single desks`, `Bench desks`, `Manager desk` używają `font-semibold`;
+- `src/app/design-system/page.tsx`: opis `ProductCodesQX` został zsynchronizowany z aktualnym wzorcem.
+
+Wynik:
+
+- pierwotne ostrzeżenie dotyczące tych nagłówków zniknęło z audytu.
+
+### 11. Zrealizowane: zastąpić `text-slate-900` tokenem projektu
 
 Plik: `src/components/catalog/CatalogNav.tsx`
 
-Miejsca:
+Status: **zrealizowane**.
 
-- `src/components/catalog/CatalogNav.tsx:233`
-- `src/components/catalog/CatalogNav.tsx:332`
+Problem z audytu:
 
-Rekomendacja:
+- brand label w nawigacji używał bezpośredniego koloru Tailwind `text-slate-900` zamiast tokena projektu.
 
-- użyć `text-foreground`, `text-primary` albo innego istniejącego tokena Tailwind z `tailwind.config.ts`;
-- nie wprowadzać nowej arbitralnej wartości, jeśli istniejący token wystarcza.
+Wykonane:
 
-### 12. Zastąpić `animate-bounce` subtelniejszą animacją
+- oba wystąpienia zostały zamienione na `text-foreground`;
+- `src/app/design-system/page.tsx` doprecyzowuje, że `CatalogNav` używa tokena `text-foreground` dla brand label.
 
-Plik: `src/layouts/qx/HeroQX.tsx:288`
+Wynik:
 
-Rekomendacja:
+- ostrzeżenie dotyczące `text-slate-900` zniknęło z audytu.
 
-- usunąć `animate-bounce` z ikony CTA albo zamienić na delikatną animację opartą o istniejące presety motion;
-- jeśli powstanie nowy preset animacji, dopisać go do design-systemu.
+### 12. Zrealizowane: zastąpić `animate-bounce` subtelniejszą animacją
+
+Plik: `src/layouts/qx/HeroQX.tsx`
+
+Status: **zrealizowane**.
+
+Problem z audytu:
+
+- ikona CTA używała ciągłej animacji `animate-bounce`.
+
+Wykonane:
+
+- przycisk CTA dostał klasę `group`;
+- ikona `ArrowDown` używa teraz `transition-transform duration-300 group-hover:translate-y-0.5`;
+- `src/app/design-system/page.tsx` opisuje aktualny wzorzec HeroQX.
+
+Wynik:
+
+- ostrzeżenie dotyczące `animate-bounce` zniknęło z audytu.
 
 ## Drobne lint
 
-### 13. `postcss.config.js`
+### 13. Zrealizowane: `postcss.config.js`
 
-ESLint zgłasza:
+Status: **zrealizowane**.
 
-```text
-postcss.config.js
-  1:1  warning  Assign object to a variable before exporting as module default  import/no-anonymous-default-export
-```
+Problem z lint:
 
-Rekomendacja:
+- `import/no-anonymous-default-export` zgłaszał anonimowy eksport obiektu.
+
+Wykonane:
 
 ```js
 const config = {
@@ -294,15 +318,35 @@ const config = {
 export default config;
 ```
 
+Wynik:
+
+- `npm run lint` przechodzi bez ostrzeżeń.
+
+## Dodatkowa poprawka po audycie
+
+### 14. Zrealizowane: usunąć realne `async-defer-await` z `catalog-loader`
+
+Plik: `src/lib/catalog-loader.ts`
+
+Status: **zrealizowane**.
+
+Problem z audytu:
+
+- React Doctor wskazywał `react-doctor/async-defer-await` przy równoległym ładowaniu treści katalogu.
+
+Wykonane:
+
+- równoległe czytanie plików treści zostało wydzielone do `readCatalogContent()`;
+- walidacja kompletności treści używa pojedynczego zwrotu warunkowego, bez wczesnego `return` po `await`;
+- `loadCatalog()` najpierw waliduje `config`, wylicza `sections`, a dopiero potem czyta treść katalogu.
+
+Wynik:
+
+- ostrzeżenie `react-doctor/async-defer-await` zniknęło z audytu.
+
 ## Sugerowana kolejność prac
 
-1. Usunąć albo świadomie podpiąć `src/lib/image-loader.ts`.
-2. Usunąć martwy hover state z `HeroQX`.
-3. Dodać guardy przed zbędnymi `setState` w `CatalogNav`.
-4. Naprawić stabilne klucze list w komponentach QX i `QxText`.
-5. Poprawić testy (`Promise.all`, uproszczenie iteracji).
-6. Zrobić UI polish w `/design-system`: `border-l-4`, em dash, `font-bold`, `text-slate-900`, `animate-bounce`.
-7. Rozbić największe komponenty dopiero po zamknięciu powyższych punktów.
+Wszystkie punkty z listy zostały zrealizowane albo świadomie zamknięte jako false positive (`src/lib/image-loader.ts`).
 
 ## Komendy do ponownej weryfikacji
 

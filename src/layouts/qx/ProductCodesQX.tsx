@@ -146,7 +146,7 @@ const ProductCodesQX = ({ data }: ProductCodesSectionProps) => {
         >
           {singleDeskGroups.length > 0 && (
             <div>
-              <h3 className="mb-2 font-display text-sm font-bold uppercase text-foreground/70">
+              <h3 className="mb-2 font-display text-sm font-semibold uppercase text-foreground/70">
                 Single desks
               </h3>
               <div className="grid grid-cols-1 grid-rows-[auto_auto] gap-y-6 sm:grid-cols-2 sm:gap-x-10 lg:grid-cols-4 lg:gap-x-[calc((100%-1372px)/3)]">
@@ -159,7 +159,7 @@ const ProductCodesQX = ({ data }: ProductCodesSectionProps) => {
 
           {benchGroups.length > 0 && (
             <div>
-              <h3 className="mb-2 font-display text-sm font-bold uppercase text-foreground/70">
+              <h3 className="mb-2 font-display text-sm font-semibold uppercase text-foreground/70">
                 Bench desks
               </h3>
               <div className="grid grid-cols-1 grid-rows-[auto_auto] gap-y-6 sm:grid-cols-2 sm:gap-x-10 lg:grid-cols-4 lg:gap-x-[calc((100%-1372px)/3)]">
@@ -173,7 +173,7 @@ const ProductCodesQX = ({ data }: ProductCodesSectionProps) => {
           {(managerGroups.length > 0 || data.legend) && (
             <div>
               {managerGroups.length > 0 && (
-                <h3 className="mb-2 font-display text-sm font-bold uppercase text-foreground/70">
+                <h3 className="mb-2 font-display text-sm font-semibold uppercase text-foreground/70">
                   Manager desk
                 </h3>
               )}
