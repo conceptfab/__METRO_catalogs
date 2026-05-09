@@ -128,7 +128,7 @@ const TYPOGRAPHY_SAMPLES = [
     source: 'globals.css · .catalog-qx0 .sec_main_text',
     render: (
       <p className="sec_main_text max-w-[44ch]">
-        Akapit treści sekcji — opis kolekcji, parametrów lub wprowadzenia. Trzyma się szerokości czytelnej.
+        Akapit treści sekcji: opis kolekcji, parametrów lub wprowadzenia. Trzyma się szerokości czytelnej.
       </p>
     ),
   },
@@ -156,7 +156,7 @@ const TYPOGRAPHY_SAMPLES = [
   },
   {
     label: '.qx-word',
-    description: 'Inline emphasis na słowie QX — weight 600',
+    description: 'Inline emphasis na słowie QX: weight 600',
     source: 'globals.css',
     render: (
       <p className="font-display text-2xl">
@@ -186,7 +186,7 @@ const TYPOGRAPHY_SAMPLES = [
 
 const PACKSHOT_DEMO = {
   image: '/catalogs/QX/packshots/QX11_W240_black__Shot_A__4K_R10.webp',
-  alt: 'QX11 desk packshot — black frame, natural oak top',
+  alt: 'QX11 desk packshot: black frame, natural oak top',
   code: 'QX11',
   frameOption: {
     id: 'frame-ral9005',
@@ -239,7 +239,7 @@ const SHARED_COMPONENTS = [
     name: 'CatalogNav',
     source: 'src/components/catalog/CatalogNav.tsx',
     description:
-      'Nav katalogu — desktop z linkami sekcji + mobile burger menu. Smooth scroll, aria-current, RAF scroll spy.',
+      'Nav katalogu: desktop z linkami sekcji + mobile burger menu. Smooth scroll, aria-current, RAF scroll spy.',
   },
   {
     name: 'CatalogMotion',
@@ -337,8 +337,8 @@ const PLANNED: Array<{ category: string; items: string[] }> = [
       'Branded Skeleton + Empty State + Error Boundary',
       'Toast wrapper (sonner styled)',
       'Command Palette (shadcn command)',
-      'Carousel — unifikacja HeroQX + shadcn carousel',
-      'Tooltip — unifikacja ColorChip + shadcn tooltip',
+      'Carousel: unifikacja HeroQX + shadcn carousel',
+      'Tooltip: unifikacja ColorChip + shadcn tooltip',
       'Form components QX-styled (Input · Select · Textarea)',
       'MetroLogo component (dziś inline w nav)',
     ],
@@ -346,8 +346,8 @@ const PLANNED: Array<{ category: string; items: string[] }> = [
   {
     category: 'Layouty katalogu',
     items: [
-      'Type2 — projekt + implementacja',
-      'Type3 — projekt + implementacja',
+      'Type2: projekt + implementacja',
+      'Type3: projekt + implementacja',
       'QS brand-scoping (.catalog-qs0)',
       'Strona produktu /catalog/[c]/[p] z konfiguratorem i ceną',
       'Komparator produktów /catalog/compare',
@@ -385,7 +385,7 @@ const PLANNED: Array<{ category: string; items: string[] }> = [
       'Visual regression (Chromatic / Playwright snapshots)',
       'Automatyczne testy a11y (axe-core / pa11y w CI)',
       'Walidacja kontrastu WCAG AA/AAA',
-      'Style Dictionary — auto-sync design-tokens.ts ↔ globals.css',
+      'Style Dictionary: auto-sync design-tokens.ts ↔ globals.css',
       'Tokeny typografii / motion w design-tokens.ts (dziś tylko kolory)',
     ],
   },
@@ -505,7 +505,7 @@ function A11yNote({
 /**
  * Tokeny zdefiniowane w globals.css i obecne w design-tokens.ts, ale obecnie
  * niewywoływane przez żaden layout/komponent w produkcji (audit: 2026-05-06).
- * Pokazane na swatch card z badgem "ZAREZERWOWANY" — żeby było jasne że są
+ * Pokazane na swatch card z badgem "ZAREZERWOWANY", żeby było jasne że są
  * dostępne w design systemie ale jeszcze nie wpięte w żaden render.
  */
 const DORMANT_TOKENS = new Set<string>([
@@ -610,7 +610,7 @@ function renderDesignSystemPage({
           </h1>
           <p className="sec_main_text mt-10 max-w-[60ch]">
             Co realnie działa w katalogach <span className="qx-word">QX</span> i{' '}
-            <span className="qx-word">QS</span> — z renderem, ścieżką źródła i
+            <span className="qx-word">QS</span>, z renderem, ścieżką źródła i
             tokenami. Plus to, co dopiero powstanie.
           </p>
           <div className="mt-12 grid grid-cols-2 gap-6 sm:grid-cols-4 sm:gap-8">
@@ -762,7 +762,7 @@ function renderDesignSystemPage({
             Reużywalne primitywy
           </h2>
 
-          {/* ColorChip — text card only. Live render shown in 04 Wzorce (real packshot context). */}
+          {/* ColorChip: text card only. Live render shown in 04 Wzorce (real packshot context). */}
           <div className="mt-16 bg-card p-6">
             <div className="flex items-start justify-between gap-6">
               <div className="max-w-[60ch]">
@@ -776,14 +776,14 @@ function renderDesignSystemPage({
                   <code className="font-mono">z-tooltip</code>. Pokazuje kod
                   (RAL/U/W) + nazwę + zdjęcie próbki. Renderowany wyłącznie
                   wewnątrz <code className="font-mono">qx-packshot-meta</code>{' '}
-                  obok labela &quot;Frame&quot; / &quot;Top&quot; — pełny render w sekcji{' '}
+                  obok labela &quot;Frame&quot; / &quot;Top&quot;, pełny render w sekcji{' '}
                   <a href="#patterns" className="underline">04 Wzorce → packshot-meta</a>.
                 </p>
               </div>
             </div>
           </div>
 
-          {/* SectionShell + SectionHeading live — DEFAULT bg (bg-surface-elevated, like every layout uses) */}
+          {/* SectionShell + SectionHeading live: DEFAULT bg (bg-surface-elevated, like every layout uses) */}
           <div className="mt-12">
             <div className="relative border border-foreground/10">
               <SurfaceTag token="--surface-elevated" />
@@ -849,7 +849,7 @@ function renderDesignSystemPage({
             Packshot card · materiały · tabela kodów
           </h2>
 
-          {/* Packshot card pattern — exact replica of PackshotsQX render */}
+          {/* Packshot card pattern: exact replica of PackshotsQX render */}
           <div className="mt-16">
             <div className="flex items-baseline justify-between">
               <p className="qx-emphasis-title">Wzorzec packshot-meta</p>
@@ -900,22 +900,22 @@ function renderDesignSystemPage({
             <div className="mt-4 grid grid-cols-1 gap-3 text-[12px] text-muted-foreground sm:grid-cols-3">
               <div>
                 <span className="font-mono text-foreground">parsePackshotImage()</span>
-                {' — '}filename → frame/top codes (stem przed{' '}
+                {': '}filename → frame/top codes (stem przed{' '}
                 <code className="font-mono">__</code>, tokenizowany).
               </div>
               <div>
                 <span className="font-mono text-foreground">pickOption()</span>
-                {' — '}merguje metro+swatch z materialsConfigurator (image z metro,
+                {': '}merguje metro+swatch z materialsConfigurator (image z metro,
                 label + thumbnail ze swatcha).
               </div>
               <div>
                 <span className="font-mono text-foreground">--packshot-meta-* · --packshot-code-*</span>
-                {' — '}custom props w <code className="font-mono">.catalog-qx0</code>.
+                {': '}custom props w <code className="font-mono">.catalog-qx0</code>.
               </div>
             </div>
           </div>
 
-          {/* MaterialsOptionGroup — exact replica of configurator render */}
+          {/* MaterialsOptionGroup: exact replica of configurator render */}
           <div className="mt-20">
             <div className="flex items-baseline justify-between">
               <p className="qx-emphasis-title">Konfigurator · MaterialsOptionGroup</p>
@@ -934,7 +934,7 @@ function renderDesignSystemPage({
             <div className="relative mt-8 bg-surface-elevated px-5 py-12 sm:px-8 lg:px-12">
               <SurfaceTag token="--surface-elevated" />
 
-              {/* Desktop Finish (top) — qx-emphasis-title + 2 sub-groups */}
+              {/* Desktop Finish (top): qx-emphasis-title + 2 sub-groups */}
               <div>
                 <h3 className="mb-3 qx-emphasis-title">Desktop Finish</h3>
                 <div className="space-y-4">
@@ -979,7 +979,7 @@ function renderDesignSystemPage({
                 </div>
               </div>
 
-              {/* Steel parts colors (frame) — variant primary, qx-emphasis-title */}
+              {/* Steel parts colors (frame): variant primary, qx-emphasis-title */}
               <div className="mt-8">
                 <h3 className="mb-3 qx-emphasis-title">Steel parts colors</h3>
                 <div className="flex flex-wrap gap-[5px]">
@@ -1003,7 +1003,7 @@ function renderDesignSystemPage({
             <p className="mt-4 text-[12px] text-muted-foreground">
               Asset:{' '}
               <code className="font-mono">/shared/materials/{'{CODE NAME}'}_thumb.webp</code>{' '}
-              (płaska próbka) — wspólny folder dla wszystkich katalogów.
+              (płaska próbka), wspólny folder dla wszystkich katalogów.
               Discovery przez <code className="font-mono">scanMaterialsFolder()</code>{' '}
               w catalog-loader. RAL-y dostają spację w wyświetlaniu (RAL9005 →
               RAL 9005) przez <code className="font-mono">formatOptionCode()</code>.
@@ -1012,7 +1012,7 @@ function renderDesignSystemPage({
             </p>
           </div>
 
-          {/* Product code table — single example showing the pattern */}
+          {/* Product code table: single example showing the pattern */}
           <div className="mt-20">
             <div className="flex items-baseline justify-between">
               <p className="qx-emphasis-title">Tabela kodów produktowych</p>
@@ -1027,7 +1027,7 @@ function renderDesignSystemPage({
               <code className="font-mono">bg-product-muted</code> z 2px{' '}
               <code className="font-mono">border-surface-elevated</code> jako
               separatory. <code className="font-mono">whitespace-nowrap</code> na
-              W/D/H — H mieści się w jednej linii.
+              W/D/H: H mieści się w jednej linii.
             </p>
 
             <div className="relative mt-8 bg-surface-elevated px-5 py-12 sm:px-8 lg:px-12">
@@ -1050,7 +1050,7 @@ function renderDesignSystemPage({
               renderuje 9 takich tabel w 3 sekcjach (Single desks · Bench desks ·
               Manager desk), każda sekcja w grid{' '}
               <code className="font-mono">lg:grid-cols-4</code> z legendą
-              &quot;* R — height-adjustable desk models&quot; w komórce manager
+              &quot;* R: height-adjustable desk models&quot; w komórce manager
               desk. Pełna lista kodów w{' '}
               <code className="font-mono">/catalogs/QX/codes/content.json</code>.
             </p>
@@ -1098,7 +1098,7 @@ function renderDesignSystemPage({
               <div className="relative aspect-[16/9] overflow-hidden bg-foreground/90">
                 <Image
                   src="/catalogs/QX/hero/02_26_Metro_QX_HERO_1_R3-clean_noise_thumb.webp"
-                  alt="Hero — biuro otwarte z biurkami QX"
+                  alt="Hero: biuro otwarte z biurkami QX"
                   fill
                   sizes="(min-width: 1024px) 50vw, 100vw"
                   className="object-cover"
@@ -1113,7 +1113,7 @@ function renderDesignSystemPage({
               <div className="relative aspect-[16/9] overflow-hidden">
                 <Image
                   src="/catalogs/QX/gallery/02_26_Metro_QX_HOME0000.webp"
-                  alt="Gallery — przykład kompozycji domowej"
+                  alt="Gallery: przykład kompozycji domowej"
                   fill
                   sizes="(min-width: 1024px) 50vw, 100vw"
                   className="object-cover"
@@ -1276,7 +1276,7 @@ function renderDesignSystemPage({
             <code>useFocusTrap</code> hook (
             <code>src/hooks/use-focus-trap.ts</code>) +{' '}
             <code>jest-axe</code> w teście. Manualna weryfikacja (Lighthouse,
-            axe DevTools, VoiceOver, 320 px reflow) — checklist w planie{' '}
+            axe DevTools, VoiceOver, 320 px reflow), checklist w planie{' '}
             <code>docs/superpowers/plans/2026-05-07-accessibility-wcag-aa-remediation.md</code>
             .
           </A11yNote>
@@ -1284,7 +1284,7 @@ function renderDesignSystemPage({
           <A11yNote>
             <strong className="font-semibold">Active in-page section:</strong>{' '}
             CatalogNav uses <code>aria-current=&quot;location&quot;</code> (not{' '}
-            <code>&quot;true&quot;</code>) for the active in-page section — per
+            <code>&quot;true&quot;</code>) for the active in-page section, per
             ARIA enum. CSS selector:{' '}
             <code>.catalog-nav-link[aria-current=&apos;location&apos;]</code>.
           </A11yNote>
@@ -1292,7 +1292,7 @@ function renderDesignSystemPage({
           <A11yNote>
             <strong className="font-semibold">Semantics:</strong> the{' '}
             <code>.section_ID</code> class is a presentational style for
-            section labels — apply to <code>&lt;h2&gt;</code> (not{' '}
+            section labels, apply to <code>&lt;h2&gt;</code> (not{' '}
             <code>&lt;p&gt;</code>) so screen readers and TOC tooling pick
             them up as headings.
           </A11yNote>
@@ -1303,7 +1303,7 @@ function renderDesignSystemPage({
             </strong>{' '}
             active state is <code>w-6 h-2 bg-primary</code> (capsule),
             inactive is <code>w-2 h-2 bg-on-dark-muted/60</code> (dot). Shape
-            difference is required — color alone isn&apos;t enough for users
+            difference is required; color alone isn&apos;t enough for users
             with colour vision deficiency (WCAG 1.4.1).
           </A11yNote>
 
@@ -1326,7 +1326,7 @@ function renderDesignSystemPage({
           </A11yNote>
           <A11yNote>
             <strong className="font-semibold">Border contrast:</strong> hover
-            uses <code>border-foreground/50</code> (≥3:1 on white) — token{' '}
+            uses <code>border-foreground/50</code> (≥3:1 on white); token{' '}
             <code>/20</code> fails WCAG 1.4.11 for UI components.
           </A11yNote>
 
@@ -1372,7 +1372,7 @@ function renderDesignSystemPage({
             </strong>{' '}
             feature animations are <code>aria-hidden=&quot;true&quot;</code>{' '}
             as visual enrichment of the tabpanel text. Rule:{' '}
-            <em>no unique information lives in the video</em> — the description{' '}
+            <em>no unique information lives in the video</em>; the description{' '}
             (<code>active.desc</code>) is the full equivalent. A short sr-only
             blurb &bdquo;Visual demonstration of [title]: [desc]&rdquo; is added
             for AT context. Respects <code>prefers-reduced-motion</code>.
@@ -1395,7 +1395,7 @@ function renderDesignSystemPage({
             (was #616161). Gives ≥6.5:1 on{' '}
             <code>--background #f8f8f8</code>. Alpha variants{' '}
             <code>/60</code>, <code>/70</code>, <code>/80</code> still fall
-            below AA for body text — use them only for decoration.
+            below AA for body text; use them only for decoration.
           </A11yNote>
 
           <A11yNote>
@@ -1412,7 +1412,7 @@ function renderDesignSystemPage({
             <code>
               bg-gradient-to-t from-black/65 via-black/30 to-transparent
             </code>{' '}
-            layer over the bottom 2/3 — guarantees hero-text contrast over
+            layer over the bottom 2/3, guaranteeing hero-text contrast over
             variable slide imagery.
           </A11yNote>
         </div>
@@ -1436,7 +1436,7 @@ function renderDesignSystemPage({
           </h2>
           <p className="mt-6 max-w-[60ch] text-base text-background/70">
             Pogrupowane po kategoriach. Każda pozycja z briefem co dokładnie ma
-            powstać. Bez deadline&apos;ów — kolejność ustala roadmapa.
+            powstać. Bez deadline&apos;ów; kolejność ustala roadmapa.
           </p>
           <div className="mt-16 grid grid-cols-1 gap-8 lg:grid-cols-2">
             {PLANNED.map((g) => (
@@ -1551,7 +1551,7 @@ function ProductCodeTablePreview({
 }
 
 /**
- * Exact replica of MaterialsOptionGroup.tsx button (L51–73). Static — no onSelect.
+ * Exact replica of MaterialsOptionGroup.tsx button (L51–73). Static, no onSelect.
  * Image source: /shared/materials/{CODE NAME}_thumb.webp (flat swatch, jak
  * w produkcji), nie /catalogs/QX/materials/metro {CODE}.webp (3D render).
  */

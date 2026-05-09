@@ -15,7 +15,7 @@ Zakres skanu:
 - język: TypeScript
 - React Compiler: nie wykryto
 - pliki źródłowe: 85
-- problemy: 24 ostrzeżenia w 7 plikach
+- problemy: 9 ostrzeżeń w 6 plikach
 
 Dodatkowe bramki:
 
@@ -212,25 +212,26 @@ Wynik:
 
 Miejsca: `src/app/design-system/page.tsx:1227-1366`
 
-### 9. Usunąć pauzy typu em dash w tekstach JSX
+### 9. Zrealizowane: usunąć pauzy typu em dash w tekstach JSX
 
-React Doctor wskazuje 15 wystąpień `—` w JSX. To głównie treść dokumentacyjna design-systemu.
+Status: **zrealizowane**.
 
-Rekomendacja:
+Problem z audytu:
 
-- zamienić na przecinki, dwukropki, średniki lub nawiasy;
-- przy okazji ujednolicić styl opisów w `/design-system`.
+- React Doctor wskazywał 15 wystąpień `—` w JSX, głównie w treści dokumentacyjnej design-systemu.
 
-Przykładowe miejsca:
+Wykonane:
 
-- `src/app/design-system/page.tsx:129`
-- `src/app/design-system/page.tsx:568`
-- `src/app/design-system/page.tsx:733`
-- `src/app/design-system/page.tsx:962`
-- `src/app/design-system/page.tsx:986`
-- `src/app/design-system/page.tsx:1009`
-- `src/app/design-system/page.tsx:1235`
-- `src/app/design-system/page.tsx:1394`
+- zamieniono em dash na dwukropki, przecinki albo średniki zależnie od kontekstu;
+- ujednolicono także em dash w opisach danych, komentarzach i `alt`, żeby `src/app/design-system/page.tsx` nie zawierał już tego znaku.
+
+Wynik:
+
+- ostrzeżenie `react-doctor/design-no-em-dash-in-jsx-text` zniknęło z audytu.
+
+Miejsce:
+
+- `src/app/design-system/page.tsx`
 
 ### 10. Zmienić `font-bold` na mniej ciężki wariant w nagłówkach
 
