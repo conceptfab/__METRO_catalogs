@@ -145,117 +145,119 @@ const PackshotsQX = ({
     lightboxIndex !== null ? packshotItems[lightboxIndex] : null;
 
   return (
-    <section
-      id="packshots"
-      aria-labelledby="packshots-title"
-      className="bg-surface-elevated"
-    >
-      <div
-        className="relative mx-auto w-full max-w-[1440px] px-5 pt-6 pb-12 sm:px-8 sm:pt-8 lg:px-0 lg:pt-3 lg:pb-[120px]"
-        ref={ref}
+    <>
+      <section
+        id="packshots"
+        aria-labelledby="packshots-title"
+        className="bg-surface-elevated"
       >
-        <m.div
-          initial={reveal.header.initial}
-          animate={isInView ? reveal.header.animate : {}}
-          transition={slowTransition({ duration: 0.6 })}
-          className="relative z-10 flex flex-col lg:max-w-[520px]"
+        <div
+          className="relative mx-auto w-full max-w-[1440px] px-5 pt-6 pb-12 sm:px-8 sm:pt-8 lg:px-0 lg:pt-3 lg:pb-[120px]"
+          ref={ref}
         >
-          <p className="section_ID font-display uppercase">
-            <QxText text={data.sectionLabel} />
-          </p>
-          <h2
-            id="packshots-title"
-            className="section_Title mt-8 font-display font-normal lg:mt-7"
+          <m.div
+            initial={reveal.header.initial}
+            animate={isInView ? reveal.header.animate : {}}
+            transition={slowTransition({ duration: 0.6 })}
+            className="relative z-10 flex flex-col lg:max-w-[520px]"
           >
-            <QxText text={data.title} />
-          </h2>
-          {data.subtitle && (
-            <p className="sec_main_text mt-6 max-w-[520px] font-body">
-              <QxText text={data.subtitle} />
+            <p className="section_ID font-display uppercase">
+              <QxText text={data.sectionLabel} />
             </p>
-          )}
-        </m.div>
+            <h2
+              id="packshots-title"
+              className="section_Title mt-8 font-display font-normal lg:mt-7"
+            >
+              <QxText text={data.title} />
+            </h2>
+            {data.subtitle && (
+              <p className="sec_main_text mt-6 max-w-[520px] font-body">
+                <QxText text={data.subtitle} />
+              </p>
+            )}
+          </m.div>
 
-        <div className="mt-12 -mx-5 grid grid-cols-1 gap-6 sm:mx-0 sm:grid-cols-2 lg:mt-[120px]">
-          {packshotItems.map((item, i) => {
-            const { topCode, frameCode } = parsePackshotImage(item.image);
-            const frameOption = pickOption(
-              materialsConfigurator?.frameOptions,
-              frameCode,
-            );
-            const desktopOption = pickOption(
-              materialsConfigurator?.desktopOptions,
-              topCode,
-            );
-            return (
-              <m.article
-                key={`${item.code}-${item.image}`}
-                initial={reveal.content.initial}
-                animate={isInView ? reveal.content.animate : {}}
-                transition={slowTransition({
-                  duration: 0.5,
-                  delay: 0.2 + i * 0.1,
-                })}
-                className="min-w-0"
-              >
-                {isMobile ? (
-                  <div className="qx-packshot-mobile-frame">
-                    <Image
-                      src={item.image}
-                      alt={item.name || `${item.code} packshot`}
-                      fill
-                      sizes="(min-width: 1440px) 710px, (min-width: 640px) 46vw, 100vw"
-                      className="qx-packshot-mobile-image"
-                    />
-                  </div>
-                ) : (
-                  <button
-                    type="button"
-                    onClick={() => openLightbox(i)}
-                    className="group relative block w-full overflow-hidden"
-                    aria-label={`View ${item.name || item.code} packshot in fullscreen`}
-                  >
-                    <div className="qx-packshot-desktop-frame">
+          <div className="mt-12 -mx-5 grid grid-cols-1 gap-6 sm:mx-0 sm:grid-cols-2 lg:mt-[120px]">
+            {packshotItems.map((item, i) => {
+              const { topCode, frameCode } = parsePackshotImage(item.image);
+              const frameOption = pickOption(
+                materialsConfigurator?.frameOptions,
+                frameCode,
+              );
+              const desktopOption = pickOption(
+                materialsConfigurator?.desktopOptions,
+                topCode,
+              );
+              return (
+                <m.article
+                  key={`${item.code}-${item.image}`}
+                  initial={reveal.content.initial}
+                  animate={isInView ? reveal.content.animate : {}}
+                  transition={slowTransition({
+                    duration: 0.5,
+                    delay: 0.2 + i * 0.1,
+                  })}
+                  className="min-w-0"
+                >
+                  {isMobile ? (
+                    <div className="qx-packshot-mobile-frame">
                       <Image
                         src={item.image}
                         alt={item.name || `${item.code} packshot`}
                         fill
                         sizes="(min-width: 1440px) 710px, (min-width: 640px) 46vw, 100vw"
-                        className="qx-packshot-desktop-image"
+                        className="qx-packshot-mobile-image"
                       />
                     </div>
-                  </button>
-                )}
-                <div className="qx-packshot-meta">
-                  <span className="qx-packshot-code">{item.code}</span>
-                  {frameOption && (
-                    <span className="inline-flex items-center gap-1.5">
-                      <span className="font-display text-[10px] uppercase tracking-[0.12em] text-foreground/70">
-                        Frame
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => openLightbox(i)}
+                      className="group relative block w-full overflow-hidden"
+                      aria-label={`View ${item.name || item.code} packshot in fullscreen`}
+                    >
+                      <div className="qx-packshot-desktop-frame">
+                        <Image
+                          src={item.image}
+                          alt={item.name || `${item.code} packshot`}
+                          fill
+                          sizes="(min-width: 1440px) 710px, (min-width: 640px) 46vw, 100vw"
+                          className="qx-packshot-desktop-image"
+                        />
+                      </div>
+                    </button>
+                  )}
+                  <div className="qx-packshot-meta">
+                    <span className="qx-packshot-code">{item.code}</span>
+                    {frameOption && (
+                      <span className="inline-flex items-center gap-1.5">
+                        <span className="font-display text-[10px] uppercase tracking-[0.12em] text-foreground/70">
+                          Frame
+                        </span>
+                        <ColorChip option={frameOption} role="frame" />
                       </span>
-                      <ColorChip option={frameOption} role="frame" />
-                    </span>
-                  )}
-                  {desktopOption && (
-                    <span className="inline-flex items-center gap-1.5">
-                      <span className="font-display text-[10px] uppercase tracking-[0.12em] text-foreground/70">
-                        Top
+                    )}
+                    {desktopOption && (
+                      <span className="inline-flex items-center gap-1.5">
+                        <span className="font-display text-[10px] uppercase tracking-[0.12em] text-foreground/70">
+                          Top
+                        </span>
+                        <ColorChip option={desktopOption} role="top" />
                       </span>
-                      <ColorChip option={desktopOption} role="top" />
-                    </span>
-                  )}
-                  {item.frameColorName && (
-                    <span>Frame {item.frameColorName}</span>
-                  )}
-                  {item.desktopColorName && (
-                    <span>Top {item.desktopColorName}</span>
-                  )}
-                </div>
-              </m.article>
-            );
-          })}
+                    )}
+                    {item.frameColorName && (
+                      <span>Frame {item.frameColorName}</span>
+                    )}
+                    {item.desktopColorName && (
+                      <span>Top {item.desktopColorName}</span>
+                    )}
+                  </div>
+                </m.article>
+              );
+            })}
+          </div>
         </div>
-      </div>
+      </section>
 
       <AnimatePresence>
         {activeItem && lightboxIndex !== null && !isMobile && (
@@ -319,7 +321,7 @@ const PackshotsQX = ({
           </m.div>
         )}
       </AnimatePresence>
-    </section>
+    </>
   );
 };
 

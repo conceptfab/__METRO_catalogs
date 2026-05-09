@@ -260,7 +260,7 @@ const QX_LAYOUTS = [
   { name: 'GalleryQX', file: 'src/layouts/qx/GalleryQX.tsx', desc: 'Desktop: siatka 4 obrazów + Lightbox. Mobile: horizontal scroll-snap carousel z naturalnym aspect-ratio (bez kropowania). Reveal LIFT.' },
   { name: 'FeaturesQX', file: 'src/layouts/qx/FeaturesQX.tsx', desc: 'Zakładki z ikonami Lucide + autoplay video; mobile pokazuje animację nad tabami. Reveal SLIDE.' },
   { name: 'GettingStartedQX', file: 'src/layouts/qx/GettingStartedQX.tsx', desc: '3-kolumnowe kroki montażu z hover scale. Reveal LIFT.' },
-  { name: 'PackshotsQX', file: 'src/layouts/qx/PackshotsQX.tsx', desc: 'Modele z ColorChip frame+top; mobile full-bleed do krawędzi ekranu (negative margin) + powiększony kadr inline; desktop ma lightbox. Reveal SLIDE.' },
+  { name: 'PackshotsQX', file: 'src/layouts/qx/PackshotsQX.tsx', desc: 'Modele z ColorChip frame+top; mobile full-bleed do krawędzi ekranu (negative margin) + powiększony kadr inline; desktop ma lightbox renderowany poza #packshots. Reveal SLIDE.' },
   { name: 'MaterialsQX', file: 'src/layouts/qx/MaterialsQX.tsx', desc: 'Biblioteka swatchy desktop+mobile. Reveal SETTLE.' },
   { name: 'FinishesQX', file: 'src/layouts/qx/FinishesQX.tsx', desc: 'Konfigurator + preview toggle. Reveal SETTLE.' },
   { name: 'DimensionsQX', file: 'src/layouts/qx/DimensionsQX.tsx', desc: 'Diagram + tabela specyfikacji. Reveal LIFT.' },
@@ -850,7 +850,9 @@ export default function DesignSystemPage() {
               packshot używa klas <code className="font-mono">qx-packshot-mobile-frame</code>{' '}
               i <code className="font-mono">qx-packshot-mobile-image</code>, które
               pokazują pełny kadr inline bez otwierania lightboxa; lightbox
-              zostaje wzorcem desktop/tablet.
+              zostaje wzorcem desktop/tablet i renderuje się jako sąsiad sekcji,
+              poza <code className="font-mono">#packshots</code>, żeby nie wejść
+              w containment z <code className="font-mono">content-visibility</code>.
             </p>
             <div className="mt-4 grid grid-cols-1 gap-3 text-[12px] text-muted-foreground sm:grid-cols-3">
               <div>
@@ -1122,7 +1124,7 @@ export default function DesignSystemPage() {
                 { name: 'animate-fade-in-up', desc: 'opacity 0 + translateY(24px) → 1, 0.6s ease-out' },
                 { name: 'animate-accordion-down', desc: 'height 0 → content height, 0.2s' },
                 { name: 'animate-accordion-up', desc: 'height content → 0, 0.2s' },
-                { name: 'home-tile-pan', desc: 'object-position 0% → 100% → 0%, 120s loop' },
+                { name: 'home-tile-pan', desc: 'object-position 45% → 55% → 45%, 120s loop; homepage tiles keep aspect 1/2 and request larger generated variants for sharp object-cover crops' },
               ].map((k) => (
                 <div key={k.name} className="border border-foreground/10 bg-card p-4">
                   <p className="font-mono text-xs font-bold">{k.name}</p>

@@ -1,52 +1,25 @@
 <claude-mem-context>
 # Memory Context
 
-# [__METRO_catalogs] recent context, 2026-05-09 11:08am GMT+2
+# [__METRO_catalogs] recent context, 2026-05-09 1:37pm GMT+2
 
 Legend: 🎯session 🔴bugfix 🟣feature 🔄refactor ✅change 🔵discovery ⚖️decision 🚨security_alert 🔐security_note
 Format: ID TIME TYPE TITLE
 Fetch details: get_observations([IDs]) | Search: mem-search skill
 
-Stats: 50 obs (16,893t read) | 450,000t work | 96% savings
+Stats: 50 obs (15,798t read) | 556,812t work | 97% savings
 
 ### May 8, 2026
-S1362 Code review of working codebase (stage_2 branch) — check for improvements, dead code, optimizations — write conclusions in raport.md (May 8 at 11:17 PM)
 S1363 Code review of stage_2 branch — check improvements, dead code, optimizations — write conclusions in raport.md; extended with detailed ColorChip performance analysis (May 8 at 11:49 PM)
 S1364 Code review: find improvements, dead code, optimizations — write conclusions in raport.md (Polish: "kod działa prawidłowo, sprawdź co można poprawić, martwy kod, optymalizacje") (May 8 at 11:57 PM)
 S1365 react-doctor audit of metro-catalogs project with results saved to react_raport.md (May 8 at 11:57 PM)
 ### May 9, 2026
 S1366 Execute React audit fixes from react_raport.md — planning phase with scope clarification before implementation (May 9 at 10:18 AM)
 S1367 Execute high-priority React audit fixes from react_raport.md on __METRO_catalogs project (branch stage_2) (May 9 at 10:19 AM)
-2651 10:22a ✅ catalogs API memoization committed — commit 78ef8a4
-2652 10:23a 🔵 src/app/page.tsx has no page-level metadata export — nextjs-missing-metadata audit finding
-2653 " 🔵 layout.tsx already has full metadata — page.tsx fix needs page-specific override only
-2654 " 🟣 Page-level metadata added to src/app/page.tsx — nextjs-missing-metadata audit fixed
-2655 " 🟣 Home page metadata committed — commit abf7ce3 on stage_2
-2656 10:24a 🔵 Production build succeeds — bundle sizes and remaining img warnings confirmed
-2657 " 🟣 React audit session complete — 3 commits on stage_2, all tests green
 S1368 react-doctor audit after recent fixes — score comparison and remaining issues analysis (May 9 at 10:24 AM)
-2658 10:25a 🔵 metro-catalogs stage_2 branch recent commit history
-2659 " 🔵 react-doctor audit: metro-catalogs scores 81/100 with 199 issues across 32 files
 S1369 react-doctor audit of __METRO_catalogs project — create remediation plan and save to react_raport.md / plan_poprawek.md (May 9 at 10:26 AM)
-2660 10:26a 🔵 CatalogNav.tsx inline render function patterns identified for refactor
-2661 10:27a 🔵 renderQxText is a ReactNode utility function, not a component — root cause of no-render-in-render violations
-2662 " 🔵 Inline render arrow functions confined to CatalogNav.tsx and FeaturesQX.tsx; all other violations are renderQxText() call sites
-2663 " 🔵 FeaturesQX renderFeatureVideo is a ref-dependent inline render function; catalog components have test coverage via Vitest
-2664 10:28a 🔵 loadCatalogMeta is exported but only used internally in catalog-loader.ts — safe to unexport
-2665 " 🔵 renderQxText used in 15 source files — broad impact for QxText component conversion
-2666 10:32a ✅ react-doctor audit plan created: plan_poprawek.md (stage_2)
 S1370 Execute plan_poprawek.md — a multi-task cleanup and quality improvement plan for the metro-catalogs Next.js project on the stage_2 branch (May 9 at 10:33 AM)
-2667 10:38a 🔵 METRO Catalogs project on stage_2 branch with recent perf optimizations
-2668 " 🟣 QxText component test suite created
-2669 " 🔵 TDD red phase confirmed: QxText component does not yet exist
-2670 10:39a 🟣 QxText React component created as typed wrapper around renderQxText logic
-2671 " 🔵 renderQxText used in 14 files across catalog and QX layouts — full migration scope identified
-2672 " 🔄 SectionHeading.tsx migrated from renderQxText import to QxText component
-2673 " 🔄 SectionHeading and MaterialsOptionGroup fully migrated from renderQxText to QxText component
-2674 10:40a 🔄 CatalogNav.tsx fully migrated to QxText component across all 4 nav contexts
-2675 " 🔄 DimensionsQX.tsx fully migrated to QxText component
-2676 " 🔄 FeaturesQX.tsx fully migrated; HeroQX.tsx read for migration with 3 call sites identified
-2677 " 🔄 HeroQX.tsx fully migrated; OverviewQX.tsx read with 2 call sites identified
+2677 10:40a 🔄 HeroQX.tsx fully migrated; OverviewQX.tsx read with 2 call sites identified
 2678 " 🔄 OverviewQX and GalleryQX fully migrated to QxText component
 2679 10:44a 🔄 FeaturesQX: Extracted FeatureVideo render function into standalone component
 2680 10:45a 🔄 FeaturesQX FeatureVideo extraction committed to stage_2 branch
@@ -67,12 +40,39 @@ S1370 Execute plan_poprawek.md — a multi-task cleanup and quality improvement 
 2695 11:03a ✅ Committed a11y-helpers test fix to stage_2 branch
 2696 " ✅ react-doctor score is 89/100 after stage_2 cleanup work
 2697 11:04a ✅ stage_2 branch: 16 commits completing plan_poprawek.md cleanup tasks
+S1371 react-doctor code audit of metro-catalogs project (May 9 at 11:04 AM)
 2698 11:05a 🔵 react-doctor audit of metro-catalogs: score 89/100, 97 issues across 21 files
-S1371 react-doctor code audit of metro-catalogs project (May 9 at 11:06 AM)
 2699 11:06a 🔵 Knip dead-code investigation: CatalogMeta used internally but not imported externally; schema exports genuinely unused
 2700 11:08a 🔵 Knip JSON reveals 19 unused types in catalog.ts and most flagged img tags are framer-motion m.img (not migratable)
+2701 " 🔵 metro-catalogs uses a custom responsive image pipeline via responsiveImg() that replaces next/image functionality
+2702 " 🔵 parseHeroContent and parsePackshotsContent ARE consumed by catalog-loader.ts; only the raw schema exports are truly dead
+2703 11:09a 🔴 Deleted dead schemas barrel file src/lib/schemas/index.ts
+2704 11:10a 🔵 Deleting schemas/index.ts breaks catalog-loader.ts import — import path './schemas' now has no index to resolve
+2705 11:11a 🔴 Fixed catalog-loader.ts import after schemas barrel deletion — now imports directly from individual schema files
+2706 11:13a 🔄 Made heroContentSchema module-private in schemas/hero.ts; removed unused export
+2707 " 🔄 All Zod schema objects and derived types made module-private in hero.ts and packshots.ts
+2708 " 🔄 Started removing unused export keywords from catalog.ts types — CatalogMeta made module-private
+2709 " 🔄 Mass de-export of unused types in catalog.ts — 19 types made module-private
+2710 11:17a 🔄 PackshotsQX migrated from native img to Next.js Image component
+2711 11:18a 🔵 responsiveImg helper still used in FinishesQX and MaterialsQX after PackshotsQX migration
+2712 " 🔵 design-system page uses raw img tags and lacks next/image import
+2713 " 🔄 design-system page fully migrated to next/image with explicit aspect ratios
+S1372 react-doctor audit (`/react-doctor zrob audyt kodu`) — full code quality remediation of metro-catalogs Next.js app (May 9 at 11:19 AM)
+2714 11:25a 🔵 Lightbox broken on packshot images
+2715 " 🔵 Responsive image manifest structure for catalog images
+2716 11:26a 🔵 PackshotsQX lightbox only wired on desktop, not mobile
+2717 " 🔵 Lightbox render condition explicitly excludes mobile in PackshotsQX
+2718 11:27a 🔵 QX packshot files confirmed present with responsive variants
+2719 11:28a 🔵 QX and QS packshots confirmed present in responsive-image-manifest.json
+2720 " 🔵 QX catalog SSR HTML contains no packshot image URLs in JSON data
+2721 " 🔵 QX packshot images correctly SSR-rendered with full responsive srcsets
+2722 " 🔵 All QX packshot static files served correctly via dev server HTTP 200
+2723 11:29a 🔵 PackshotsQX.tsx has no uncommitted changes — bug exists in committed code
+2724 11:30a 🔵 Most recent PackshotsQX.tsx commit introduced image-loader utility refactor
+2725 " 🔵 Commit 5f74d97 modified Lightbox.tsx, PackshotsQX.tsx, and packshots schema — prime regression candidate
+2726 " 🔵 Custom image-loader breaks SVG images — missing width implementation causes Next.js warnings
 
-Access 450k tokens of past work via get_observations([IDs]) or mem-search skill.
+Access 557k tokens of past work via get_observations([IDs]) or mem-search skill.
 </claude-mem-context>
 
 ## Design System — obowiązkowe

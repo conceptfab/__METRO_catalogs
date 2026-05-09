@@ -392,20 +392,20 @@
 @keyframes home-tile-pan {
   0%,
   100% {
-    object-position: 35% 50%;
+    object-position: 45% 50%;
   }
   50% {
-    object-position: 65% 50%;
+    object-position: 55% 50%;
   }
 }
 
 @keyframes home-tile-pan-reverse {
   0%,
   100% {
-    object-position: 65% 50%;
+    object-position: 55% 50%;
   }
   50% {
-    object-position: 35% 50%;
+    object-position: 45% 50%;
   }
 }
 

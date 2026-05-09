@@ -64,8 +64,8 @@ export default async function HomePage() {
                       alt=""
                       fill
                       priority
-                      sizes="(min-width: 1024px) 20vw, (min-width: 640px) 33vw, 50vw"
-                      className="home-tile-pan scale-[1.4] object-cover transition-transform duration-700 group-hover:scale-[1.45]"
+                      sizes="(min-width: 1024px) 85vw, (min-width: 640px) 132vw, 200vw"
+                      className="home-tile-pan object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-foreground/0 transition-colors duration-300 group-hover:bg-foreground/55" />
                     <span className="pointer-events-none absolute inset-0 flex items-center justify-center font-display text-[88px] font-black tracking-tighter text-background opacity-0 transition-opacity duration-300 group-hover:opacity-100">
@@ -88,8 +88,8 @@ export default async function HomePage() {
                       alt=""
                       fill
                       priority
-                      sizes="(min-width: 1024px) 20vw, (min-width: 640px) 33vw, 50vw"
-                      className="home-tile-pan-reverse scale-[1.4] object-cover transition-transform duration-700 group-hover:scale-[1.45]"
+                      sizes="(min-width: 1024px) 85vw, (min-width: 640px) 132vw, 200vw"
+                      className="home-tile-pan-reverse object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-foreground/0 transition-colors duration-300 group-hover:bg-foreground/55" />
                     <span className="pointer-events-none absolute inset-0 flex items-center justify-center font-display text-[88px] font-black tracking-tighter text-background opacity-0 transition-opacity duration-300 group-hover:opacity-100">
