@@ -47,8 +47,8 @@ describe('responsive-image preset parity', () => {
       expect(presetName, `no preset mapping for section "${section}"`).toBeDefined();
       const preset = presetWidths[presetName];
       expect(preset, `PRESET_WIDTHS missing "${presetName}"`).toBeDefined();
-      expect([...preset].sort((a, b) => a - b)).toEqual(
-        [...sectionWidths].sort((a, b) => a - b),
+      expect(preset.toSorted((a, b) => a - b)).toEqual(
+        sectionWidths.toSorted((a, b) => a - b),
       );
     }
   });

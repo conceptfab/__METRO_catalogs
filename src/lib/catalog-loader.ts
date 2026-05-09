@@ -225,7 +225,7 @@ async function discoverHeroImages(heroBaseUrl: string): Promise<string[]> {
     }
 
     return [...heroFilesByName.entries()]
-      .sort(([left], [right]) =>
+      .toSorted(([left], [right]) =>
         left.localeCompare(right, undefined, { numeric: true }),
       )
       .slice(0, MAX_HERO_SLIDES)
