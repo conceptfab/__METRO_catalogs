@@ -6,7 +6,7 @@ Narzędzie: `npx -y react-doctor@latest . --verbose` (`react-doctor v0.1.4`)
 
 ## Wynik
 
-React Doctor: **95 / 100, Great**
+React Doctor: **96 / 100, Great**
 
 Zakres skanu:
 
@@ -15,7 +15,7 @@ Zakres skanu:
 - język: TypeScript
 - React Compiler: nie wykryto
 - pliki źródłowe: 85
-- problemy: 40 ostrzeżeń w 7 plikach
+- problemy: 24 ostrzeżenia w 7 plikach
 
 Dodatkowe bramki:
 
@@ -191,14 +191,24 @@ Wynik:
 
 Te punkty dotyczą głównie `/design-system` i wizualnego języka projektu. Każda implementacja tych zmian wpływa na UI, więc zgodnie z `AGENTS.md` trzeba po niej zsynchronizować stronę `/design-system` i ewentualnie `docs/design-system-consistency-report.md`.
 
-### 8. Zamienić `border-l-4` w notatkach a11y
+### 8. Zrealizowane: zamienić `border-l-4` w notatkach a11y
 
-React Doctor wskazuje 16 wystąpień `border-l-4` w `src/app/design-system/page.tsx` w sekcji notatek WCAG.
+Status: **zrealizowane**.
 
-Rekomendacja:
+Problem z audytu:
 
-- zastąpić gruby jednostronny border subtelniejszym wzorcem, np. `border border-foreground/10` + mały nagłówek statusu, albo `shadow-[inset_2px_0_0_var(--accent)]`;
-- najlepiej stworzyć jeden komponent `A11yNote`, żeby usunąć powtarzanie klas.
+- React Doctor wskazywał 16 wystąpień `border-l-4` w `src/app/design-system/page.tsx` w sekcji notatek WCAG.
+
+Wykonane:
+
+- dodano lokalny komponent `A11yNote`;
+- statusowa notatka używa `border border-foreground/15 bg-warm-light`;
+- pozostałe notatki używają `border border-accent/20 bg-warm-light/50`;
+- usunięto wszystkie `border-l-4` z sekcji notatek a11y.
+
+Wynik:
+
+- ostrzeżenie `react-doctor/no-side-tab-border` zniknęło z audytu.
 
 Miejsca: `src/app/design-system/page.tsx:1227-1366`
 

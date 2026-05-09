@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import type { ReactNode } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ColorChip } from '@/components/catalog/ColorChip';
@@ -479,6 +480,25 @@ function StatusTag({ kind }: { kind: 'used' | 'planned' }) {
       <span className="size-1.5 rounded-full bg-muted-foreground" />
       planowane
     </span>
+  );
+}
+
+function A11yNote({
+  children,
+  tone = 'default',
+}: {
+  children: ReactNode;
+  tone?: 'default' | 'strong';
+}) {
+  const toneClass =
+    tone === 'strong'
+      ? 'border-foreground/15 bg-warm-light'
+      : 'border-accent/20 bg-warm-light/50';
+
+  return (
+    <aside className={`mt-6 border p-4 text-sm ${toneClass}`}>
+      {children}
+    </aside>
   );
 }
 
@@ -1247,7 +1267,7 @@ function renderDesignSystemPage({
             wzorzec ARIA / WCAG i miejsce, w którym jest stosowany.
           </p>
 
-          <aside className="mt-6 border-l-4 border-foreground bg-warm-light p-4 text-sm">
+          <A11yNote tone="strong">
             <strong className="font-semibold">Status WCAG 2.1 AA:</strong> po
             naprawach z audytu{' '}
             <code>.ui-design/audits/metro_catalogs_zasady_20260507_115012.md</code>
@@ -1259,25 +1279,25 @@ function renderDesignSystemPage({
             axe DevTools, VoiceOver, 320 px reflow) — checklist w planie{' '}
             <code>docs/superpowers/plans/2026-05-07-accessibility-wcag-aa-remediation.md</code>
             .
-          </aside>
+          </A11yNote>
 
-          <aside className="mt-6 border-l-4 border-accent bg-warm-light/50 p-4 text-sm">
+          <A11yNote>
             <strong className="font-semibold">Active in-page section:</strong>{' '}
             CatalogNav uses <code>aria-current=&quot;location&quot;</code> (not{' '}
             <code>&quot;true&quot;</code>) for the active in-page section — per
             ARIA enum. CSS selector:{' '}
             <code>.catalog-nav-link[aria-current=&apos;location&apos;]</code>.
-          </aside>
+          </A11yNote>
 
-          <aside className="mt-6 border-l-4 border-accent bg-warm-light/50 p-4 text-sm">
+          <A11yNote>
             <strong className="font-semibold">Semantics:</strong> the{' '}
             <code>.section_ID</code> class is a presentational style for
             section labels — apply to <code>&lt;h2&gt;</code> (not{' '}
             <code>&lt;p&gt;</code>) so screen readers and TOC tooling pick
             them up as headings.
-          </aside>
+          </A11yNote>
 
-          <aside className="mt-6 border-l-4 border-accent bg-warm-light/50 p-4 text-sm">
+          <A11yNote>
             <strong className="font-semibold">
               Carousel slide indicators:
             </strong>{' '}
@@ -1285,16 +1305,16 @@ function renderDesignSystemPage({
             inactive is <code>w-2 h-2 bg-on-dark-muted/60</code> (dot). Shape
             difference is required — color alone isn&apos;t enough for users
             with colour vision deficiency (WCAG 1.4.1).
-          </aside>
+          </A11yNote>
 
-          <aside className="mt-6 border-l-4 border-accent bg-warm-light/50 p-4 text-sm">
+          <A11yNote>
             <strong className="font-semibold">Scrollbar:</strong> custom
             WebKit scrollbar widened from 6 px to 12 px for easier mouse
             target (WCAG 2.5.8). Thumb opacity also bumped 0.3 → 0.4 for
             visibility.
-          </aside>
+          </A11yNote>
 
-          <aside className="mt-6 border-l-4 border-accent bg-warm-light/50 p-4 text-sm">
+          <A11yNote>
             <strong className="font-semibold">Group semantics (MaterialsOptionGroup):</strong>{' '}
             container has <code>role=&quot;group&quot;</code> +{' '}
             <code>aria-labelledby</code> pointing at the{' '}
@@ -1303,31 +1323,31 @@ function renderDesignSystemPage({
             <code>group</code> over <code>radiogroup</code>: no arrow-key
             navigation needed; if added later, migrate to{' '}
             <code>radiogroup</code> + roving tabindex.)
-          </aside>
-          <aside className="mt-6 border-l-4 border-accent bg-warm-light/50 p-4 text-sm">
+          </A11yNote>
+          <A11yNote>
             <strong className="font-semibold">Border contrast:</strong> hover
             uses <code>border-foreground/50</code> (≥3:1 on white) — token{' '}
             <code>/20</code> fails WCAG 1.4.11 for UI components.
-          </aside>
+          </A11yNote>
 
-          <aside className="mt-6 border-l-4 border-accent bg-warm-light/50 p-4 text-sm">
+          <A11yNote>
             <strong className="font-semibold">ColorChip touch target:</strong>{' '}
             44×44 px button (<code>h-11 w-11</code>) wraps a 24×24 px visual
             chip. Helper text in <code>aria-label</code>; inner image{' '}
             <code>alt=&quot;&quot; aria-hidden</code>. Tooltip on hover/focus,
             dismissible via Escape (WCAG 1.4.13).
-          </aside>
+          </A11yNote>
 
-          <aside className="mt-6 border-l-4 border-accent bg-warm-light/50 p-4 text-sm">
+          <A11yNote>
             <strong className="font-semibold">Focus on dark overlays:</strong>{' '}
             icon buttons over dark surfaces (Lightbox, FinishesQX preview)
             use explicit{' '}
             <code>focus-visible:outline-on-dark</code>; the global{' '}
             <code>:focus-visible</code> rule with{' '}
             <code>var(--ring)=#141414</code> is invisible on black backgrounds.
-          </aside>
+          </A11yNote>
 
-          <aside className="mt-6 border-l-4 border-accent bg-warm-light/50 p-4 text-sm">
+          <A11yNote>
             <strong className="font-semibold">Modal a11y:</strong> all modals
             use the <code>useFocusTrap(ref, isOpen)</code> hook (
             <code>src/hooks/use-focus-trap.ts</code>) for Tab trap, body
@@ -1336,17 +1356,17 @@ function renderDesignSystemPage({
             <code>aria-modal=&quot;true&quot;</code> +{' '}
             <code>aria-labelledby</code> pointing at a visible or{' '}
             <code>sr-only</code> <code>&lt;h2&gt;</code>.
-          </aside>
+          </A11yNote>
 
-          <aside className="mt-6 border-l-4 border-accent bg-warm-light/50 p-4 text-sm">
+          <A11yNote>
             <strong className="font-semibold">Lightbox:</strong> uses{' '}
             <code>useFocusTrap</code>; <code>aria-labelledby</code> points at
             the counter &bdquo;Image N of M: <em>alt</em>&rdquo;; ESC closes,
             Arrow Left/Right navigate; on close focus returns to trigger
             (e.g. packshot thumbnail).
-          </aside>
+          </A11yNote>
 
-          <aside className="mt-6 border-l-4 border-accent bg-warm-light/50 p-4 text-sm">
+          <A11yNote>
             <strong className="font-semibold">
               Decorative video (FeaturesQX):
             </strong>{' '}
@@ -1356,9 +1376,9 @@ function renderDesignSystemPage({
             (<code>active.desc</code>) is the full equivalent. A short sr-only
             blurb &bdquo;Visual demonstration of [title]: [desc]&rdquo; is added
             for AT context. Respects <code>prefers-reduced-motion</code>.
-          </aside>
+          </A11yNote>
 
-          <aside className="mt-6 border-l-4 border-accent bg-warm-light/50 p-4 text-sm">
+          <A11yNote>
             <strong className="font-semibold">
               Mobile FeaturesQX order:
             </strong>{' '}
@@ -1366,9 +1386,9 @@ function renderDesignSystemPage({
             section heading and the tab buttons. Desktop keeps the two-column
             composition with media on the right. This keeps the selected
             animation visible before the user chooses another feature.
-          </aside>
+          </A11yNote>
 
-          <aside className="mt-6 border-l-4 border-accent bg-warm-light/50 p-4 text-sm">
+          <A11yNote>
             <strong className="font-semibold">
               Token <code>--muted-foreground</code> = #595959
             </strong>{' '}
@@ -1376,17 +1396,17 @@ function renderDesignSystemPage({
             <code>--background #f8f8f8</code>. Alpha variants{' '}
             <code>/60</code>, <code>/70</code>, <code>/80</code> still fall
             below AA for body text — use them only for decoration.
-          </aside>
+          </A11yNote>
 
-          <aside className="mt-6 border-l-4 border-accent bg-warm-light/50 p-4 text-sm">
+          <A11yNote>
             <strong className="font-semibold">
               Token <code>--on-dark-muted</code> = #d0d0d0
             </strong>{' '}
             (was #b8b8b8). Used on dark overlays (Lightbox, Hero buttons).
             ≥7:1 on #262626.
-          </aside>
+          </A11yNote>
 
-          <aside className="mt-6 border-l-4 border-accent bg-warm-light/50 p-4 text-sm">
+          <A11yNote>
             <strong className="font-semibold">Hero gradient:</strong> Hero
             section has a fixed{' '}
             <code>
@@ -1394,7 +1414,7 @@ function renderDesignSystemPage({
             </code>{' '}
             layer over the bottom 2/3 — guarantees hero-text contrast over
             variable slide imagery.
-          </aside>
+          </A11yNote>
         </div>
       </section>
 
