@@ -21,10 +21,12 @@ interface Props {
   footerEntries?: CatalogFooterEntry[];
 }
 
+const EMPTY_FOOTER_ENTRIES: CatalogFooterEntry[] = [];
+
 export default function CatalogPageQX({
   catalog,
   globalConfig,
-  footerEntries = [],
+  footerEntries = EMPTY_FOOTER_ENTRIES,
 }: Props) {
   const themeClassName = catalog.meta.theme
     ? `catalog-${catalog.meta.theme}`
