@@ -12,6 +12,8 @@ interface ProductCodesSectionProps {
   data: ProductCodesData;
 }
 
+const DIMENSION_KEYS = ['width', 'depth', 'height'] as const;
+
 const ProductCodeTable = ({ group, open }: { group: ProductCodeGroup; open: boolean }) => (
   <details
     open={open}
@@ -43,20 +45,24 @@ const ProductCodeTable = ({ group, open }: { group: ProductCodeGroup; open: bool
         </thead>
         <tbody className="font-body text-product-text">
           {group.rows.map((row) => {
-            const dimensions = row.dimensions.split('×').map((part) => part.trim());
+            const dimensions = row.dimensions.split('×').map((part, position, all) => ({
+              key: DIMENSION_KEYS[position] ?? part.trim(),
+              value: part.trim(),
+              hasRightBorder: position < all.length - 1,
+            }));
             return (
               <tr key={`${group.id}-${row.index}`}>
                 <td className="border-r-2 border-t-2 border-surface-elevated bg-product-muted px-3 py-1.5 font-medium">
                   {row.index}
                 </td>
-                {dimensions.map((dimension, index) => (
+                {dimensions.map((dimension) => (
                   <td
-                    key={`${row.index}-d${index}-${dimension}`}
+                    key={`${row.index}-${dimension.key}`}
                     className={`whitespace-nowrap border-t-2 border-surface-elevated bg-product-muted px-2 py-1.5 ${
-                      index < dimensions.length - 1 ? 'border-r-2' : ''
+                      dimension.hasRightBorder ? 'border-r-2' : ''
                     }`}
                   >
-                    {dimension}
+                    {dimension.value}
                   </td>
                 ))}
               </tr>

@@ -154,7 +154,7 @@ const FinishesQX = ({ data, configurator }: FinishesSectionProps) => {
           {data.description && (
             <p className="sec_main_text mt-6 max-w-[633px]">
               {descriptionLines.map((line, index) => (
-                <span key={`${line}-${index}`}>
+                <span key={line}>
                   <QxText text={line} />
                   {index < descriptionLines.length - 1 ? <br /> : null}
                 </span>

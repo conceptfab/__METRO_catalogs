@@ -38,8 +38,8 @@ const OverviewQX = ({ data }: OverviewSectionProps) => {
             className="mb-12 lg:mb-[120px]"
           />
           <div className="sec_main_text mt-12 max-w-[520px] space-y-4 font-body lg:mt-[120px]">
-            {data.paragraphs.map((p, i) => (
-              <p key={`${p.slice(0, 40)}-${i}`}><QxText text={p} /></p>
+            {data.paragraphs.map((p) => (
+              <p key={p}><QxText text={p} /></p>
             ))}
           </div>
         </m.div>

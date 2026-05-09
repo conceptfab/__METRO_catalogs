@@ -1,20 +1,38 @@
 import type { ReactNode } from 'react';
 
-const QX_TOKEN_REGEX = /\bQX\b/gi;
-const LINEBREAK_REGEX = /\\n|\/n|\n/g;
+const QX_TOKEN_REGEX = /^QX$/i;
+const TEXT_TOKEN_REGEX = /\\n|\/n|\n|\bQX\b/gi;
 
-function renderLine(line: string, lineIndex: number): ReactNode[] {
-  const matches = line.match(QX_TOKEN_REGEX);
-  const parts = line.split(QX_TOKEN_REGEX);
+function renderText(text: string): ReactNode[] {
+  const nodes: ReactNode[] = [];
+  let cursor = 0;
 
-  return parts.flatMap((part, index) => [
-    part,
-    matches && index < matches.length ? (
-      <span key={`qx-${lineIndex}-${index}`} className="qx-word">
-        {matches[index].toUpperCase()}
-      </span>
-    ) : null,
-  ]);
+  for (const match of text.matchAll(TEXT_TOKEN_REGEX)) {
+    const token = match[0];
+    const tokenStart = match.index;
+
+    if (tokenStart > cursor) {
+      nodes.push(text.slice(cursor, tokenStart));
+    }
+
+    if (QX_TOKEN_REGEX.test(token)) {
+      nodes.push(
+        <span key={`qx-${tokenStart}`} className="qx-word">
+          {token.toUpperCase()}
+        </span>,
+      );
+    } else {
+      nodes.push(<br key={`br-${tokenStart}`} />);
+    }
+
+    cursor = tokenStart + token.length;
+  }
+
+  if (cursor < text.length) {
+    nodes.push(text.slice(cursor));
+  }
+
+  return nodes;
 }
 
 interface QxTextProps {
@@ -22,12 +40,5 @@ interface QxTextProps {
 }
 
 export function QxText({ text }: QxTextProps): ReactNode {
-  const lines = text.split(LINEBREAK_REGEX);
-
-  return lines.flatMap((line, lineIndex) => {
-    const lineNodes = renderLine(line, lineIndex);
-    return lineIndex < lines.length - 1
-      ? [...lineNodes, <br key={`br-${lineIndex}`} />]
-      : lineNodes;
-  });
+  return renderText(text);
 }

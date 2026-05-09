@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useReducer, useRef, useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { m, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
@@ -35,6 +35,36 @@ interface BrandControlProps {
   className: string;
   logoClassName: string;
   onBrandClick: () => void;
+}
+
+interface CatalogNavState {
+  activeSection: string;
+  scrolled: boolean;
+}
+
+type CatalogNavAction = {
+  activeSection?: string;
+  scrolled?: boolean;
+};
+
+function catalogNavReducer(
+  state: CatalogNavState,
+  action: CatalogNavAction,
+): CatalogNavState {
+  const nextActiveSection = action.activeSection ?? state.activeSection;
+  const nextScrolled = action.scrolled ?? state.scrolled;
+
+  if (
+    state.activeSection === nextActiveSection &&
+    state.scrolled === nextScrolled
+  ) {
+    return state;
+  }
+
+  return {
+    activeSection: nextActiveSection,
+    scrolled: nextScrolled,
+  };
 }
 
 function BrandControl({
@@ -88,9 +118,11 @@ const CatalogNav = ({
   variant = 'default',
   logoOnly = false,
 }: CatalogNavProps) => {
-  const [activeSection, setActiveSection] = useState('cover');
+  const [{ activeSection, scrolled }, dispatchNavState] = useReducer(
+    catalogNavReducer,
+    { activeSection: 'cover', scrolled: false },
+  );
   const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const scrollAnimationRef = useRef<number | null>(null);
   const scrollingToSectionRef = useRef<string | null>(null);
   const navExpanded = !scrolled;
@@ -104,25 +136,29 @@ const CatalogNav = ({
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-
-      if (scrollingToSectionRef.current) {
-        setActiveSection(scrollingToSectionRef.current);
+      const scrollingToSection = scrollingToSectionRef.current;
+      if (scrollingToSection) {
+        dispatchNavState({
+          activeSection: scrollingToSection,
+          scrolled: window.scrollY > 50,
+        });
         return;
       }
 
-      const sectionElements = visibleSections.map((section) => ({
-        id: section.id,
-        el: document.getElementById(section.id),
-      }));
-
-      for (let i = sectionElements.length - 1; i >= 0; i--) {
-        const element = sectionElements[i].el;
+      let nextActiveSection: string | undefined;
+      for (let i = visibleSections.length - 1; i >= 0; i--) {
+        const section = visibleSections[i];
+        const element = document.getElementById(section.id);
         if (element && element.getBoundingClientRect().top <= 120) {
-          setActiveSection(sectionElements[i].id);
+          nextActiveSection = section.id;
           break;
         }
       }
+
+      dispatchNavState({
+        activeSection: nextActiveSection,
+        scrolled: window.scrollY > 50,
+      });
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -166,7 +202,7 @@ const CatalogNav = ({
     }
 
     scrollingToSectionRef.current = id;
-    setActiveSection(id);
+    dispatchNavState({ activeSection: id });
 
     const computeTargetTop = () => {
       if (id === 'cover') return 0;

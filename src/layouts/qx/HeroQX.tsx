@@ -115,7 +115,7 @@ const HeroQX = ({ data }: HeroQXProps) => {
     displaySlides.length - 1,
   );
   const [currentIndex, setCurrentIndex] = useState(initialIdx);
-  const [isHovered, setIsHovered] = useState(false);
+  const isHoveredRef = useRef(false);
   const currentSlide = displaySlides[currentIndex] ?? displaySlides[0];
 
   const layout: Required<HeroSlideContentLayout> = {
@@ -222,13 +222,15 @@ const HeroQX = ({ data }: HeroQXProps) => {
       !hasSlider ||
       displaySlides.length <= 1 ||
       prefersReducedMotion ||
-      !slider.autoAdvance ||
-      (slider.pauseOnHover && isHovered)
+      !slider.autoAdvance
     ) {
       return;
     }
 
-    const timer = setInterval(goNext, scaleMotionValue(slider.interval));
+    const timer = setInterval(() => {
+      if (slider.pauseOnHover && isHoveredRef.current) return;
+      goNext();
+    }, scaleMotionValue(slider.interval));
     return () => clearInterval(timer);
   }, [
     hasSlider,
@@ -237,7 +239,6 @@ const HeroQX = ({ data }: HeroQXProps) => {
     slider.autoAdvance,
     slider.interval,
     slider.pauseOnHover,
-    isHovered,
     goNext,
   ]);
 
@@ -294,8 +295,12 @@ const HeroQX = ({ data }: HeroQXProps) => {
       id="cover"
       className="relative flex min-h-screen items-center justify-center overflow-hidden bg-surface-elevated"
       aria-label={`${currentHeroContent.collectionName} Collection cover`}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseEnter={() => {
+        isHoveredRef.current = true;
+      }}
+      onMouseLeave={() => {
+        isHoveredRef.current = false;
+      }}
     >
       <div
         className="absolute inset-0"
@@ -373,7 +378,7 @@ const HeroQX = ({ data }: HeroQXProps) => {
             >
               {displaySlides.map((slide, index) => (
                 <button
-                  key={`slide-dot-${slide.src}-${index}`}
+                  key={`slide-dot-${slide.src}`}
                   type="button"
                   role="tab"
                   aria-selected={index === currentIndex}

@@ -29,6 +29,7 @@ export default function nextConfig(phase: string): NextConfig {
     },
     images: {
       loader: 'custom',
+      // Used by next/image to resolve pre-generated responsive variants.
       loaderFile: './src/lib/image-loader.ts',
     },
     compiler: {
