@@ -51,7 +51,7 @@ const ProductCodeTable = ({ group, open }: { group: ProductCodeGroup; open: bool
                 </td>
                 {dimensions.map((dimension, index) => (
                   <td
-                    key={`${row.index}-${dimension}-${index}`}
+                    key={`${row.index}-d${index}-${dimension}`}
                     className={`whitespace-nowrap border-t-2 border-surface-elevated bg-product-muted px-2 py-1.5 ${
                       index < dimensions.length - 1 ? 'border-r-2' : ''
                     }`}

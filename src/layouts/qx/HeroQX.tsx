@@ -364,9 +364,9 @@ const HeroQX = ({ data }: HeroQXProps) => {
               role="tablist"
               aria-label="Slide indicators"
             >
-              {displaySlides.map((_, index) => (
+              {displaySlides.map((slide, index) => (
                 <button
-                  key={index}
+                  key={`slide-dot-${slide.src}-${index}`}
                   type="button"
                   role="tab"
                   aria-selected={index === currentIndex}

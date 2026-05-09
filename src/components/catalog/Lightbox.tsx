@@ -97,7 +97,7 @@ export function Lightbox({ images, index, onClose, onNavigate }: LightboxProps) 
             <ChevronRight size={32} />
           </button>
           <m.img
-            key={index}
+            key={images[index!].src}
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
