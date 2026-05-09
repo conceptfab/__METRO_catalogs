@@ -26,6 +26,13 @@ export function Lightbox({ images, index, onClose, onNavigate }: LightboxProps) 
 
   useFocusTrap(dialogRef, isOpen);
 
+  const onCloseRef = useRef(onClose);
+  const onNavigateRef = useRef(onNavigate);
+  useEffect(() => {
+    onCloseRef.current = onClose;
+    onNavigateRef.current = onNavigate;
+  }, [onClose, onNavigate]);
+
   useEffect(() => {
     if (!isOpen) return;
     closeRef.current?.focus();
@@ -33,23 +40,23 @@ export function Lightbox({ images, index, onClose, onNavigate }: LightboxProps) 
     const handler = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         event.preventDefault();
-        onClose();
+        onCloseRef.current();
         return;
       }
       if (event.key === 'ArrowLeft') {
         event.preventDefault();
-        onNavigate(-1);
+        onNavigateRef.current(-1);
         return;
       }
       if (event.key === 'ArrowRight') {
         event.preventDefault();
-        onNavigate(1);
+        onNavigateRef.current(1);
       }
     };
 
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);
-  }, [isOpen, onClose, onNavigate]);
+  }, [isOpen]);
 
   return (
     <AnimatePresence>

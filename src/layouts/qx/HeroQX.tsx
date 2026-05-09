@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback, type CSSProperties } from 'react';
+import { useState, useEffect, useCallback, useRef, type CSSProperties } from 'react';
 import { AnimatePresence, m, useReducedMotion } from 'framer-motion';
 import { ArrowDown, ChevronLeft, ChevronRight } from 'lucide-react';
 import type {
@@ -241,6 +241,13 @@ const HeroQX = ({ data }: HeroQXProps) => {
     goNext,
   ]);
 
+  const goPrevRef = useRef(goPrev);
+  const goNextRef = useRef(goNext);
+  useEffect(() => {
+    goPrevRef.current = goPrev;
+    goNextRef.current = goNext;
+  }, [goPrev, goNext]);
+
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
       if (!hasSlider) return;
@@ -255,18 +262,18 @@ const HeroQX = ({ data }: HeroQXProps) => {
 
       if (event.key === 'ArrowLeft') {
         event.preventDefault();
-        goPrev();
+        goPrevRef.current();
       }
 
       if (event.key === 'ArrowRight') {
         event.preventDefault();
-        goNext();
+        goNextRef.current();
       }
     };
 
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, [hasSlider, goPrev, goNext]);
+  }, [hasSlider]);
 
   const ctaButton = (extraClassName?: string) => (
     <button
