@@ -451,7 +451,7 @@ interface CatalogConfig {
 }
 
 /** Lightweight loader for list view */
-export async function loadCatalogMeta(
+async function loadCatalogMeta(
   catalogId: string,
 ): Promise<{ id: string; meta: CatalogData['meta'] } | null> {
   const base = catalogBase(catalogId);

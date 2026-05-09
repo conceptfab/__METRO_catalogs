@@ -1,6 +1,6 @@
 import type { Transition } from 'framer-motion';
 
-export const CATALOG_MOTION_MULTIPLIER = 2;
+const CATALOG_MOTION_MULTIPLIER = 2;
 
 type RevealPose = {
   initial: Record<string, number>;

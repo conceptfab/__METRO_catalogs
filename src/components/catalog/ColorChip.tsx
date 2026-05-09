@@ -11,11 +11,11 @@ const CHIP_ROLE_LABEL: Record<ChipRole, string> = {
   top: 'Top',
 };
 
-export function formatOptionCode(code: string): string {
+function formatOptionCode(code: string): string {
   return code.startsWith('RAL') ? `RAL ${code.slice(3)}` : code;
 }
 
-export function getOptionDescriptor(option: MaterialsConfiguratorOption) {
+function getOptionDescriptor(option: MaterialsConfiguratorOption) {
   const codeFormatted = formatOptionCode(option.code);
   const labelText = option.label
     .replace(codeFormatted, '')

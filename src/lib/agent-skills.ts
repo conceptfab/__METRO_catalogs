@@ -1,9 +1,9 @@
 import { createHash } from 'node:crypto';
 
-export const AGENT_SKILLS_SCHEMA =
+const AGENT_SKILLS_SCHEMA =
   'https://schemas.agentskills.io/discovery/0.2.0/schema.json';
 
-export const METRO_CATALOG_DISCOVERY_SKILL = {
+const METRO_CATALOG_DISCOVERY_SKILL = {
   name: 'metro-catalog-discovery',
   type: 'skill-md',
   description:
@@ -58,7 +58,7 @@ Use \`POST /mcp\` with JSON-RPC for lightweight discovery:
 Do not assume private write access. The published endpoints are read-only discovery surfaces.
 `;
 
-export function sha256Digest(content: string): string {
+function sha256Digest(content: string): string {
   return `sha256:${createHash('sha256').update(content, 'utf8').digest('hex')}`;
 }
 
